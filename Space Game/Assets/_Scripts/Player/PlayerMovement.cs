@@ -47,7 +47,6 @@ public class PlayerMovement : MonoBehaviour
         {
             target.y = -100;
         }
-        Debug.Log(Vector2.Distance(transform.position, target));
         if (Vector2.Distance(transform.position + transform.forward, target) > 3.5f)
         {
             Move();
