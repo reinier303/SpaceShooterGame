@@ -9,8 +9,11 @@ public class BaseEntity : MonoBehaviour
 
     public GameObject ParticleEffect;
 
+    public System.Action<float> OnTakeDamage;
+
     protected virtual void Awake()
     {
+        OnTakeDamage += TakeDamage;
         currentHealth = MaxHealth.GetValue();
     }
 

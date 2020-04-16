@@ -35,7 +35,7 @@ public class Projectile : MonoBehaviour
         if(entity != null)
         {
             //TEMP: GET DAMAGE FROM PLAYER
-            entity.TakeDamage(Damage.GetValue());
+            entity.OnTakeDamage?.Invoke(Damage.GetValue());
             gameObject.SetActive(false);
         }
     }

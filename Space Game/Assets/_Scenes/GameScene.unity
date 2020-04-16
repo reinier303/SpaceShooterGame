@@ -353,6 +353,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c3e898ee8a4d4547999b3456b36703f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RPlayer: {fileID: 692017888}
 --- !u!4 &478935430
 Transform:
   m_ObjectHideFlags: 0
@@ -545,7 +546,6 @@ MonoBehaviour:
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
-  m_CameraOutput: 0
   m_Cameras: []
   m_RendererIndex: -1
   m_VolumeLayerMask:
@@ -557,6 +557,7 @@ MonoBehaviour:
   m_AntialiasingQuality: 2
   m_StopNaN: 0
   m_Dithering: 0
+  m_ClearDepth: 1
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
@@ -822,6 +823,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6db9dde7335c73e4198e4ae533987bef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RPlayerAttack: {fileID: 0}
+  RPlayerMovement: {fileID: 0}
+  RPlayerEntity: {fileID: 0}
 --- !u!114 &692017889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2011,6 +2015,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Swarmling
+      objectReference: {fileID: 0}
+    - target: {fileID: 3029544696909630313, guid: dc890be09286c4a4bb2af37fe6bac688,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3029544696909630314, guid: dc890be09286c4a4bb2af37fe6bac688,
         type: 3}

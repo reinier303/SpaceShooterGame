@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private Player RPlayer;
+    #region Script References
+
+    public Player RPlayer;
     private InputManager RInputManager;
 
     private WaveManager RWaveManager;
@@ -13,4 +15,17 @@ public class GameManager : MonoBehaviour
     private CameraManager RCameraManager;
     private UIManager RUIManager;
     private AudioManager RAudioManager;
+
+    #endregion
+
+    private void Start()
+    {
+        InitializeOnTakeDamage();
+    }
+
+    private void InitializeOnTakeDamage()
+    {
+        //RPlayer.RPlayerEntity.OnTakeDamage += RPlayer.RPlayerEntity.TakeDamage;
+    }
+
 }

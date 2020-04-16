@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private PlayerAttack RPlayerAttack;
-    private PlayerMovement RPlayerMovement;
-    private PlayerEntity RPlayerEntity;
+    public PlayerAttack RPlayerAttack;
+    public PlayerMovement RPlayerMovement;
+    public PlayerEntity RPlayerEntity;
+
+    private void Awake()
+    {
+        RPlayerAttack = GetComponent<PlayerAttack>();
+        RPlayerMovement = GetComponent<PlayerMovement>();
+        RPlayerEntity = GetComponent<PlayerEntity>();
+    }
 }
