@@ -99,7 +99,7 @@ MonoBehaviour:
     baseValue: 15
     multiplier: 0
   Damage:
-    baseValue: 3
+    baseValue: 1
     multiplier: 0
   AliveTime:
     baseValue: 2

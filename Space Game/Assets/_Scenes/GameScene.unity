@@ -1369,6 +1369,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b0768d88290a947a5ef9f1743772fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentWave: 0
+  EnemiesAlive: 0
+  Spawning: 1
+  MapRenderer: {fileID: 866685844}
 --- !u!4 &1467098432
 Transform:
   m_ObjectHideFlags: 0
@@ -2069,11 +2073,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Swarmling
-      objectReference: {fileID: 0}
-    - target: {fileID: 3029544696909630313, guid: dc890be09286c4a4bb2af37fe6bac688,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3029544696909630314, guid: dc890be09286c4a4bb2af37fe6bac688,
         type: 3}

@@ -14,7 +14,7 @@ public class ScriptableWave : ScriptableObject
 [System.Serializable]
 public struct EnemyWaveData
 {
+    [Header("This name has to be the same as in the pool")]
     public string Name;
-    public GameObject Prefab;
     public int MaxAmount;
 }

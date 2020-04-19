@@ -12,6 +12,11 @@ public class Swarmling : BaseEnemy
     [Tooltip("Distance to player at which the enemy will stop moving")]
     public float StopDistance;
 
+    private void Start()
+    {
+        Player = GameManager.Instance.RPlayer.transform;
+    }
+
     protected void Update()
     {
         Move();

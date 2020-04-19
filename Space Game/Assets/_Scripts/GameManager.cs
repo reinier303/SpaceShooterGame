@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance;
+
     #region Script References
 
     public Player RPlayer;
@@ -17,6 +19,11 @@ public class GameManager : MonoBehaviour
     public AudioManager RAudioManager;
 
     #endregion
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
