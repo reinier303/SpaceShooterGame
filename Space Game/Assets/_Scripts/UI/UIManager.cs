@@ -10,7 +10,7 @@ public class UIManager : MonoBehaviour
 
     public PlayerEntity RPlayerEntity;
 
-    public void TakeDamage(float damage)
+    public void UpdateLives(float damage)
     {
         LivesText.text = "Lives:" + RPlayerEntity.currentHealth;
     }

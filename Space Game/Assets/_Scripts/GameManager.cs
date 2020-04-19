@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     private void InitializeOnTakeDamage()
     {
         RUIManager.RPlayerEntity = RPlayer.RPlayerEntity;
-        RPlayer.RPlayerEntity.OnTakeDamage += RUIManager.TakeDamage;
+        RPlayer.RPlayerEntity.OnTakeDamage += RUIManager.UpdateLives;
     }
 
 }

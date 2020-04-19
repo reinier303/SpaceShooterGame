@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
+    public static AudioManager Instance;
+
     List<AudioData> AudioDatas = new List<AudioData>();
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     public void AddAudio(string name, float duration)
     {
