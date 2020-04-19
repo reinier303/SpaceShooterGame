@@ -7,6 +7,8 @@ public class BaseEntity : MonoBehaviour
     public Stat MaxHealth;
     public float currentHealth;
 
+    public string HitSound, DeathSound;
+
     public GameObject ParticleEffect;
 
     public System.Action<float> OnTakeDamage;

@@ -7,14 +7,14 @@ public class GameManager : MonoBehaviour
     #region Script References
 
     public Player RPlayer;
-    private InputManager RInputManager;
+    public InputManager RInputManager;
 
-    private WaveManager RWaveManager;
-    private ObjectPooler RObjectPooler;
+    public WaveManager RWaveManager;
+    public ObjectPooler RObjectPooler;
 
-    private CameraManager RCameraManager;
-    private UIManager RUIManager;
-    private AudioManager RAudioManager;
+    public CameraManager RCameraManager;
+    public UIManager RUIManager;
+    public AudioManager RAudioManager;
 
     #endregion
 
@@ -25,7 +25,8 @@ public class GameManager : MonoBehaviour
 
     private void InitializeOnTakeDamage()
     {
-        //RPlayer.RPlayerEntity.OnTakeDamage += RPlayer.RPlayerEntity.TakeDamage;
+        RUIManager.RPlayerEntity = RPlayer.RPlayerEntity;
+        RPlayer.RPlayerEntity.OnTakeDamage += RUIManager.TakeDamage;
     }
 
 }

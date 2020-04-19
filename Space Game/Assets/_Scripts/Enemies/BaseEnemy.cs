@@ -12,7 +12,7 @@ public class BaseEnemy : BaseEntity
 
         if (player != null)
         {
-            player.TakeDamage(ContactDamage.GetValue());
+            player.OnTakeDamage?.Invoke(ContactDamage.GetValue());
         }
     }
 }

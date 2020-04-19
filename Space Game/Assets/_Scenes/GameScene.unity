@@ -354,6 +354,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RPlayer: {fileID: 692017888}
+  RInputManager: {fileID: 0}
+  RWaveManager: {fileID: 0}
+  RObjectPooler: {fileID: 0}
+  RCameraManager: {fileID: 0}
+  RUIManager: {fileID: 1225166029}
+  RAudioManager: {fileID: 0}
 --- !u!4 &478935430
 Transform:
   m_ObjectHideFlags: 0
@@ -840,6 +846,49 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RObjectPooler: {fileID: 505205243}
   fireCooldown: 1
+--- !u!1 &727943445
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 727943447}
+  - component: {fileID: 727943446}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &727943446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 727943445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1d1f3f8cc6ca4447a4b4e033af30719, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &727943447
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 727943445}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.4772496, y: 1.2941741, z: -2.8114681}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &778804154
 GameObject:
   m_ObjectHideFlags: 0
@@ -1205,6 +1254,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f77666f050d83047928dbc71fb4c670, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LivesText: {fileID: 778804156}
+  UnitsText: {fileID: 1586174074}
+  RPlayerEntity: {fileID: 0}
 --- !u!114 &1225166030
 MonoBehaviour:
   m_ObjectHideFlags: 0
