@@ -356,10 +356,10 @@ MonoBehaviour:
   RPlayer: {fileID: 692017888}
   RInputManager: {fileID: 0}
   RWaveManager: {fileID: 0}
-  RObjectPooler: {fileID: 0}
+  RObjectPooler: {fileID: 505205243}
   RCameraManager: {fileID: 0}
   RUIManager: {fileID: 1225166029}
-  RAudioManager: {fileID: 0}
+  RAudioManager: {fileID: 727943446}
 --- !u!4 &478935430
 Transform:
   m_ObjectHideFlags: 0
@@ -769,6 +769,8 @@ MonoBehaviour:
     baseValue: 3
     multiplier: 0
   currentHealth: 0
+  HitSound: 
+  DeathSound: 
   ParticleEffect: {fileID: 0}
 --- !u!61 &692017886
 BoxCollider2D:

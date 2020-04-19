@@ -14,6 +14,7 @@ public class ScriptableWave : ScriptableObject
 [System.Serializable]
 public struct EnemyWaveData
 {
+    public string Name;
     public GameObject Prefab;
     public int MaxAmount;
 }
