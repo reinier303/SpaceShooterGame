@@ -61,7 +61,7 @@ GameObject:
   - component: {fileID: 3029544696909630308}
   - component: {fileID: 3029544696909630309}
   m_Layer: 8
-  m_Name: Swarmling
+  m_Name: SwarmQueenMinion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ Transform:
   m_GameObject: {fileID: 3029544696909630313}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.12, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 134452518}
   m_Father: {fileID: 0}
@@ -121,7 +121,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: aeab10f22b3ad614796c005f66a3b3a0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e7610c520f4fcda429ac1c2fb0857247, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -182,17 +182,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth:
-    baseValue: 3
+    statName: Max Health
+    baseValue: 1
     multiplier: 0
   currentHealth: 0
   HitSound: 
   DeathSound: 
   ParticleEffect: {fileID: 0}
   ContactDamage:
-    baseValue: 1
+    statName: 
+    baseValue: 0.5
     multiplier: 0
   Player: {fileID: 0}
   Speed:
-    baseValue: 3
+    statName: 
+    baseValue: 3.5
     multiplier: 0
   StopDistance: 0.5

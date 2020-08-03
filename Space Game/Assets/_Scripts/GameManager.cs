@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
+    public System.Action OnEndGame;
+
     private void Awake()
     {
         Instance = this;
@@ -36,4 +38,12 @@ public class GameManager : MonoBehaviour
         RPlayer.RPlayerEntity.OnTakeDamage += RUIManager.UpdateLives;
     }
 
+    private void InitializeOnEndGame()
+    {
+        OnEndGame += RPlayer.SavePlayerData;
+    }
+    private void OnApplicationQuit()
+    {
+        //OnEndGame.Invoke();
+    }
 }

@@ -3,11 +3,11 @@
 [System.Serializable]
 public class Stat
 {
-    [SerializeField]
-    private float baseValue = 1;
+    [SerializeField] private string statName;
 
-    [HideInInspector]
-    public float multiplier;
+    [SerializeField] private float baseValue = 1;
+
+    [HideInInspector] public float multiplier;
 
     public float GetValue()
     {
