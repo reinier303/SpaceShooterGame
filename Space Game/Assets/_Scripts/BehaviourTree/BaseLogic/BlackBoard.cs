@@ -18,14 +18,33 @@ public class BlackBoard : MonoBehaviour
     public float BulletDamage;
     public float TimeBetweenShots;
 
+    //SprayShot
+    [Header("SprayShot Variables")]
+    public float TimesToShootSpray;
+    public float BulletAmountSpray;
+    public float BulletSpreadSpray;
+    public float TimeBetweenShotsSpray;
+
+    //BulletBurst
+    [Header("BulletBurst Variables")]
+    public float TimesToShootBurst;
+    public float BulletAmountBurst;
+    public float BulletSpreadBurst;
+    public float TimeBetweenShotsBurst;
+
     //Dash
     [Header("Dash Variables")]
     public float DashDamage;
     public float DashSpeed;
+    public float DashSteps;
+    public bool PlayerHit;
 
     //Spawn
     [Header("Spawn Variables")]
     public float SpawnTime;
+    public float TimeBetweenSpawns;
+    public float SpawnAmount;
+
 
     public Transform Player;
     [HideInInspector] public PlayerEntity PlayerEntity;

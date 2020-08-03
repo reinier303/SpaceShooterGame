@@ -19,10 +19,26 @@ public class LesserSwarmQueen : BaseEnemy
         Rotate();
     }
 
+    protected override void OnTriggerEnter2D(Collider2D collision)
+    {
+        PlayerEntity player = collision.GetComponent<PlayerEntity>();
+
+        if (player != null)
+        {
+            player.OnTakeDamage?.Invoke(ContactDamage.GetValue());
+            HitPlayer();
+        }
+    }
+
     private IEnumerator Spawn()
     {
         blackBoard.objectPooler.SpawnFromPool("SwarmQueenMinion", blackBoard.BossEntity.transform.position + blackBoard.BossEntity.transform.up * 2.5f, blackBoard.BossEntity.transform.rotation);
         yield return new WaitForSeconds(blackBoard.SpawnTime);
         StartCoroutine(Spawn());
+    }
+
+    private void HitPlayer()
+    {
+        blackBoard.PlayerHit = true;
     }
 }

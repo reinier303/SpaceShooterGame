@@ -16,8 +16,19 @@ public class BehaviourTree : MonoBehaviour
 
         List<Node> nodeList = new List<Node>();
 
+        List<Node> nodeListSequence = new List<Node>();
+
         //nodeList.Add(new ConditionNode(blackBoard, new Func<bool>(()=> CheckBossHealth(50)), nodeList));
-        nodeList.Add(new MultiShot(blackBoard));
+
+        /*
+        nodeListSequence.Add(new Dash(blackBoard));
+        nodeListSequence.Add(new BulletBurst(blackBoard));
+
+        nodeList.Add(new Sequence(nodeListSequence));
+        */
+
+        nodeList.Add(new SpawnMinions(blackBoard));
+
 
         //Initialize behaviour tree with nodes
         node = new Selector(nodeList);

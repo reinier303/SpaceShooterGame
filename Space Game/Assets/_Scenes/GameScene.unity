@@ -1531,7 +1531,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentWave: 0
   EnemiesAlive: 0
-  Spawning: 1
+  Spawning: 0
   MapRenderer: {fileID: 866685844}
 --- !u!4 &1467098432
 Transform:
@@ -2444,7 +2444,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6608690468006295947}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.39, y: 0, z: 0}
+  m_LocalPosition: {x: 14.03, y: 0, z: 0}
   m_LocalScale: {x: 1.1, y: 1.1, z: 1.1}
   m_Children:
   - {fileID: 8195937994754123716}
@@ -2555,12 +2555,24 @@ MonoBehaviour:
   RotationSpeed: 15
   TimesToShoot: 18
   BulletAmount: 15
-  BulletSpread: 150
+  BulletSpread: 100
   BulletDamage: 1
   TimeBetweenShots: 1
-  DashDamage: 0
-  DashSpeed: 0
+  TimesToShootSpray: 100
+  BulletAmountSpray: 3
+  BulletSpreadSpray: 40
+  TimeBetweenShotsSpray: 0.2
+  TimesToShootBurst: 3
+  BulletAmountBurst: 36
+  BulletSpreadBurst: 360
+  TimeBetweenShotsBurst: 0.6
+  DashDamage: 1
+  DashSpeed: 10
+  DashSteps: 60
+  PlayerHit: 0
   SpawnTime: 5
+  TimeBetweenSpawns: 0.8
+  SpawnAmount: 8
   Player: {fileID: 692017883}
   PlayerEntity: {fileID: 0}
   BossEntity: {fileID: 0}
@@ -2598,7 +2610,7 @@ MonoBehaviour:
   DeathSound: 
   ParticleEffect: {fileID: 0}
   ContactDamage:
-    statName: c
+    statName: Contact Damage
     baseValue: 1
     multiplier: 0
   Player: {fileID: 0}
