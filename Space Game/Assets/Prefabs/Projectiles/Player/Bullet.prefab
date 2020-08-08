@@ -51,7 +51,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -92,18 +92,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7296814962085735418}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67940253b171c054ca60cb3a8de99f97, type: 3}
+  m_Script: {fileID: 11500000, guid: 10dffc870d222114b94986e978ae303a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed:
-    baseValue: 15
-    multiplier: 0
-  Damage:
-    baseValue: 3
-    multiplier: 0
-  AliveTime:
-    baseValue: 2
-    multiplier: 0
 --- !u!58 &7296814962085735422
 CircleCollider2D:
   m_ObjectHideFlags: 0

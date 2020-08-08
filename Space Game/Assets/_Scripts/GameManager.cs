@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance;
+
     #region Script References
 
     public Player RPlayer;
@@ -18,6 +20,13 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
+    public System.Action OnEndGame;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     private void Start()
     {
         InitializeOnTakeDamage();
@@ -26,7 +35,15 @@ public class GameManager : MonoBehaviour
     private void InitializeOnTakeDamage()
     {
         RUIManager.RPlayerEntity = RPlayer.RPlayerEntity;
-        RPlayer.RPlayerEntity.OnTakeDamage += RUIManager.TakeDamage;
+        RPlayer.RPlayerEntity.OnTakeDamage += RUIManager.UpdateLives;
     }
 
+    private void InitializeOnEndGame()
+    {
+        OnEndGame += RPlayer.SavePlayerData;
+    }
+    private void OnApplicationQuit()
+    {
+        //OnEndGame.Invoke();
+    }
 }

@@ -6,13 +6,15 @@ public class ObjectPooler : MonoBehaviour
 {
     //CREATE POOL IN RESOURCES FOLDER TO FUNCTION.
     //Assets/Resources/Pools/CreatePoolHere
-
+    public static ObjectPooler Instance;
 
     private List<ScriptablePool> Pools = new List<ScriptablePool>();
     public Dictionary<string, Queue<GameObject>> PoolDictionary;
 
     private void Awake()
     {
+        Instance = this;
+
         Object[] ScriptablePools = Resources.LoadAll("Pools", typeof(ScriptablePool));
         foreach (ScriptablePool pool in ScriptablePools)
         {

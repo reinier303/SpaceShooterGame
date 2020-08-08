@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   EnemyPrefabs:
-  - Prefab: {fileID: 0}
-    MaxAmount: 0
-  SpawnRate: 1
+  - Name: Swarmling
+    MaxAmount: 20
+  SpawnRate: 2
