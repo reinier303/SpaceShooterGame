@@ -5,10 +5,10 @@ using UnityEngine;
 public class Sequence : Node
 {
     //Children nodes that belong to this sequence
-    private List<Node> m_nodes = new List<Node>();
+    private Node[] m_nodes;
 
     //Must provide an initial set of children nodes to work
-    public Sequence(List<Node> nodes)
+    public Sequence(params Node[] nodes)
     {
         m_nodes = nodes;
     }

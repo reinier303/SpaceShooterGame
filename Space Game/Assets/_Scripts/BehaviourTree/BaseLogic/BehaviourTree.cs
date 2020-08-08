@@ -14,24 +14,24 @@ public class BehaviourTree : MonoBehaviour
         //Get BlackBoard from Transform
         blackBoard = GetComponent<BlackBoard>();
 
-        List<Node> nodeList = new List<Node>();
-
-        List<Node> nodeListSequence = new List<Node>();
-
-        //nodeList.Add(new ConditionNode(blackBoard, new Func<bool>(()=> CheckBossHealth(50)), nodeList));
-
-        /*
-        nodeListSequence.Add(new Dash(blackBoard));
-        nodeListSequence.Add(new BulletBurst(blackBoard));
-
-        nodeList.Add(new Sequence(nodeListSequence));
-        */
-
-        nodeList.Add(new SpawnMinions(blackBoard));
-
-
-        //Initialize behaviour tree with nodes
-        node = new Selector(nodeList);
+        node = new Sequence(
+            
+                new ConditionNode(blackBoard, new Func<bool>(() => !CheckBossHealth(50)),new Selector(
+                    new ConditionNode(blackBoard, new Func<bool>(() => !CheckPlayerDistance(12)), new Selector(
+                        new MultiShot(blackBoard),
+                        new SprayShot(blackBoard))),
+                    new ConditionNode(blackBoard, new Func<bool>(() => CheckPlayerDistance(12)), new Sequence(
+                        new Dash(blackBoard),
+                        new BulletBurst(blackBoard))))),
+                new ConditionNode(blackBoard, new Func<bool>(() => CheckBossHealth(50)), new Selector(
+                    new ConditionNode(blackBoard, new Func<bool>(() => !CheckPlayerDistance(12)), new Selector(
+                        new SprayShot(blackBoard),
+                        new SpawnMinions(blackBoard))),
+                    new ConditionNode(blackBoard, new Func<bool>(() => CheckPlayerDistance(12)), new Sequence(
+                        new Dash(blackBoard),
+                        new Dash(blackBoard),
+                        new Dash(blackBoard),
+                        new BulletBurst(blackBoard))))));
     }
 
     // Update is called once per frame

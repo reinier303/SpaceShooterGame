@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class ConditionNode : Node
 {
-    private List<Node> inputNodes;
+    private Node[] inputNodes;
     private Func<bool> condition;
 
     private BlackBoard blackBoard;
 
-    public ConditionNode(BlackBoard bb, Func<bool> _condition, List<Node> _inputNodes)
+    public ConditionNode(BlackBoard bb, Func<bool> _condition, params Node[] _inputNodes)
     {
         this.blackBoard = bb;
         this.condition = _condition;
@@ -21,7 +21,7 @@ public class ConditionNode : Node
     {
         if (!condition())
         {
-            return NodeStates.SUCCESS;
+            return NodeStates.FAILURE;
         }
         foreach (Node node in inputNodes)
         {

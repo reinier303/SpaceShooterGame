@@ -6,7 +6,9 @@ public class Dash : Node
 {
     private int timesShot;
 
-    private float timer, timeBetween;
+    private float timer, cooldownTimer;
+
+    private bool onCooldown;
 
 
     public Dash(BlackBoard board)
@@ -16,9 +18,17 @@ public class Dash : Node
 
     public override NodeStates Evaluate()
     {
+        if(onCooldown)
+        {
+            cooldownTimer++;
+            if(cooldownTimer > blackBoard.Cooldown)
+            {
+                return NodeStates.RUNNING;
+            }
+        }
+
         if(blackBoard.PlayerHit)
         {
-            Debug.Log("hit");
             blackBoard.PlayerHit = false;
             return NodeStates.SUCCESS;
         }
@@ -28,8 +38,7 @@ public class Dash : Node
         if (timer >= blackBoard.DashSteps)
         {
             timer = 0;
-            //Remove when put into behaviour tree
-            blackBoard.DashSpeed = 0;
+            onCooldown = true;
             return NodeStates.FAILURE;
         }
         else

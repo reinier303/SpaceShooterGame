@@ -37,6 +37,7 @@ public class BlackBoard : MonoBehaviour
     public float DashDamage;
     public float DashSpeed;
     public float DashSteps;
+    public float Cooldown;
     public bool PlayerHit;
 
     //Spawn

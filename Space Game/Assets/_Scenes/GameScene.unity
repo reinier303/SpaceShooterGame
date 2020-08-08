@@ -2558,7 +2558,7 @@ MonoBehaviour:
   BulletSpread: 100
   BulletDamage: 1
   TimeBetweenShots: 1
-  TimesToShootSpray: 100
+  TimesToShootSpray: 60
   BulletAmountSpray: 3
   BulletSpreadSpray: 40
   TimeBetweenShotsSpray: 0.2

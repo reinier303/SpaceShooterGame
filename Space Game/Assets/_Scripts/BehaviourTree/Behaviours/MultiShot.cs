@@ -16,9 +16,11 @@ public class MultiShot : Node
 
     public override NodeStates Evaluate()
     {
+        Debug.Log("MultiShot");
         if(timesShot >= blackBoard.TimesToShoot)
         {
-            return NodeStates.SUCCESS;
+            //timesShot = 0;
+            return NodeStates.FAILURE;
         }
         else
         {

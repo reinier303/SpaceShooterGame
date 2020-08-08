@@ -20,7 +20,7 @@ public class SpawnMinions : Node
             //Remove when in behaviour tree/testing only
             blackBoard.SpawnAmount = 0;
 
-            return NodeStates.SUCCESS;
+            return NodeStates.FAILURE;
         }
         else
         {

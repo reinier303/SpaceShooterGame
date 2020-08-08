@@ -15,9 +15,11 @@ public class SprayShot : Node
 
     public override NodeStates Evaluate()
     {
-        if(timesShot >= blackBoard.TimesToShootSpray)
+        Debug.Log("SprayShot");
+        if (timesShot >= blackBoard.TimesToShootSpray)
         {
-            return NodeStates.SUCCESS;
+            timesShot = 0;
+            return NodeStates.FAILURE;
         }
         else
         {

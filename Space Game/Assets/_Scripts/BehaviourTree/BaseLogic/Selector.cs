@@ -5,10 +5,10 @@ using UnityEngine;
 public class Selector : Node
 {
     //Child nodes for this selector
-    protected List<Node> m_nodes = new List<Node>();
+    protected Node[] m_nodes;
 
     //the constructor requires a list of child nodes to be passed in.
-    public Selector(List<Node> nodes)
+    public Selector(params Node[] nodes)
     {
         m_nodes = nodes;
     }
