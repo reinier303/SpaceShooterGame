@@ -46,6 +46,7 @@ public class AudioManager : MonoBehaviour
 
 public struct AudioData
 {
+    public AudioClip clip;
     public string name;
     public float duration;
 }

@@ -17,7 +17,7 @@ MonoBehaviour:
   StatName: ProjectileCount
   stat:
     statName: ProjectileCount
-    baseValue: 1
+    baseValue: 3
     multiplier: 0
   PointsSpent: 0
   PointValue: 1

@@ -50,15 +50,14 @@ public class SaveLoad : MonoBehaviour
         PlayerData data = new PlayerData();
         data.TotalUnits = 0;
         data.Units = 0;
+
         data.Weapons = new List<WeaponData>();
-        Object[] Weapons = Resources.LoadAll("Weapons", typeof(Weapon));
-        foreach (Weapon weapon in Weapons)
-        {
-            if(weapon.ID == 0)
-            {
-                data.Weapons.Add(weapon.RWeaponData);
-            }
-        }
-        Save<PlayerData>(data, "PlayerData");
+        Weapon weapon = (Weapon)Resources.Load("Weapons/Bullet/Bullets", typeof(Weapon));
+        weapon.AddBaseModules();
+        weapon.SaveWeaponData();
+        data.Weapons.Add(weapon.RWeaponData);
+
+        Save(data, "PlayerData.sav");
+        Debug.Log("New Save Made" + "Weapon 0:" + data.Weapons[0].WeaponName);
     }
 }

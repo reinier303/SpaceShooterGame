@@ -4,29 +4,71 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    //Player script references
     public PlayerAttack RPlayerAttack;
     public PlayerMovement RPlayerMovement;
     public PlayerEntity RPlayerEntity;
 
+    //Script references
+    private UIManager RUIManager;
+    
+    //Saving and loading
     public PlayerData Data;
 
+    //Weapons
     private Weapon CurrentWeapon;
+    public Weapon StartWeapon;
 
     private void Awake()
     {
+        GetSaveData();
+
         RPlayerAttack = GetComponent<PlayerAttack>();
         RPlayerMovement = GetComponent<PlayerMovement>();
         RPlayerEntity = GetComponent<PlayerEntity>();
+        RUIManager = GameManager.Instance.RUIManager;
+
+        StartWeapon = (Weapon)Resources.Load("Weapons/Bullet/Bullets", typeof(Weapon));
+    }
+
+    private void GetSaveData()
+    {
+        if(SaveLoad.SaveExists("PlayerData.sav"))
+        {
+            Data = SaveLoad.Load<PlayerData>("PlayerData.sav");
+        }
+        else
+        {
+            SaveLoad.NewSave();
+            Data = SaveLoad.Load<PlayerData>("PlayerData.sav");
+            Debug.Log(Data);
+        }
+    }
+
+    public void SetCurrentWeapon(Weapon weapon)
+    {
+        CurrentWeapon = weapon;
+    }
+
+    public void AddExperience(float expGain)
+    {
+        CurrentWeapon.GainExperience(expGain);
+    }
+
+    public void AddUnits(float units)
+    {
+        Data.Units += units;
+        RUIManager.UpdateUnits(units);
     }
 
     public void SavePlayerData()
     {
         CurrentWeapon.SaveWeaponData();
-        foreach(WeaponData data in Data.Weapons)
+        for(int i = 0; i < Data.Weapons.Count; i++)
         {
-            if(data.WeaponName == CurrentWeapon.WeaponName)
+            if(Data.Weapons[i].WeaponName == CurrentWeapon.WeaponName)
             {
-                Data.Weapons.Remove(data);
+                Data.Weapons.RemoveAt(i);
                 Data.Weapons.Add(CurrentWeapon.RWeaponData);
             }
         }
@@ -35,7 +77,7 @@ public class Player : MonoBehaviour
 }
 
 [System.Serializable]
-public struct PlayerData
+public class PlayerData
 {
     public List<WeaponData> Weapons;
     public float Units;

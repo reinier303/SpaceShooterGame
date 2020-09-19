@@ -29,7 +29,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0.72302735, w: 0.6908194}
   m_LocalPosition: {x: -2.33, y: 0.06, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 8001207218102178786}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 92.61}
@@ -51,7 +52,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 78a75498771f1fb4e92322ff332b6c17, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -73,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 20c122f1ed905f648ba310f12959e217, type: 3}
-  m_Color: {r: 0.13756159, g: 1, b: 0.10849059, a: 1}
+  m_Color: {r: 0.2718014, g: 0.7169812, b: 0.10484158, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -112,3 +113,78 @@ CircleCollider2D:
   m_Offset: {x: 0.0045956583, y: 0.100816466}
   serializedVersion: 2
   m_Radius: 0.1480496
+--- !u!1001 &8635767056519557743
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 7296814962085735423}
+    m_Modifications:
+    - target: {fileID: 1788377587036971405, guid: e1f30d2de03264344ad77bda076e527b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1788377587036971405, guid: e1f30d2de03264344ad77bda076e527b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1788377587036971405, guid: e1f30d2de03264344ad77bda076e527b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1788377587036971405, guid: e1f30d2de03264344ad77bda076e527b,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1788377587036971405, guid: e1f30d2de03264344ad77bda076e527b,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1788377587036971405, guid: e1f30d2de03264344ad77bda076e527b,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1788377587036971405, guid: e1f30d2de03264344ad77bda076e527b,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1788377587036971405, guid: e1f30d2de03264344ad77bda076e527b,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1788377587036971405, guid: e1f30d2de03264344ad77bda076e527b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 1788377587036971405, guid: e1f30d2de03264344ad77bda076e527b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1788377587036971405, guid: e1f30d2de03264344ad77bda076e527b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1788377587037213329, guid: e1f30d2de03264344ad77bda076e527b,
+        type: 3}
+      propertyPath: m_Name
+      value: SwarmBulletTrail
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e1f30d2de03264344ad77bda076e527b, type: 3}
+--- !u!4 &8001207218102178786 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1788377587036971405, guid: e1f30d2de03264344ad77bda076e527b,
+    type: 3}
+  m_PrefabInstance: {fileID: 8635767056519557743}
+  m_PrefabAsset: {fileID: 0}

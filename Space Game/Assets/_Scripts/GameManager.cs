@@ -20,7 +20,8 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
-    public System.Action OnEndGame;
+    public delegate void OnEndGame();
+    public OnEndGame onEndGame;
 
     private void Awake()
     {
@@ -29,21 +30,28 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        InitializeOnEndGame();
         InitializeOnTakeDamage();
     }
 
     private void InitializeOnTakeDamage()
     {
-        RUIManager.RPlayerEntity = RPlayer.RPlayerEntity;
         RPlayer.RPlayerEntity.OnTakeDamage += RUIManager.UpdateLives;
     }
 
     private void InitializeOnEndGame()
     {
-        OnEndGame += RPlayer.SavePlayerData;
+        onEndGame += RPlayer.SavePlayerData;
     }
     private void OnApplicationQuit()
     {
-        //OnEndGame.Invoke();
+        onEndGame.Invoke();
+    }
+
+    public IEnumerator Sleep(float seconds)
+    {
+        Time.timeScale = 0;
+        yield return new WaitForSecondsRealtime(seconds);
+        Time.timeScale = 1;
     }
 }

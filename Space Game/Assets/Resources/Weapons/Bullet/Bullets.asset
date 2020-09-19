@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 424c19f2150fa3346bdbfb0ea6929afc, type: 3}
   m_Name: Bullets
   m_EditorClassIdentifier: 
+  ID: 0
   WeaponName: Bullets
   ProjectileName: Bullet
   BaseModules:
@@ -21,10 +22,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a6ea3741a541a2c4eb98a51244a69d0d, type: 2}
   - {fileID: 11400000, guid: 6d0d3d33745f3cd49b3906147bf878b5, type: 2}
   - {fileID: 11400000, guid: 318e4748094101440a01ef906221409d, type: 2}
-  CurrentExperience: 0
-  Level: 1
+  CurrentExperience: 5
+  experienceNeeded: 50
+  PointsPerLevel: 0
+  CurrentPoints: 5
+  Level: 24
   RWeaponData:
-    WeaponName: 
-    CurrentExperience: 0
-    experienceNeeded: 0
-    Level: 0
+    WeaponName: Bullets
+    CurrentExperience: 5
+    experienceNeeded: 50
+    CurrentPoints: 5
+    Level: 24

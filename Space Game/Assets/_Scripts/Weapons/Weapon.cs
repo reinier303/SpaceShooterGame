@@ -10,27 +10,46 @@ public class Weapon : ScriptableObject
     public string WeaponName;
     public string ProjectileName;
     public List<Module> BaseModules = new List<Module>();
-    public Dictionary<string, Module> Modules = new Dictionary<string, Module>();
+    public Dictionary<string, ModuleData> Modules = new Dictionary<string, ModuleData>();
 
     public float CurrentExperience;
-    private float experienceNeeded;
+    public float experienceNeeded;
+    public float PointsPerLevel;
+    public float CurrentPoints;
 
     public int Level = 1;
 
     public WeaponData RWeaponData;
 
+    private UIManager uIManager;
+
+    public void InitializeUI()
+    {
+        uIManager = GameManager.Instance.RUIManager;
+        float currentValue = CurrentExperience / experienceNeeded;
+        uIManager.UpdateCurrentWeapon(currentValue);
+        uIManager.UpdateCurrentWeaponLevel(RWeaponData.Level);
+    }
+
+    public void GetWeaponData(PlayerData data, int weaponIndex)
+    {
+        Debug.Log(data.Weapons.Count);
+        Debug.Log(data.Weapons[weaponIndex].WeaponName);
+        RWeaponData = data.Weapons[weaponIndex];
+    }
+
     public void GainExperience(float expGain)
     {
         //Calculate if any experience remains after leveling up.
-        float remainingExp = expGain + CurrentExperience - experienceNeeded;
+        float remainingExp = expGain + RWeaponData.CurrentExperience - RWeaponData.experienceNeeded;
 
-        CurrentExperience += expGain;
+        RWeaponData.CurrentExperience += expGain;
 
         //Check if level up.
-        if(CurrentExperience >= experienceNeeded)
+        if(RWeaponData.CurrentExperience >= RWeaponData.experienceNeeded)
         {
-            Level++;
-            CurrentExperience = 0;
+            LevelUp();
+            RWeaponData.CurrentExperience = 0;
 
             //Repeat GainExperience untill expGain runs out.
             if(remainingExp > 0)
@@ -38,6 +57,16 @@ public class Weapon : ScriptableObject
                 GainExperience(remainingExp);
             }
         }
+        float currentValue = RWeaponData.CurrentExperience / RWeaponData.experienceNeeded;
+        GameManager.Instance.RUIManager.UpdateCurrentWeapon(currentValue);
+    }
+
+    public void LevelUp()
+    {
+        Level++;
+        RWeaponData.CurrentPoints += PointsPerLevel;
+        GameManager.Instance.RUIManager.UpdateCurrentWeaponLevel(RWeaponData.Level);
+        SaveWeaponData();
     }
 
     public void SaveWeaponData()
@@ -46,6 +75,7 @@ public class Weapon : ScriptableObject
         RWeaponData.WeaponName = WeaponName;
         RWeaponData.CurrentExperience = CurrentExperience;
         RWeaponData.experienceNeeded = experienceNeeded;
+        RWeaponData.CurrentPoints = CurrentPoints;
         RWeaponData.Level = Level;
     }
 
@@ -61,20 +91,21 @@ public class Weapon : ScriptableObject
     {
         if(!Modules.ContainsKey(module.StatName))
         {
-            Modules.Add(module.StatName, module);
+            Modules.Add(module.StatName, module.GetModuleData());
         }
     }
 }
 
 [System.Serializable]
-public struct WeaponData
+public class WeaponData
 {
-    public Dictionary<string, Module> Modules;
+    public Dictionary<string, ModuleData> Modules;
 
     public string WeaponName;
 
     public float CurrentExperience;
     public float experienceNeeded;
+    public float CurrentPoints;
 
     public int Level;
 }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6450961297329582260}
   - component: {fileID: 6450961297329582263}
   - component: {fileID: 6450961297329582262}
+  - component: {fileID: 6450961299208137064}
   m_Layer: 5
   m_Name: WeaponUIButton
   m_TagString: Untagged
@@ -118,7 +119,39 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6450961297329582263}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6450961299208137064}
+        m_MethodName: ShowWeaponModules
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6450961299208137064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6450961297329582248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bccbb2ae1dc08041aea6cc4d6b4384c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponData:
+    WeaponName: 
+    CurrentExperience: 0
+    experienceNeeded: 0
+    Level: 0
+  weaponButton: {fileID: 6309535112839826457, guid: 25ef63a25267ecf4080381bb7443f315,
+    type: 3}
+  weaponModulePanel: {fileID: 0}
+  textComponent: {fileID: 6450961298597137982}
 --- !u!1 &6450961298597137968
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,9 +19,13 @@ public class HangarManager : MonoBehaviour
 
     private void InitializeWeapons()
     {
-        foreach (WeaponData weapon in data.Weapons)
+        foreach (WeaponData weaponData in data.Weapons)
         {
-            Instantiate(weaponButton, weaponPanel);
+            GameObject weapon = Instantiate(weaponButton, weaponPanel);
+            ShopUIWeapon UIWeapon = weapon.GetComponent<ShopUIWeapon>();
+            UIWeapon.weaponData = weaponData;
+            UIWeapon.weaponModulePanel = statPanel;
+            UIWeapon.textComponent.text = weaponData.WeaponName;
         }
     }
 }

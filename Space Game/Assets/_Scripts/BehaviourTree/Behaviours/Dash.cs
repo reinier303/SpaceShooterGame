@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Dash : Node
 {
-    private int timesShot;
-
     private float timer, cooldownTimer;
 
     private bool onCooldown;

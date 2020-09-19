@@ -4,7 +4,17 @@ using UnityEngine;
 
 public class PlayerProjectile : MonoBehaviour
 {
-    public Dictionary<string, Module> Modules = new Dictionary<string, Module>();
+    public Dictionary<string, ModuleData> Modules = new Dictionary<string, ModuleData>();
+    public string OnHitEffectName;
+    protected ObjectPooler objectPooler;
+    protected GameManager gameManager;
+
+
+    protected virtual void Awake()
+    {
+        objectPooler = ObjectPooler.Instance;
+        gameManager = GameManager.Instance;
+    }
 
     protected virtual void Update()
     {
@@ -21,7 +31,9 @@ public class PlayerProjectile : MonoBehaviour
         BaseEntity entity = collider.GetComponent<BaseEntity>();
         if(entity != null)
         {
+            gameManager.StartCoroutine(gameManager.Sleep(0.015f));
             entity.OnTakeDamage?.Invoke(Modules["Damage"].GetStatValue());
+            objectPooler.SpawnFromPool(OnHitEffectName, transform.position, Quaternion.identity);
             gameObject.SetActive(false);
         }
     }
@@ -29,6 +41,7 @@ public class PlayerProjectile : MonoBehaviour
     public virtual IEnumerator DisableAfterTime()
     {
         yield return new WaitForSeconds(Modules["AliveTime"].GetStatValue());
+        objectPooler.SpawnFromPool(OnHitEffectName, transform.position, Quaternion.identity);
         gameObject.SetActive(false);
     }
 }

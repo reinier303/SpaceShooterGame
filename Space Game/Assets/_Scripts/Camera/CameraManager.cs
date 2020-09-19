@@ -1,18 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class CameraManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public CinemachineVirtualCamera cvCam;
+    private CinemachineBasicMultiChannelPerlin NoiseAmplitude;
+
+    void Awake()
     {
-        
+        NoiseAmplitude = cvCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public IEnumerator Shake(float duration, float magnitude)
     {
-        
+        NoiseAmplitude.m_AmplitudeGain = magnitude;
+
+        yield return new WaitForSeconds(duration);
+
+        while (NoiseAmplitude.m_AmplitudeGain < magnitude / 10)
+        {
+            NoiseAmplitude.m_AmplitudeGain = Mathf.Lerp(magnitude, 0, Time.deltaTime / duration);
+
+            yield return null;
+        }
+
+        NoiseAmplitude.m_AmplitudeGain = 0;
     }
 }

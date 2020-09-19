@@ -6,6 +6,7 @@ public class PlayerAttack : MonoBehaviour
 {
     //TEMP: Gamemanager delegates 
     public ObjectPooler RObjectPooler;
+    private Player rPlayer;
 
     private bool canFire;
     public float fireCooldown;
@@ -14,7 +15,14 @@ public class PlayerAttack : MonoBehaviour
 
     private Weapon currentWeapon;
 
+    [SerializeField] private GameObject muzzleFlash;
+
     private void Awake()
+    {
+        rPlayer = GetComponent<Player>();
+    }
+
+    private void Start()
     {
         Initialize();
     }
@@ -22,17 +30,16 @@ public class PlayerAttack : MonoBehaviour
     private void Initialize()
     {
         canFire = true;
-        currentWeapon = Weapons[0];
-        InitializeWeapons();
+        currentWeapon = rPlayer.StartWeapon;
+        Debug.Log(rPlayer.Data);
+        currentWeapon.GetWeaponData(rPlayer.Data, 0);
+        rPlayer.SetCurrentWeapon(currentWeapon);
+        currentWeapon.InitializeUI();
     }
 
-    //TEMP???: Other way to do this?
-    private void InitializeWeapons()
+    public Weapon GetCurrentWeapon()
     {
-        foreach(Weapon weapon in Weapons)
-        {
-            weapon.AddBaseModules();
-        }
+        return currentWeapon;
     }
 
     // Update is called once per frame
@@ -49,8 +56,12 @@ public class PlayerAttack : MonoBehaviour
     {
         if(canFire)
         {
-            float spread = currentWeapon.Modules["ProjectileSpread"].GetStatValue();
-            float count = (int)currentWeapon.Modules["ProjectileCount"].GetStatValue();
+            Debug.Log(currentWeapon.Modules.Count);
+            muzzleFlash.SetActive(false);
+            muzzleFlash.SetActive(true);
+
+            float spread = currentWeapon.RWeaponData.Modules["ProjectileSpread"].GetStatValue();
+            float count = (int)currentWeapon.RWeaponData.Modules["ProjectileCount"].GetStatValue();
 
             float angleIncrease;
 
@@ -76,7 +87,7 @@ public class PlayerAttack : MonoBehaviour
 
                 //Initialize projectile
                 PlayerProjectile projectile = projectileObject.GetComponent<PlayerProjectile>();
-                projectile.Modules = currentWeapon.Modules;
+                projectile.Modules = currentWeapon.RWeaponData.Modules;
                 projectile.StartCoroutine(projectile.DisableAfterTime());
             }
 

@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81ef996067970074d8dd88ba76874a9d, type: 3}
+  m_Name: SwarmExplosionBase
+  m_EditorClassIdentifier: 
+  Tag: SwarmExplosionBase
+  Prefab: {fileID: 69479998559693278, guid: 98fd1826280d2c14b94fc5ba23284896, type: 3}
+  Amount: 100
