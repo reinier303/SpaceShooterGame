@@ -25,7 +25,12 @@ public class HangarManager : MonoBehaviour
             ShopUIWeapon UIWeapon = weapon.GetComponent<ShopUIWeapon>();
             UIWeapon.weaponData = weaponData;
             UIWeapon.weaponModulePanel = statPanel;
-            UIWeapon.textComponent.text = weaponData.WeaponName;
+            UIWeapon.Initialize();
         }
+    }
+
+    public void SaveWeaponData()
+    {
+        SaveLoad.Save<PlayerData>(data, "PlayerData.sav");
     }
 }

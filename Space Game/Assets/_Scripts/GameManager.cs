@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    //Singleton
     public static GameManager Instance;
 
     #region Script References
@@ -23,15 +25,35 @@ public class GameManager : MonoBehaviour
     public delegate void OnEndGame();
     public OnEndGame onEndGame;
 
+    public bool PlayerAlive;
+
     private void Awake()
     {
+        Time.timeScale = 1;
         Instance = this;
+        PlayerAlive = true;
     }
 
     private void Start()
     {
         InitializeOnEndGame();
         InitializeOnTakeDamage();
+    }
+
+    private void Update()
+    {
+        //Replace this in inputManager
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            if(Time.timeScale == 1)
+            {
+                PauseGame();
+            }
+            else
+            {
+                UnpauseGame();
+            }
+        }
     }
 
     private void InitializeOnTakeDamage()
@@ -53,5 +75,23 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0;
         yield return new WaitForSecondsRealtime(seconds);
         Time.timeScale = 1;
+    }
+
+    //TODO:Loading screen and helper loadscene method instead of here
+    public void LoadSceneAsync(int scene)
+    {
+        SceneManager.LoadSceneAsync(scene);
+    }
+
+    private void PauseGame()
+    {
+        Time.timeScale = 0;
+        RUIManager.OpenPauseMenu();
+    }
+
+    private void UnpauseGame()
+    {
+        Time.timeScale = 1;
+        RUIManager.ClosePauseMenu();
     }
 }

@@ -17,7 +17,7 @@ MonoBehaviour:
   StatName: ProjectileSpeed
   stat:
     statName: ProjectileSpeed
-    baseValue: 24
+    baseValue: 20
     multiplier: 0
   PointsSpent: 0
   PointValue: 1.6

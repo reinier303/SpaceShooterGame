@@ -22,14 +22,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a6ea3741a541a2c4eb98a51244a69d0d, type: 2}
   - {fileID: 11400000, guid: 6d0d3d33745f3cd49b3906147bf878b5, type: 2}
   - {fileID: 11400000, guid: 318e4748094101440a01ef906221409d, type: 2}
-  CurrentExperience: 5
-  experienceNeeded: 50
+  CurrentExperience: 0
+  experienceNeeded: 100
   PointsPerLevel: 1
   CurrentPoints: 0
   Level: 1
   RWeaponData:
     WeaponName: Bullets
-    CurrentExperience: 0
-    experienceNeeded: 50
+    CurrentExperience: 8
+    ExperienceNeeded: 100
     CurrentPoints: 0
     Level: 1

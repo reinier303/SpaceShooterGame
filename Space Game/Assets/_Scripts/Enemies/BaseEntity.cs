@@ -7,7 +7,6 @@ public class BaseEntity : MonoBehaviour
     [Header("Stats")]
     public Stat MaxHealth;
     public float currentHealth;
-    public Stat DroppedUnits;
 
     [Header("Screen Shake")]
     public float ShakeMagnitude;
@@ -28,6 +27,7 @@ public class BaseEntity : MonoBehaviour
 
     public System.Action<float> OnTakeDamage;
 
+    protected GameManager gameManager;
     protected ObjectPooler objectPooler;
     protected CameraManager cameraManager;
 
@@ -47,6 +47,7 @@ public class BaseEntity : MonoBehaviour
 
     protected virtual void Start()
     {
+        gameManager = GameManager.Instance;
         objectPooler = ObjectPooler.Instance;
         cameraManager = GameManager.Instance.RCameraManager;
     }
@@ -61,6 +62,7 @@ public class BaseEntity : MonoBehaviour
         currentHealth -= damage;
         if(currentHealth <= 0)
         {
+            currentHealth = 0;
             Die();
         }
         else
@@ -80,18 +82,17 @@ public class BaseEntity : MonoBehaviour
     {
         SpawnSegments();
         SpawnParticleEffect();
-        DropUnits(DroppedUnits.GetValue());
         cameraManager.StartCoroutine(cameraManager.Shake(ShakeDuration, ShakeMagnitude));
         gameObject.SetActive(false);
     }
 
-    protected void SpawnParticleEffect()
+    protected virtual void SpawnParticleEffect()
     {
         GameObject effect = objectPooler.SpawnFromPool(ParticleEffect, transform.position, Quaternion.identity);
         effect.transform.localScale *= ParticleEffectScale;
     }
 
-    protected void SpawnSegments()
+    protected virtual void SpawnSegments()
     {
         for (int i = 0; i < Random.Range(3, 6); i++)
         {
@@ -101,13 +102,4 @@ public class BaseEntity : MonoBehaviour
         }
     }
 
-    protected virtual void DropUnits(float units)
-    {
-        for (int i = 0; i * 2 < units; i++)
-        {
-            GameObject unitObj = objectPooler.SpawnFromPool("Unit0.5", transform.position, Quaternion.identity);
-            Unit unit = unitObj.GetComponent<Unit>();
-            unit.MoveUnit();
-        }
-    }
 }

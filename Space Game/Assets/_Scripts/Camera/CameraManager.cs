@@ -8,9 +8,12 @@ public class CameraManager : MonoBehaviour
     public CinemachineVirtualCamera cvCam;
     private CinemachineBasicMultiChannelPerlin NoiseAmplitude;
 
+    private Animator cinemachineAnimator;
+
     void Awake()
     {
         NoiseAmplitude = cvCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        cinemachineAnimator = GetComponent<Animator>();
     }
 
     public IEnumerator Shake(float duration, float magnitude)
@@ -27,5 +30,10 @@ public class CameraManager : MonoBehaviour
         }
 
         NoiseAmplitude.m_AmplitudeGain = 0;
+    }
+
+    public void DeathCamera()
+    {
+        cinemachineAnimator.SetBool("Death", true);
     }
 }

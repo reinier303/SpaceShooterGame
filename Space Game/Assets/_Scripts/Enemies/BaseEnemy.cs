@@ -8,11 +8,11 @@ public class BaseEnemy : BaseEntity
 {
     public Transform Player;
 
+    //Stats
     public Stat ContactDamage;
-
     public Stat Speed;
-
     public Stat ExpGiven;
+    public Stat DroppedUnits;
 
     [Tooltip("Distance to player at which the enemy will stop moving")]
     public float StopDistance;
@@ -40,7 +40,7 @@ public class BaseEnemy : BaseEntity
         {
             if(field.FieldType == typeof(Stat))
             {
-                Stat newStat = new Stat("fuk man", (float)field.GetValue("baseValue"), (float)field.GetValue("multiplier"));
+                Stat newStat = new Stat("newStat", (float)field.GetValue("baseValue"), (float)field.GetValue("multiplier"));
                 Debug.Log(newStat.GetValue());
                 field.SetValue(field, newStat);
             }
@@ -59,9 +59,13 @@ public class BaseEnemy : BaseEntity
 
     protected virtual void Move()
     {
-        if (Vector2.Distance(transform.position, Player.transform.position) > StopDistance)
+        if (Vector2.Distance(transform.position, Player.transform.position) > StopDistance && gameManager.PlayerAlive)
         {
             transform.position = Vector2.MoveTowards(transform.position, Player.position, Speed.GetValue() * Time.deltaTime);
+        }
+        else
+        {
+            transform.position = Vector2.MoveTowards(transform.position, Player.position, -Speed.GetValue() * Time.deltaTime);
         }
     }
 
@@ -70,13 +74,27 @@ public class BaseEnemy : BaseEntity
         Vector3 difference = Player.position - transform.position;
         float rotationZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotationZ - 90f);
+        if (!gameManager.PlayerAlive)
+        {
+            transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotationZ + 90f);
+        }
     }
 
     protected override void Die()
     {
         Player.GetComponent<Player>().AddExperience(ExpGiven.GetValue());
+        DropUnits(DroppedUnits.GetValue());
         base.Die();
     }
 
+    protected virtual void DropUnits(float units)
+    {
+        for (int i = 0; i * 2 < units; i++)
+        {
+            GameObject unitObj = objectPooler.SpawnFromPool("Unit0.5", transform.position, Quaternion.identity);
+            Unit unit = unitObj.GetComponent<Unit>();
+            unit.MoveUnit();
+        }
+    }
 
 }

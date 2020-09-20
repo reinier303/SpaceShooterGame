@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ShopManager : MonoBehaviour
 {
@@ -12,11 +13,11 @@ public class ShopManager : MonoBehaviour
 
     private void Awake()
     {
+        Time.timeScale = 1;
+
         Instance = this;
 
-        Data = SaveLoad.Load<PlayerData>("PlayerData");
-        Bullets.AddBaseModules();
-        Data.Weapons.Add(Bullets.RWeaponData);
+        Data = SaveLoad.Load<PlayerData>("PlayerData.sav");
     }
 
     public void RemoveUnits(float Units)
@@ -27,5 +28,11 @@ public class ShopManager : MonoBehaviour
     public float GetUnits()
     {
         return Data.TotalUnits;
+    }
+
+    //TODO:Loading screen and helper loadscene method instead of here
+    public void LoadSceneAsync(int scene)
+    {
+        SceneManager.LoadSceneAsync(scene);
     }
 }

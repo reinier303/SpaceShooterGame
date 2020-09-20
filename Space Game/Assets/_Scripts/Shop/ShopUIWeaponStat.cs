@@ -24,17 +24,19 @@ public class ShopUIWeaponStat : MonoBehaviour
             shopUIWeapon.weaponData.Modules[ModuleName].PointsSpent++;
             PointsSpent.text = "" + shopUIWeapon.weaponData.Modules[ModuleName].PointsSpent;
             shopUIWeapon.weaponData.CurrentPoints -= shopUIWeapon.weaponData.Modules[ModuleName].PointCost;
+            shopUIWeapon.AdjustPointsToSpend();
             Debug.Log(ModuleName + ": Added, Points Left:" + shopUIWeapon.weaponData.CurrentPoints);
         }
     }
 
     public void RemoveStat()
     {
-        if (shopUIWeapon.weaponData.CurrentPoints >= 1 && shopUIWeapon.weaponData.Modules[ModuleName].PointsSpent > 1)
+        if (shopUIWeapon.weaponData.Modules[ModuleName].PointsSpent > 0)
         {
             shopUIWeapon.weaponData.Modules[ModuleName].PointsSpent--;
             PointsSpent.text = "" + shopUIWeapon.weaponData.Modules[ModuleName].PointsSpent;
             shopUIWeapon.weaponData.CurrentPoints += shopUIWeapon.weaponData.Modules[ModuleName].PointCost;
+            shopUIWeapon.AdjustPointsToSpend();
             Debug.Log(ModuleName + ": Removed, Points Left:" + shopUIWeapon.weaponData.CurrentPoints);
 
         }

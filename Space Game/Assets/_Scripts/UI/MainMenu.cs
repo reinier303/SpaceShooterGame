@@ -10,7 +10,9 @@ namespace SpaceGame
 
         private void Awake()
         {
-            if(!SaveLoad.SaveExists("PlayerData"))
+            Time.timeScale = 1;
+
+            if (!SaveLoad.SaveExists("PlayerData.Sav"))
             {
                 SaveLoad.NewSave();
             }

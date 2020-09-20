@@ -12,13 +12,24 @@ public class ShopUIWeapon : MonoBehaviour
 
     [HideInInspector] public Transform weaponModulePanel;
 
-    public TextMeshProUGUI textComponent;
+    public TextMeshProUGUI TextComponent;
+    public TextMeshProUGUI PointsToSpend;
+
+    public void Initialize()
+    {
+        TextComponent.text = weaponData.WeaponName;
+        PointsToSpend.text = "" + weaponData.CurrentPoints;
+    }
 
     public void ShowWeaponModules()
     {
         for(int i = 0; i < weaponModulePanel.childCount; i++)
         {
-            Destroy(weaponModulePanel.GetChild(i).gameObject);
+            //TODO: this is ugly make this better, either in hierarchy or code...
+            if(weaponModulePanel.GetChild(i).name != "SaveButton")
+            {
+                Destroy(weaponModulePanel.GetChild(i).gameObject);
+            }
         }
         for(int i = 0; i < weaponData.Modules.Count; i++)
         {
@@ -28,5 +39,10 @@ public class ShopUIWeapon : MonoBehaviour
             weaponStatScript.shopUIWeapon = this;
             weaponStatScript.Initialize();
         }
+    }
+
+    public void AdjustPointsToSpend()
+    {
+        PointsToSpend.text = "" + weaponData.CurrentPoints;
     }
 }

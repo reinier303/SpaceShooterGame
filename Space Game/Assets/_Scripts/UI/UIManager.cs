@@ -12,6 +12,9 @@ public class UIManager : MonoBehaviour
     public TMP_Text WeaponLevelText;
     public Slider WeaponExperience;
 
+    public GameObject PostGamePanel;
+    public GameObject PauseMenu;
+
     [Header("BounceTweenValues")]
     public float BounceTime;
     public float BounceSize;
@@ -64,5 +67,19 @@ public class UIManager : MonoBehaviour
         LeanTween.scale(uIElement, new Vector2(BounceSize, BounceSize), BounceTime).setEase(BounceType).setIgnoreTimeScale(true);
         yield return new WaitForSeconds(BounceTime);
         LeanTween.scale(uIElement, new Vector2(1, 1), BounceTime).setEase(BounceType).setIgnoreTimeScale(true);
+    }
+
+    public void OpenPauseMenu()
+    {
+        PauseMenu.SetActive(true);
+    }
+    public void ClosePauseMenu()
+    {
+        PauseMenu.SetActive(false);
+    }
+
+    public void OnPlayerDeathUI()
+    {
+        PostGamePanel.SetActive(true);
     }
 }

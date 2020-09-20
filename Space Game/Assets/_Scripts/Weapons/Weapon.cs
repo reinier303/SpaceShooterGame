@@ -39,12 +39,12 @@ public class Weapon : ScriptableObject
     public void GainExperience(float expGain)
     {
         //Calculate if any experience remains after leveling up.
-        float remainingExp = expGain + RWeaponData.CurrentExperience - RWeaponData.experienceNeeded;
+        float remainingExp = expGain + RWeaponData.CurrentExperience - RWeaponData.ExperienceNeeded;
 
         RWeaponData.CurrentExperience += expGain;
 
         //Check if level up.
-        if(RWeaponData.CurrentExperience >= RWeaponData.experienceNeeded)
+        if(RWeaponData.CurrentExperience >= RWeaponData.ExperienceNeeded)
         {
             LevelUp();
             RWeaponData.CurrentExperience = 0;
@@ -55,7 +55,7 @@ public class Weapon : ScriptableObject
                 GainExperience(remainingExp);
             }
         }
-        float currentValue = RWeaponData.CurrentExperience / RWeaponData.experienceNeeded;
+        float currentValue = RWeaponData.CurrentExperience / RWeaponData.ExperienceNeeded;
         GameManager.Instance.RUIManager.UpdateCurrentWeapon(currentValue);
     }
 
@@ -63,8 +63,10 @@ public class Weapon : ScriptableObject
     {
         RWeaponData.Level++;
         RWeaponData.CurrentPoints += PointsPerLevel;
+        RWeaponData.ExperienceNeeded = RWeaponData.ExperienceNeeded * (1.4f + 0.005f * RWeaponData.Level);
         GameManager.Instance.RUIManager.UpdateCurrentWeaponLevel(RWeaponData.Level);
         GameManager.Instance.RPlayer.SavePlayerData();
+        Debug.Log(RWeaponData.ExperienceNeeded);
     }
 
     public void NewWeaponData()
@@ -72,7 +74,7 @@ public class Weapon : ScriptableObject
         RWeaponData.Modules = Modules;
         RWeaponData.WeaponName = WeaponName;
         RWeaponData.CurrentExperience = CurrentExperience;
-        RWeaponData.experienceNeeded = experienceNeeded;
+        RWeaponData.ExperienceNeeded = experienceNeeded;
         RWeaponData.CurrentPoints = CurrentPoints;
         RWeaponData.Level = Level;
     }
@@ -102,7 +104,7 @@ public class WeaponData
     public string WeaponName;
 
     public float CurrentExperience;
-    public float experienceNeeded;
+    public float ExperienceNeeded;
     public float CurrentPoints;
 
     public int Level;

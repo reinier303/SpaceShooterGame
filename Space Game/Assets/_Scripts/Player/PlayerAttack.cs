@@ -55,7 +55,6 @@ public class PlayerAttack : MonoBehaviour
     {
         if(canFire)
         {
-            Debug.Log(currentWeapon.RWeaponData.Modules.Count);
             muzzleFlash.SetActive(false);
             muzzleFlash.SetActive(true);
 

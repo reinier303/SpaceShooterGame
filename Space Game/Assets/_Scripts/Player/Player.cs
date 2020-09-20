@@ -41,7 +41,6 @@ public class Player : MonoBehaviour
         {
             SaveLoad.NewSave();
             Data = SaveLoad.Load<PlayerData>("PlayerData.sav");
-            Debug.Log(Data);
         }
     }
 

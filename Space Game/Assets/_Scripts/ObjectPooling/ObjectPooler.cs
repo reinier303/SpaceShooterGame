@@ -58,7 +58,7 @@ public class ObjectPooler : MonoBehaviour
     }
 
     //Spawn an object from the corresponding pool with the given variables
-    public GameObject SpawnFromPool(string tag, Vector3 position, Quaternion rotation)
+    public GameObject SpawnFromPool(string tag, Vector2 position, Quaternion rotation)
     {
         if (!PoolDictionary.ContainsKey(tag))
         {

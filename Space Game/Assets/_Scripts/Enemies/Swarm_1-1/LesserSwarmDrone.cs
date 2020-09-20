@@ -22,7 +22,7 @@ public class LesserSwarmDrone : BaseEnemy
 
     private void Fire()
     {
-        if (canFire)
+        if (canFire && gameManager.PlayerAlive)
         {
             objectPooler.SpawnFromPool("SwarmBullet", transform.position, transform.rotation);
             canFire = false;
