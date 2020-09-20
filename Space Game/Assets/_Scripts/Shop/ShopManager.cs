@@ -15,7 +15,6 @@ public class ShopManager : MonoBehaviour
         Instance = this;
 
         Data = SaveLoad.Load<PlayerData>("PlayerData");
-        Bullets.SaveWeaponData();
         Bullets.AddBaseModules();
         Data.Weapons.Add(Bullets.RWeaponData);
     }

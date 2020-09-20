@@ -54,7 +54,7 @@ public class SaveLoad : MonoBehaviour
         data.Weapons = new List<WeaponData>();
         Weapon weapon = (Weapon)Resources.Load("Weapons/Bullet/Bullets", typeof(Weapon));
         weapon.AddBaseModules();
-        weapon.SaveWeaponData();
+        weapon.NewWeaponData();
         data.Weapons.Add(weapon.RWeaponData);
 
         Save(data, "PlayerData.sav");

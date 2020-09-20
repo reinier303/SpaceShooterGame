@@ -13,7 +13,7 @@ public class PlayerAttack : MonoBehaviour
 
     public List<Weapon> Weapons;
 
-    private Weapon currentWeapon;
+    [SerializeField] private Weapon currentWeapon;
 
     [SerializeField] private GameObject muzzleFlash;
 
@@ -31,7 +31,6 @@ public class PlayerAttack : MonoBehaviour
     {
         canFire = true;
         currentWeapon = rPlayer.StartWeapon;
-        Debug.Log(rPlayer.Data);
         currentWeapon.GetWeaponData(rPlayer.Data, 0);
         rPlayer.SetCurrentWeapon(currentWeapon);
         currentWeapon.InitializeUI();
@@ -56,7 +55,7 @@ public class PlayerAttack : MonoBehaviour
     {
         if(canFire)
         {
-            Debug.Log(currentWeapon.Modules.Count);
+            Debug.Log(currentWeapon.RWeaponData.Modules.Count);
             muzzleFlash.SetActive(false);
             muzzleFlash.SetActive(true);
 
@@ -98,7 +97,7 @@ public class PlayerAttack : MonoBehaviour
 
     private IEnumerator FireCooldownTimer()
     {
-        yield return new WaitForSeconds(1 / currentWeapon.Modules["FireRate"].GetStatValue());
+        yield return new WaitForSeconds(1 / currentWeapon.RWeaponData.Modules["FireRate"].GetStatValue());
         canFire = true;
     }
 }

@@ -12,6 +12,5 @@ public class ScriptableShopItem : ScriptableObject
     public void UnlockModule()
     {
         ModuleToUnlock.Weapon.AddModule(ModuleToUnlock);
-        ModuleToUnlock.Weapon.SaveWeaponData();
     }
 }

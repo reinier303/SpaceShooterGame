@@ -63,7 +63,6 @@ public class Player : MonoBehaviour
 
     public void SavePlayerData()
     {
-        CurrentWeapon.SaveWeaponData();
         for(int i = 0; i < Data.Weapons.Count; i++)
         {
             if(Data.Weapons[i].WeaponName == CurrentWeapon.WeaponName)

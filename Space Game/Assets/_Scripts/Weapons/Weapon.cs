@@ -33,8 +33,6 @@ public class Weapon : ScriptableObject
 
     public void GetWeaponData(PlayerData data, int weaponIndex)
     {
-        Debug.Log(data.Weapons.Count);
-        Debug.Log(data.Weapons[weaponIndex].WeaponName);
         RWeaponData = data.Weapons[weaponIndex];
     }
 
@@ -63,13 +61,13 @@ public class Weapon : ScriptableObject
 
     public void LevelUp()
     {
-        Level++;
+        RWeaponData.Level++;
         RWeaponData.CurrentPoints += PointsPerLevel;
         GameManager.Instance.RUIManager.UpdateCurrentWeaponLevel(RWeaponData.Level);
-        SaveWeaponData();
+        GameManager.Instance.RPlayer.SavePlayerData();
     }
 
-    public void SaveWeaponData()
+    public void NewWeaponData()
     {
         RWeaponData.Modules = Modules;
         RWeaponData.WeaponName = WeaponName;

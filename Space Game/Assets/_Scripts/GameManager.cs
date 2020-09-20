@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
 
     private void InitializeOnEndGame()
     {
-        onEndGame += RPlayer.SavePlayerData;
+       onEndGame += RPlayer.SavePlayerData;
     }
     private void OnApplicationQuit()
     {
