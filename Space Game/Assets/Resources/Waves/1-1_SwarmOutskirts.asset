@@ -12,8 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5286f50686901e409d707c0eff733fd, type: 3}
   m_Name: 1-1_SwarmOutskirts
   m_EditorClassIdentifier: 
-  Name: 
+  Name: 'The Swarm Outskirts '
   EnemyPrefabs:
   - Name: Swarmling
     MaxAmount: 20
-  SpawnRate: 2
+    Priority: 3
+  - Name: LesserSwarmDrone
+    MaxAmount: 20
+    Priority: 2
+  - Name: Asteroid
+    MaxAmount: 100
+    Priority: 20
+  StartSpawnRate: 0.8
+  SpawnRateRampPerSecond: -0.0015
+  MaxSpawnRate: 0.02
+  BossName: 

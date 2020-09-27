@@ -147,7 +147,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1.65
+  m_Radius: 0.9
 --- !u!50 &3029544696909630308
 Rigidbody2D:
   serializedVersion: 4
@@ -156,7 +156,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3029544696909630313}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -184,18 +184,14 @@ MonoBehaviour:
   MaxHealth:
     statName: Max Health
     baseValue: 3
-    multiplier: 0
+    multiplier: 1
   currentHealth: 0
-  DroppedUnits:
-    statName: DroppedUnits
-    baseValue: 3
-    multiplier: 0
   ShakeMagnitude: 6.5
   ShakeDuration: 0.5
   HitSound: 
   DeathSound: 
   ParticleEffect: SwarmExplosionBase
-  ParticleEffectScale: 1.1
+  ParticleEffectScale: 1
   PermanenceSprites:
   - {fileID: 5223915406847709327, guid: e665cd6447b483045b247d4d2e18537c, type: 3}
   - {fileID: -5976695707227044153, guid: e665cd6447b483045b247d4d2e18537c, type: 3}
@@ -207,19 +203,28 @@ MonoBehaviour:
   - {fileID: 8536487650082518270, guid: e665cd6447b483045b247d4d2e18537c, type: 3}
   - {fileID: -6762059052596736650, guid: e665cd6447b483045b247d4d2e18537c, type: 3}
   - {fileID: -981286961749730114, guid: e665cd6447b483045b247d4d2e18537c, type: 3}
+  PermanencePartMinMaxAmount: {x: 3, y: 6}
   PermanencePartOutwardsPower: 400
   PermanenceScaleFactor: 1
   Player: {fileID: 0}
   ContactDamage:
     statName: Contact Damage
     baseValue: 1
-    multiplier: 0
+    multiplier: 1
   Speed:
     statName: Speed
-    baseValue: 3
-    multiplier: 0
+    baseValue: 8
+    multiplier: 1
+  RotationSpeed:
+    statName: 
+    baseValue: 0.85
+    multiplier: 1
   ExpGiven:
     statName: 
     baseValue: 5
-    multiplier: 0
+    multiplier: 1
+  DroppedUnits:
+    statName: DroppedUnits
+    baseValue: 3
+    multiplier: 1
   StopDistance: 0.5

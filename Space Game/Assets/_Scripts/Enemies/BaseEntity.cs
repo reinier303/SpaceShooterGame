@@ -22,6 +22,7 @@ public class BaseEntity : MonoBehaviour
 
     [Header("Permanence Parts")]
     public List<Sprite> PermanenceSprites;
+    public Vector2 PermanencePartMinMaxAmount;
     public float PermanencePartOutwardsPower;
     public float PermanenceScaleFactor;
 
@@ -43,16 +44,16 @@ public class BaseEntity : MonoBehaviour
         onHitMaterial = (Material)Resources.Load("Materials/FlashWhite", typeof(Material));
         spriteRenderer = GetComponent<SpriteRenderer>();
         baseMaterial = spriteRenderer.material;
+        gameManager = GameManager.Instance;
+        objectPooler = ObjectPooler.Instance;
     }
 
     protected virtual void Start()
     {
-        gameManager = GameManager.Instance;
-        objectPooler = ObjectPooler.Instance;
         cameraManager = GameManager.Instance.RCameraManager;
     }
 
-    protected void OnEnable()
+    protected virtual void OnEnable()
     {
         currentHealth = MaxHealth.GetValue();
     }
@@ -94,12 +95,11 @@ public class BaseEntity : MonoBehaviour
 
     protected virtual void SpawnSegments()
     {
-        for (int i = 0; i < Random.Range(3, 6); i++)
+        for (int i = 0; i < Random.Range(PermanencePartMinMaxAmount.x, PermanencePartMinMaxAmount.y); i++)
         {
             GameObject permanencePart = objectPooler.SpawnFromPool("PermanencePart", transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
             permanencePart.transform.localScale = transform.localScale;
             permanencePart.GetComponent<PermanencePart>().InitializePart(PermanenceSprites, PermanencePartOutwardsPower, PermanenceScaleFactor);
         }
     }
-
 }

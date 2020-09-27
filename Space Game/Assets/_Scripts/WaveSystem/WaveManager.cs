@@ -13,8 +13,7 @@ public class WaveManager : MonoBehaviour
 
     //Current Wave Data
     public int currentWave;
-    private float currentSpawnTime;
-    private List<EnemyWaveData> currentEnemyWaveDatas;
+    [SerializeField] private float currentSpawnTime;
 
     //General Data
     public int EnemiesAlive;
@@ -23,13 +22,15 @@ public class WaveManager : MonoBehaviour
     //Background Renderer: info for spawn location
     public SpriteRenderer MapRenderer;
 
+    private List<string> enemyNames = new List<string>();
+
     private void Awake()
     {
         Object[] ScriptableWaves = Resources.LoadAll("Waves", typeof(ScriptableWave));
         foreach (ScriptableWave wave in ScriptableWaves)
         {
             //Check if pool info is filled.
-            if (wave.SpawnRate > 0 && wave.EnemyPrefabs.Length > 0 && wave.Name != null)
+            if (wave.StartSpawnRate > 0 && wave.EnemyPrefabs.Count > 0 && wave.Name != null)
             {
                 Waves.Add(wave);
             }
@@ -38,16 +39,17 @@ public class WaveManager : MonoBehaviour
                 Debug.LogWarning("Wave: " + wave.name + " is missing some information. \n Please go back to Resources/Waves and fill in the information correctly");
             }
         }
+        GenerateRandomEnemyList();
     }
 
     private void Start()
     {
         RObjectPooler = ObjectPooler.Instance;
         currentWave = 0;
-        currentSpawnTime = Waves[currentWave].SpawnRate;
-        currentEnemyWaveDatas = Waves[currentWave].EnemyPrefabs.ToList();
+        currentSpawnTime = Waves[currentWave].StartSpawnRate;
 
         StartCoroutine(StartSpawning());
+        StartCoroutine(RampSpawnRate());
     }
 
     private IEnumerator StartSpawning()
@@ -63,9 +65,25 @@ public class WaveManager : MonoBehaviour
         {
             EnemiesAlive++;
             Vector2 spawnPosition = GenerateSpawnPosition();
-            string enemy = RandomEnemyName();
-            GameObject Enemy = RObjectPooler.SpawnFromPool(enemy, spawnPosition, Quaternion.identity);
+            string enemy = enemyNames[Random.Range(0, enemyNames.Count)];
+            RObjectPooler.SpawnFromPool(enemy, spawnPosition, Quaternion.identity);
         }
+    }
+
+    private IEnumerator RampSpawnRate()
+    {
+        yield return new WaitForSeconds(1);
+        currentSpawnTime += Waves[currentWave].SpawnRateRampPerSecond;
+        if(currentSpawnTime >= Waves[currentWave].MaxSpawnRate)
+        {
+            StartCoroutine(RampSpawnRate());
+        }
+    }
+
+    public void AdjustToBoss(float spawnMultiplier)
+    {
+        currentSpawnTime = Waves[currentWave].StartSpawnRate * spawnMultiplier;
+        StopCoroutine(RampSpawnRate());
     }
 
     private Vector2 GenerateSpawnPosition()
@@ -82,16 +100,21 @@ public class WaveManager : MonoBehaviour
         return spawnPosition;
     }
 
-    private string RandomEnemyName()
+    private void GenerateRandomEnemyList()
     {
-        string name = currentEnemyWaveDatas[Random.Range(0, currentEnemyWaveDatas.Count)].Name;
-        return name;
+        for(int i = 0; i < Waves[currentWave].EnemyPrefabs.Count; i++)
+        {
+            for(int j = 0; j < Waves[currentWave].EnemyPrefabs[i].Priority; j++)
+            {
+                enemyNames.Add(Waves[currentWave].EnemyPrefabs[i].Name);
+            }
+        }
     }
 
     private void NextWave()
     {
         currentWave++;
-        currentSpawnTime = Waves[currentWave].SpawnRate;
-        currentEnemyWaveDatas = Waves[currentWave].EnemyPrefabs.ToList();
+        currentSpawnTime = Waves[currentWave].StartSpawnRate;
+        StartCoroutine(RampSpawnRate());
     }
 }

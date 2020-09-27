@@ -184,12 +184,8 @@ MonoBehaviour:
   MaxHealth:
     statName: Max Health
     baseValue: 50000
-    multiplier: 0
+    multiplier: 1
   currentHealth: 0
-  DroppedUnits:
-    statName: DroppedUnits
-    baseValue: 3
-    multiplier: 0
   ShakeMagnitude: 3.7
   ShakeDuration: 0.35
   HitSound: 
@@ -197,6 +193,7 @@ MonoBehaviour:
   ParticleEffect: SwarmExplosionBase
   ParticleEffectScale: 0.9
   PermanenceSprites: []
+  PermanencePartMinMaxAmount: {x: 0, y: 0}
   PermanencePartOutwardsPower: 0
   PermanenceScaleFactor: 0
   Player: {fileID: 0}
@@ -208,8 +205,16 @@ MonoBehaviour:
     statName: Speed
     baseValue: 0
     multiplier: 0
+  RotationSpeed:
+    statName: 
+    baseValue: 0
+    multiplier: 0
   ExpGiven:
     statName: 
     baseValue: 5
+    multiplier: 0
+  DroppedUnits:
+    statName: DroppedUnits
+    baseValue: 3
     multiplier: 0
   StopDistance: 0.5

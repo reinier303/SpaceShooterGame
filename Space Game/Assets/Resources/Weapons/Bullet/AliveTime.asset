@@ -17,8 +17,8 @@ MonoBehaviour:
   StatName: AliveTime
   stat:
     statName: AliveTime
-    baseValue: 1.5
-    multiplier: 0
+    baseValue: 0.8
+    multiplier: 1
   PointsSpent: 0
   PointValue: 0.1
   PointCost: 1

@@ -98,6 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ProjectileSpeed: 5
   Damage: 1
+  AliveTime: 30
 --- !u!58 &7296814962085735422
 CircleCollider2D:
   m_ObjectHideFlags: 0

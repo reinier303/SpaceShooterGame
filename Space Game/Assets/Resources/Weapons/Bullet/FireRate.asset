@@ -18,7 +18,7 @@ MonoBehaviour:
   stat:
     statName: FireRate
     baseValue: 1
-    multiplier: 0
+    multiplier: 1
   PointsSpent: 0
   PointValue: 0.5
   PointCost: 1

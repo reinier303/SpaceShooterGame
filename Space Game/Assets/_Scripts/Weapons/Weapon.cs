@@ -63,7 +63,8 @@ public class Weapon : ScriptableObject
     {
         RWeaponData.Level++;
         RWeaponData.CurrentPoints += PointsPerLevel;
-        RWeaponData.ExperienceNeeded = RWeaponData.ExperienceNeeded * (1.4f + 0.005f * RWeaponData.Level);
+        Debug.Log(Mathf.Clamp((1.25f + 0.01f * RWeaponData.Level), 1.25f, 1.65f));
+        RWeaponData.ExperienceNeeded = RWeaponData.ExperienceNeeded * Mathf.Clamp((1.25f + 0.01f * RWeaponData.Level),1.25f, 1.65f);
         GameManager.Instance.RUIManager.UpdateCurrentWeaponLevel(RWeaponData.Level);
         GameManager.Instance.RPlayer.SavePlayerData();
         Debug.Log(RWeaponData.ExperienceNeeded);

@@ -60,6 +60,12 @@ public class Player : MonoBehaviour
         RUIManager.UpdateUnits(units);
     }
 
+    public void AddUnitsToTotal()
+    {
+        Data.TotalUnits += Data.Units;
+        Data.Units = 0;
+    }
+
     public void SavePlayerData()
     {
         for(int i = 0; i < Data.Weapons.Count; i++)

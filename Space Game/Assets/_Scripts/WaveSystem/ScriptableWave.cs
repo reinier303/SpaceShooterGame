@@ -7,8 +7,12 @@ public class ScriptableWave : ScriptableObject
 {
     public string Name;
     [Tooltip("Enemy Prefab and max amount alive")]
-    public EnemyWaveData[] EnemyPrefabs;
-    public float SpawnRate = 1;
+    public List<EnemyWaveData> EnemyPrefabs;
+    public float StartSpawnRate = 1;
+    public float SpawnRateRampPerSecond = -0.01f;
+    public float MaxSpawnRate = 0.5f;
+    [Header("This name has to be the same as in the pool")]
+    public string BossName;
 }
 
 [System.Serializable]
@@ -17,4 +21,5 @@ public struct EnemyWaveData
     [Header("This name has to be the same as in the pool")]
     public string Name;
     public int MaxAmount;
+    public int Priority;
 }

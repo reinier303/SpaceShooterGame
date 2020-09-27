@@ -14,7 +14,6 @@ public class ShopManager : MonoBehaviour
     private void Awake()
     {
         Time.timeScale = 1;
-
         Instance = this;
 
         Data = SaveLoad.Load<PlayerData>("PlayerData.sav");

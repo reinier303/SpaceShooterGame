@@ -18,7 +18,7 @@ MonoBehaviour:
   stat:
     statName: ProjectileSpread
     baseValue: 25
-    multiplier: 0
+    multiplier: 1
   PointsSpent: 0
   PointValue: 0
   PointCost: 0

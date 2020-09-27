@@ -7,7 +7,7 @@ public class Stat
 
     [SerializeField] private float baseValue = 1;
 
-    [HideInInspector] public float multiplier;
+    public float multiplier = 1;
 
     public Stat(string name, float value, float newMultiplier)
     {
@@ -18,6 +18,6 @@ public class Stat
 
     public float GetValue()
     {
-        return baseValue;
+        return baseValue * multiplier;
     }
 }

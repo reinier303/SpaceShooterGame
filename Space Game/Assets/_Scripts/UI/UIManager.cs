@@ -10,16 +10,35 @@ public class UIManager : MonoBehaviour
     public TMP_Text LivesText;
     public TMP_Text UnitsText;
     public TMP_Text WeaponLevelText;
+    public TMP_Text WaveEnterText;
+
+    private CanvasGroup WaveEnterCanvasGroup;
+
     public Slider WeaponExperience;
 
     public GameObject PostGamePanel;
     public GameObject PauseMenu;
+
+    public Image HitVignette;
 
     [Header("BounceTweenValues")]
     public float BounceTime;
     public float BounceSize;
     public LeanTweenType BounceType;
 
+    [Header("On Hit Vignette Values")]
+    public float VignetteDuration;
+    public float AlphaTo;
+    public LeanTweenType EaseType;
+
+    [Header("Wave Text Values")]
+    public float WaveTextDuration;
+    public float AlphaToWave;
+    public LeanTweenType EaseTypeWave;
+
+    [Header("Script References")]
+
+    public PostGamePanel PostGamePanelScript;
     private PlayerEntity RPlayerEntity;
     private Player RPlayer;
 
@@ -32,6 +51,8 @@ public class UIManager : MonoBehaviour
     {
         LivesText.text = "Lives:" + RPlayerEntity.currentHealth;
         UnitsText.text = "Units:" + RPlayer.Data.Units;
+        WaveEnterCanvasGroup = WaveEnterText.GetComponent<CanvasGroup>();
+        StartCoroutine(ShowWaveText());
     }
 
     public void UpdateLives(float damage)
@@ -81,5 +102,20 @@ public class UIManager : MonoBehaviour
     public void OnPlayerDeathUI()
     {
         PostGamePanel.SetActive(true);
+        PostGamePanelScript.UpdateSummary();
+    }
+
+    public IEnumerator ShowWaveText()
+    {
+        LeanTween.alphaCanvas(WaveEnterCanvasGroup, AlphaToWave, WaveTextDuration / 2).setEase(EaseTypeWave);
+        yield return new WaitForSeconds(WaveTextDuration);
+        LeanTween.alphaCanvas(WaveEnterCanvasGroup, 0, WaveTextDuration / 2).setEase(EaseTypeWave);
+    }
+
+    public IEnumerator TweenAlpha(RectTransform rectTransform , float duration, float alphaTo, float alphaFrom)
+    {
+        LeanTween.alpha(rectTransform, AlphaTo, duration/2).setEase(EaseType);
+        yield return new WaitForSeconds(duration / 2);
+        LeanTween.alpha(rectTransform, alphaFrom, duration / 2).setEase(EaseType);
     }
 }

@@ -21,16 +21,16 @@ public class BehaviourTree : MonoBehaviour
                         new MultiShot(blackBoard),
                         new SprayShot(blackBoard))),
                     new ConditionNode(blackBoard, new Func<bool>(() => CheckPlayerDistance(12)), new Sequence(
-                        new Dash(blackBoard),
+                        new DashNode(blackBoard),
                         new BulletBurst(blackBoard))))),
                 new ConditionNode(blackBoard, new Func<bool>(() => CheckBossHealth(50)), new Selector(
                     new ConditionNode(blackBoard, new Func<bool>(() => !CheckPlayerDistance(12)), new Selector(
                         new SprayShot(blackBoard),
                         new SpawnMinions(blackBoard))),
                     new ConditionNode(blackBoard, new Func<bool>(() => CheckPlayerDistance(12)), new Sequence(
-                        new Dash(blackBoard),
-                        new Dash(blackBoard),
-                        new Dash(blackBoard),
+                        new DashNode(blackBoard),
+                        new DashNode(blackBoard),
+                        new DashNode(blackBoard),
                         new BulletBurst(blackBoard))))));
     }
 

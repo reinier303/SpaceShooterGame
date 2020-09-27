@@ -18,7 +18,7 @@ MonoBehaviour:
   stat:
     statName: Damage
     baseValue: 1
-    multiplier: 0
+    multiplier: 1
   PointsSpent: 0
   PointValue: 1
   PointCost: 1

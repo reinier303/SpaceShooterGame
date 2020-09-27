@@ -147,7 +147,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1.65
+  m_Radius: 0.9
 --- !u!50 &4502396797467818755
 Rigidbody2D:
   serializedVersion: 4
@@ -156,7 +156,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4502396797467818766}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -184,12 +184,8 @@ MonoBehaviour:
   MaxHealth:
     statName: 
     baseValue: 5
-    multiplier: 0
+    multiplier: 1
   currentHealth: 5
-  DroppedUnits:
-    statName: DroppedUnits
-    baseValue: 8
-    multiplier: 0
   ShakeMagnitude: 8
   ShakeDuration: 0.5
   HitSound: 
@@ -207,23 +203,36 @@ MonoBehaviour:
   - {fileID: 8536487650082518270, guid: e665cd6447b483045b247d4d2e18537c, type: 3}
   - {fileID: -6762059052596736650, guid: e665cd6447b483045b247d4d2e18537c, type: 3}
   - {fileID: -981286961749730114, guid: e665cd6447b483045b247d4d2e18537c, type: 3}
+  PermanencePartMinMaxAmount: {x: 3, y: 6}
   PermanencePartOutwardsPower: 500
   PermanenceScaleFactor: 1.25
   Player: {fileID: 0}
   ContactDamage:
     statName: Contact Damage
     baseValue: 1
-    multiplier: 0
+    multiplier: 1
   Speed:
     statName: Speed
     baseValue: 3
-    multiplier: 0
+    multiplier: 1
+  RotationSpeed:
+    statName: 
+    baseValue: 2.8
+    multiplier: 1
   ExpGiven:
     statName: Exp Given
     baseValue: 8
-    multiplier: 0
-  StopDistance: 1.5
-  fireRate:
-    statName: Fire Rate
-    baseValue: 0.5
-    multiplier: 0
+    multiplier: 1
+  DroppedUnits:
+    statName: DroppedUnits
+    baseValue: 8
+    multiplier: 1
+  StopDistance: 4
+  FireRate:
+    statName: 
+    baseValue: 0.7
+    multiplier: 1
+  ShootDistance:
+    statName: 
+    baseValue: 16
+    multiplier: 1

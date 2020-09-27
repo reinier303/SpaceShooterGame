@@ -11,11 +11,13 @@ public class PlayerEntity : BaseEntity
     protected override void Die()
     {
         gameManager.PlayerAlive = false;
-        gameManager.RPlayer.SavePlayerData();
+        gameManager.SetSummaryData();
+        gameManager.RPlayer.AddUnitsToTotal();
         gameManager.RCameraManager.DeathCamera();
         gameManager.RUIManager.OnPlayerDeathUI();
         SpawnParticleEffect();
         cameraManager.StartCoroutine(cameraManager.Shake(ShakeDuration, ShakeMagnitude));
+        gameManager.RPlayer.SavePlayerData();
         gameObject.SetActive(false);
     }
 
@@ -26,6 +28,8 @@ public class PlayerEntity : BaseEntity
             return;
         }
         PlayerHitEffect.SetActive(true);
+        gameManager.RUIManager.StartCoroutine(gameManager.RUIManager.TweenAlpha(gameManager.RUIManager.HitVignette.rectTransform, 
+            gameManager.RUIManager.VignetteDuration, gameManager.RUIManager.AlphaTo, 0));
         if (!gameManager.PlayerAlive)
         {
             return;

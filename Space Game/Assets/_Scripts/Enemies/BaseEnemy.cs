@@ -11,6 +11,7 @@ public class BaseEnemy : BaseEntity
     //Stats
     public Stat ContactDamage;
     public Stat Speed;
+    public Stat RotationSpeed;
     public Stat ExpGiven;
     public Stat DroppedUnits;
 
@@ -61,7 +62,8 @@ public class BaseEnemy : BaseEntity
     {
         if (Vector2.Distance(transform.position, Player.transform.position) > StopDistance && gameManager.PlayerAlive)
         {
-            transform.position = Vector2.MoveTowards(transform.position, Player.position, Speed.GetValue() * Time.deltaTime);
+            //transform.position = Vector2.MoveTowards(transform.position, Player.position, Speed.GetValue() * Time.deltaTime);
+            transform.position += transform.up * Speed.GetValue() * Time.deltaTime;
         }
         else
         {
@@ -73,7 +75,8 @@ public class BaseEnemy : BaseEntity
     {
         Vector3 difference = Player.position - transform.position;
         float rotationZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotationZ - 90f);
+        Quaternion desiredRotation = Quaternion.Euler(0.0f, 0.0f, rotationZ - 90f);
+        transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, RotationSpeed.GetValue() * Time.deltaTime);
         if (!gameManager.PlayerAlive)
         {
             transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotationZ + 90f);
@@ -83,18 +86,39 @@ public class BaseEnemy : BaseEntity
     protected override void Die()
     {
         Player.GetComponent<Player>().AddExperience(ExpGiven.GetValue());
+        UpdateRunData();
         DropUnits(DroppedUnits.GetValue());
         base.Die();
+    }
+    protected virtual void UpdateRunData()
+    {
+        gameManager.EnemiesKilled++;
+        gameManager.ExperienceEarned += ExpGiven.GetValue();
     }
 
     protected virtual void DropUnits(float units)
     {
-        for (int i = 0; i * 2 < units; i++)
+        int unitAmount50 = (int)((units - units % 50) / 50);
+        int unitAmount5 = (int)(((units - units % 5) / 5) - (unitAmount50 * 10));
+        int unitAmount05 = (int)((units / 0.5f) - (unitAmount50 * 100) - (unitAmount5 * 10));
+
+        for (int i = 0; i < unitAmount50; i++)
+        {
+            GameObject unitObj = objectPooler.SpawnFromPool("Unit50", transform.position, Quaternion.identity);
+            Unit unit = unitObj.GetComponent<Unit>();
+            unit.MoveUnit();
+        }
+        for (int i = 0; i < unitAmount5; i++)
+        {
+            GameObject unitObj = objectPooler.SpawnFromPool("Unit5", transform.position, Quaternion.identity);
+            Unit unit = unitObj.GetComponent<Unit>();
+            unit.MoveUnit();
+        }
+        for (int i = 0; i < unitAmount05; i++)
         {
             GameObject unitObj = objectPooler.SpawnFromPool("Unit0.5", transform.position, Quaternion.identity);
             Unit unit = unitObj.GetComponent<Unit>();
             unit.MoveUnit();
         }
     }
-
 }

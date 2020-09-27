@@ -27,6 +27,11 @@ public class GameManager : MonoBehaviour
 
     public bool PlayerAlive;
 
+    //Curren Run Data
+    private float runTime;
+    [HideInInspector] public float ExperienceEarned;
+    [HideInInspector] public int RareDropsFound, EnemiesKilled, BossesKilled;
+
     private void Awake()
     {
         Time.timeScale = 1;
@@ -42,8 +47,9 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        runTime += Time.deltaTime;
         //Replace this in inputManager
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             if(Time.timeScale == 1)
             {
@@ -93,5 +99,15 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1;
         RUIManager.ClosePauseMenu();
+    }
+
+    public void SetSummaryData()
+    {
+        RUIManager.PostGamePanelScript.RunTimeSeconds = runTime;  
+        RUIManager.PostGamePanelScript.EnemiesKilled = EnemiesKilled;
+        RUIManager.PostGamePanelScript.BossesKilled = BossesKilled;
+        RUIManager.PostGamePanelScript.RareDropsFound = RareDropsFound;
+        RUIManager.PostGamePanelScript.UnitsEarned = RPlayer.Data.Units;
+        RUIManager.PostGamePanelScript.ExperienceEarned = ExperienceEarned;
     }
 }

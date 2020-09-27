@@ -8,6 +8,12 @@ public class EnemyProjectile : MonoBehaviour
 
     //TODO:Get Damage from enemy that shoots as Stat
     public float Damage;
+    public float AliveTime;
+
+    protected virtual void OnEnable()
+    {
+        StartCoroutine(DisableAfterTime());
+    }
 
     protected virtual void Update()
     {
@@ -27,5 +33,11 @@ public class EnemyProjectile : MonoBehaviour
         {
             player.OnTakeDamage?.Invoke(Damage);
         }
+    }
+
+    public virtual IEnumerator DisableAfterTime()
+    {
+        yield return new WaitForSeconds(AliveTime);
+        gameObject.SetActive(false);
     }
 }

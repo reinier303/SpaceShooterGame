@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class LesserSwarmDrone : BaseEnemy
 {
-    public Stat fireRate;
+    public Stat FireRate;
+    public Stat ShootDistance;
     private bool canFire;
 
     protected override void Awake()
@@ -22,7 +23,7 @@ public class LesserSwarmDrone : BaseEnemy
 
     private void Fire()
     {
-        if (canFire && gameManager.PlayerAlive)
+        if (canFire && gameManager.PlayerAlive && Vector2.Distance(Player.position, transform.position) <= ShootDistance.GetValue())
         {
             objectPooler.SpawnFromPool("SwarmBullet", transform.position, transform.rotation);
             canFire = false;
@@ -32,7 +33,7 @@ public class LesserSwarmDrone : BaseEnemy
 
     private IEnumerator FireCooldownTimer()
     {
-        yield return new WaitForSeconds(1 / fireRate.GetValue());
+        yield return new WaitForSeconds(1 / FireRate.GetValue());
         canFire = true;
     }
 }
