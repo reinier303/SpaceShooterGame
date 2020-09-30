@@ -28,7 +28,14 @@ public class LesserSwarmQueen : BaseBoss
         moves.Add(new BossShoot(gameObject, Player, objectPooler, this, MoveToNextStateRoundRobin, PostMoveTime, TimeBetweenShots, ShotSpread, TimesToShoot, BulletAmount));
         moves.Add(new Dash(gameObject, Player, objectPooler, this, MoveToNextStateRoundRobin, PostMoveTime, DashHaltTime, DashDuration, ChargeUpTime, DashMovementMultiplier, DashAmount));
 
-
         MoveToNextStateRoundRobin();
+
+        gameManager.BossAlive = true;
+    }
+
+    protected override void Die()
+    {
+        base.Die();
+        gameManager.BossAlive = false;
     }
 }

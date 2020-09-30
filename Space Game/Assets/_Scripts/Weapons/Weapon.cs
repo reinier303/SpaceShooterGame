@@ -33,6 +33,7 @@ public class Weapon : ScriptableObject
 
     public void GetWeaponData(PlayerData data, int weaponIndex)
     {
+
         RWeaponData = data.Weapons[weaponIndex];
     }
 
@@ -94,6 +95,23 @@ public class Weapon : ScriptableObject
         {
             Modules.Add(module.StatName, module.GetModuleData());
         }
+    }
+
+    public void AddModuleShop(Module module, int maxPoints)
+    {
+        ShopManager shopManager = ShopManager.Instance;
+
+        if (!shopManager.Weapons[module.Weapon.WeaponName].Modules.ContainsKey(module.StatName))
+        {
+            shopManager.Weapons[module.Weapon.WeaponName].Modules.Add(module.StatName, module.GetModuleData());
+        }
+        else if (maxPoints > shopManager.Weapons[module.Weapon.WeaponName].Modules[module.StatName].MaxPoints)
+        {
+            shopManager.Weapons[module.Weapon.WeaponName].Modules[module.StatName].MaxPoints = maxPoints;
+        }
+
+        shopManager.RefreshWeapons();
+        shopManager.SaveWeapons();
     }
 }
 

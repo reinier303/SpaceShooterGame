@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9ed2f2c1623539846bc6a5e920f20183, type: 3}
-  m_Name: ProjectileSpeed
+  m_Name: FireRate
   m_EditorClassIdentifier: 
-  ID: 3
+  ID: 1
   Weapon: {fileID: 11400000, guid: 0a51dc546c872474a98ef6a2b8035aea, type: 2}
-  StatName: ProjectileSpeed
+  StatName: FireRate
   stat:
-    statName: ProjectileSpeed
-    baseValue: 20
+    statName: FireRate
+    baseValue: 1
     multiplier: 1
   PointsSpent: 0
-  PointValue: 1.6
-  PointCost: 1
-  MaxSpent: 0
+  PointValue: 0.5
+  PointCost: 2
+  MaxPoints: 0

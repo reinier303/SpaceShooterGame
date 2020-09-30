@@ -152,6 +152,8 @@ MonoBehaviour:
     Level: 0
   weaponButton: {fileID: 6309535112839826457, guid: 25ef63a25267ecf4080381bb7443f315,
     type: 3}
+  lockedButton: {fileID: 6446071591026811615, guid: ea8227f2544bac840a953ca013a63584,
+    type: 3}
   weaponModulePanel: {fileID: 0}
   TextComponent: {fileID: 6450961298597137982}
   PointsToSpend: {fileID: 7083257736240054684}

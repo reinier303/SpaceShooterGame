@@ -15,6 +15,8 @@ public class UIManager : MonoBehaviour
     private CanvasGroup WaveEnterCanvasGroup;
 
     public Slider WeaponExperience;
+    public Slider WaveProgressBar;
+
 
     public GameObject PostGamePanel;
     public GameObject PauseMenu;
@@ -39,12 +41,15 @@ public class UIManager : MonoBehaviour
     [Header("Script References")]
 
     public PostGamePanel PostGamePanelScript;
+
+    private GameManager gameManager;
     private PlayerEntity RPlayerEntity;
     private Player RPlayer;
 
     private void Awake()
     {
-        RPlayer = GameManager.Instance.RPlayer;
+        gameManager = GameManager.Instance;
+        RPlayer = gameManager.RPlayer;
         RPlayerEntity = RPlayer.RPlayerEntity;
     }
     private void Start()
@@ -53,6 +58,7 @@ public class UIManager : MonoBehaviour
         UnitsText.text = "Units:" + RPlayer.Data.Units;
         WaveEnterCanvasGroup = WaveEnterText.GetComponent<CanvasGroup>();
         StartCoroutine(ShowWaveText());
+        WaveProgressBar.maxValue = gameManager.RWaveManager.GetWave(gameManager.RWaveManager.currentWave).EnemiesForBossSpawn;
     }
 
     public void UpdateLives(float damage)
@@ -64,6 +70,11 @@ public class UIManager : MonoBehaviour
         StopCoroutine(BounceSizeTween(UnitsText.gameObject));
         StartCoroutine(BounceSizeTween(UnitsText.gameObject));
         UnitsText.text = "Units:" + RPlayer.Data.Units;
+    }
+
+    public void UpdateProgressBar()
+    {
+        WaveProgressBar.value = gameManager.RWaveManager.EnemiesKilledThisWave;
     }
 
     //Damage number popup

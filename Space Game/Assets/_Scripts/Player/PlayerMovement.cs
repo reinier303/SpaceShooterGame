@@ -31,22 +31,7 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit hit;
         Physics.Raycast(ray, out hit);
         target = hit.point;
-        if(target.x > 100)
-        {
-            target.x = 100;
-        }
-        if (target.x < -100)
-        {
-            target.x = -100;
-        }
-        if (target.y > 100)
-        {
-            target.y = 100;
-        }
-        if (target.y < -100)
-        {
-            target.y = -100;
-        }
+
         if (Vector2.Distance(transform.position + transform.forward, target) > 3.5f)
         {
             Move();

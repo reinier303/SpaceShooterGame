@@ -10,6 +10,8 @@ public class BaseBoss : BaseEnemy
     protected int currentMove = 0;
     public float SpawnRateReductionMultiplier;
 
+    public bool dashing;
+
     protected override void Start()
     {
         base.Start();       
@@ -97,6 +99,19 @@ public class BaseBoss : BaseEnemy
     protected virtual void ReduceSpawns()
     {
         gameManager.RWaveManager.AdjustToBoss(SpawnRateReductionMultiplier);
+    }
+
+    protected override void Move()
+    {
+        if (Vector2.Distance(transform.position, Player.transform.position) > StopDistance || dashing && gameManager.PlayerAlive)
+        {
+            //transform.position = Vector2.MoveTowards(transform.position, Player.position, Speed.GetValue() * Time.deltaTime);
+            transform.position += transform.up * Speed.GetValue() * Time.deltaTime;
+        }
+        else
+        {
+            transform.position = Vector2.MoveTowards(transform.position, Player.position, -Speed.GetValue() * Time.deltaTime);
+        }
     }
 
     #endregion

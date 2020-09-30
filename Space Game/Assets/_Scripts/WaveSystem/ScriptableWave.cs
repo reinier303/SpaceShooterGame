@@ -13,6 +13,7 @@ public class ScriptableWave : ScriptableObject
     public float MaxSpawnRate = 0.5f;
     [Header("This name has to be the same as in the pool")]
     public string BossName;
+    public int EnemiesForBossSpawn;
 }
 
 [System.Serializable]

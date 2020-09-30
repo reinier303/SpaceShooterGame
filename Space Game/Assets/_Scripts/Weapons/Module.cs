@@ -11,7 +11,7 @@ public class Module : ScriptableObject
     public int PointsSpent;
     public float PointValue;
     public int PointCost;
-    public int MaxSpent;
+    public int MaxPoints;
 
     public ModuleData GetModuleData()
     {
@@ -23,7 +23,7 @@ public class Module : ScriptableObject
         data.PointsSpent = PointsSpent;
         data.PointValue = PointValue;
         data.PointCost = PointCost;
-        data.MaxSpent = MaxSpent;
+        data.MaxPoints = MaxPoints;
 
         return data;
     }
@@ -39,7 +39,7 @@ public class ModuleData
     public int PointsSpent;
     public float PointValue;
     public int PointCost;
-    public int MaxSpent;
+    public int MaxPoints;
 
     public float GetStatValue()
     {

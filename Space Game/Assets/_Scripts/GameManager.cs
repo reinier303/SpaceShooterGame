@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     public OnEndGame onEndGame;
 
     public bool PlayerAlive;
+    public bool BossAlive;
 
     //Curren Run Data
     private float runTime;
@@ -37,6 +38,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         Instance = this;
         PlayerAlive = true;
+        BossAlive = false;
     }
 
     private void Start()
@@ -109,5 +111,11 @@ public class GameManager : MonoBehaviour
         RUIManager.PostGamePanelScript.RareDropsFound = RareDropsFound;
         RUIManager.PostGamePanelScript.UnitsEarned = RPlayer.Data.Units;
         RUIManager.PostGamePanelScript.ExperienceEarned = ExperienceEarned;
+    }
+
+    public void AddEnemyKilled()
+    {
+        EnemiesKilled++;
+        RWaveManager.EnemyKilled();
     }
 }

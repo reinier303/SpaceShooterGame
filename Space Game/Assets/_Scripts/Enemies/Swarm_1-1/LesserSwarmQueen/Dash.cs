@@ -28,6 +28,7 @@ public class Dash : BaseState
 
     private IEnumerator PerformMoveIEnumerator()
     {
+        bossScript.dashing = true;
         bossScript.StartCoroutine(ChargeAnimation());
         yield return new WaitForSeconds(chargeTime);
         for (int i = 0; i < dashes; i++)
@@ -38,6 +39,7 @@ public class Dash : BaseState
             yield return new WaitForSeconds(timeBetweenDashes);
         }
         yield return new WaitForSeconds(postMoveWaitTime);
+        bossScript.dashing = false;
         nextMoveType.Invoke();
     }
 

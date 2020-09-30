@@ -6,6 +6,7 @@ using System.Linq;
 public class WaveManager : MonoBehaviour
 {
     //Script References
+    private GameManager gameManager;
     private ObjectPooler RObjectPooler;
 
     //Initialisation Data
@@ -23,6 +24,8 @@ public class WaveManager : MonoBehaviour
     public SpriteRenderer MapRenderer;
 
     private List<string> enemyNames = new List<string>();
+
+    public int EnemiesKilledThisWave;
 
     private void Awake()
     {
@@ -45,6 +48,7 @@ public class WaveManager : MonoBehaviour
     private void Start()
     {
         RObjectPooler = ObjectPooler.Instance;
+        gameManager = GameManager.Instance;
         currentWave = 0;
         currentSpawnTime = Waves[currentWave].StartSpawnRate;
 
@@ -116,5 +120,31 @@ public class WaveManager : MonoBehaviour
         currentWave++;
         currentSpawnTime = Waves[currentWave].StartSpawnRate;
         StartCoroutine(RampSpawnRate());
+    }
+
+    public void EnemyKilled()
+    {
+        if(gameManager.BossAlive)
+        {
+            return;
+        }
+
+        EnemiesKilledThisWave++;
+        if(EnemiesKilledThisWave >= Waves[currentWave].EnemiesForBossSpawn)
+        {
+            EnemiesKilledThisWave = 0;
+            SpawnBoss();
+        }
+    }
+
+    private void SpawnBoss()
+    {
+        Vector2 spawnPosition = GenerateSpawnPosition();
+        RObjectPooler.SpawnFromPool(Waves[currentWave].BossName, spawnPosition, Quaternion.identity);
+    }
+
+    public ScriptableWave GetWave(int wave)
+    {
+        return Waves[wave];
     }
 }

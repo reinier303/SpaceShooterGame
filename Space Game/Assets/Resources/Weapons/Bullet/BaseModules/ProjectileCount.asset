@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9ed2f2c1623539846bc6a5e920f20183, type: 3}
-  m_Name: AliveTime
+  m_Name: ProjectileCount
   m_EditorClassIdentifier: 
-  ID: 5
+  ID: 2
   Weapon: {fileID: 11400000, guid: 0a51dc546c872474a98ef6a2b8035aea, type: 2}
-  StatName: AliveTime
+  StatName: ProjectileCount
   stat:
-    statName: AliveTime
-    baseValue: 0.8
+    statName: ProjectileCount
+    baseValue: 1
     multiplier: 1
   PointsSpent: 0
-  PointValue: 0.1
-  PointCost: 1
-  MaxSpent: 0
+  PointValue: 1
+  PointCost: 4
+  MaxPoints: 0

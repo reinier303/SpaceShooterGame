@@ -185,7 +185,7 @@ MonoBehaviour:
     statName: Max Health
     baseValue: 50000
     multiplier: 1
-  currentHealth: 0
+  currentHealth: 1
   ShakeMagnitude: 3.7
   ShakeDuration: 0.35
   HitSound: 
@@ -200,21 +200,21 @@ MonoBehaviour:
   ContactDamage:
     statName: Contact Damage
     baseValue: 1
-    multiplier: 0
+    multiplier: 1
   Speed:
     statName: Speed
     baseValue: 0
-    multiplier: 0
+    multiplier: 1
   RotationSpeed:
     statName: 
     baseValue: 0
-    multiplier: 0
+    multiplier: 1
   ExpGiven:
     statName: 
     baseValue: 5
-    multiplier: 0
+    multiplier: 1
   DroppedUnits:
     statName: DroppedUnits
     baseValue: 3
-    multiplier: 0
+    multiplier: 1
   StopDistance: 0.5

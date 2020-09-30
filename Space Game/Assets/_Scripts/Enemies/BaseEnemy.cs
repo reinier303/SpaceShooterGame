@@ -88,11 +88,12 @@ public class BaseEnemy : BaseEntity
         Player.GetComponent<Player>().AddExperience(ExpGiven.GetValue());
         UpdateRunData();
         DropUnits(DroppedUnits.GetValue());
+        gameManager.RUIManager.UpdateProgressBar();
         base.Die();
     }
     protected virtual void UpdateRunData()
     {
-        gameManager.EnemiesKilled++;
+        gameManager.AddEnemyKilled();
         gameManager.ExperienceEarned += ExpGiven.GetValue();
     }
 

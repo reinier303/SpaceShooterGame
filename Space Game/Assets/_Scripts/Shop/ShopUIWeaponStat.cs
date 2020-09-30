@@ -15,12 +15,19 @@ public class ShopUIWeaponStat : MonoBehaviour
     {
         textComponent.text = ModuleName;
         PointsSpent.text = "" + shopUIWeapon.weaponData.Modules[ModuleName].PointsSpent;
+
     }
 
     public void AddStat()
     {
         if(shopUIWeapon.weaponData.CurrentPoints >= shopUIWeapon.weaponData.Modules[ModuleName].PointCost)
         {
+            Debug.Log(shopUIWeapon.weaponData.Modules[ModuleName].PointsSpent + ", Max:" + shopUIWeapon.weaponData.Modules[ModuleName].MaxPoints);
+
+            if (shopUIWeapon.weaponData.Modules[ModuleName].PointsSpent >= shopUIWeapon.weaponData.Modules[ModuleName].MaxPoints)
+            {
+                return;
+            }
             shopUIWeapon.weaponData.Modules[ModuleName].PointsSpent++;
             PointsSpent.text = "" + shopUIWeapon.weaponData.Modules[ModuleName].PointsSpent;
             shopUIWeapon.weaponData.CurrentPoints -= shopUIWeapon.weaponData.Modules[ModuleName].PointCost;

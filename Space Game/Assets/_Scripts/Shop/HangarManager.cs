@@ -10,8 +10,9 @@ public class HangarManager : MonoBehaviour
 
     [SerializeField] private GameObject weaponButton, weaponStat;
 
+
     // Start is called before the first frame update
-    private void Start()
+    private void OnEnable()
     {
         data = ShopManager.Instance.Data;
         InitializeWeapons();
@@ -21,6 +22,18 @@ public class HangarManager : MonoBehaviour
     {
         foreach (WeaponData weaponData in data.Weapons)
         {
+            for (int i = 0; i < weaponPanel.childCount; i++)
+            {
+                Destroy(weaponPanel.GetChild(i).gameObject);
+            }
+            for (int i = 0; i < statPanel.childCount; i++)
+            {
+                //TODO: this is ugly make this better, either in hierarchy or code...
+                if (statPanel.GetChild(i).name != "SaveButton")
+                {
+                    Destroy(statPanel.GetChild(i).gameObject);
+                }
+            }
             GameObject weapon = Instantiate(weaponButton, weaponPanel);
             ShopUIWeapon UIWeapon = weapon.GetComponent<ShopUIWeapon>();
             UIWeapon.weaponData = weaponData;

@@ -24,7 +24,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 318e4748094101440a01ef906221409d, type: 2}
   CurrentExperience: 0
   experienceNeeded: 60
-  PointsPerLevel: 1
+  PointsPerLevel: 2
   CurrentPoints: 0
   Level: 1
   RWeaponData:

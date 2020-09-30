@@ -20,7 +20,37 @@ public class SaveEditor : EditorWindow
 
     private void OnGUI()
     {
-        if(GUILayout.Button("Delete Save"))
+        if (GUILayout.Button("Delete Player Save Data"))
+        {
+            EditorGUILayout.LabelField("Save Editor", EditorStyles.boldLabel);
+            EditorGUILayout.LabelField("\n");
+            string path = Application.persistentDataPath + "/saveData/PlayerData.sav";
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+                Debug.Log("PlayerData at: " + path + " deleted.");
+            }
+            else
+            {
+                Debug.Log("No file found at: " + path);
+            }
+        }
+        if (GUILayout.Button("Delete Shop Save Data"))
+        {
+            EditorGUILayout.LabelField("Save Editor", EditorStyles.boldLabel);
+            EditorGUILayout.LabelField("\n");
+            string path = Application.persistentDataPath + "/saveData/ShopItemsUnlocked.sav";
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+                Debug.Log("ShopItemsUnlocked at: " + path + " deleted.");
+            }
+            else
+            {
+                Debug.Log("No file found at: " + path);
+            }
+        }
+        if (GUILayout.Button("Delete All Save Data"))
         {
             EditorGUILayout.LabelField("Save Editor", EditorStyles.boldLabel);
             EditorGUILayout.LabelField("\n");
