@@ -209,7 +209,7 @@ MonoBehaviour:
   Player: {fileID: 0}
   ContactDamage:
     statName: 
-    baseValue: 0.5
+    baseValue: 1
     multiplier: 1
   Speed:
     statName: 

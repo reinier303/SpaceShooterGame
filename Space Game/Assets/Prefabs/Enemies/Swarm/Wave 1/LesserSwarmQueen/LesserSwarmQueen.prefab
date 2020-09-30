@@ -19,7 +19,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2488495253632554841
 Transform:
   m_ObjectHideFlags: 0
@@ -140,7 +140,7 @@ MonoBehaviour:
     multiplier: 1
   currentHealth: 0
   ShakeMagnitude: 20
-  ShakeDuration: 3
+  ShakeDuration: 0.5
   HitSound: 
   DeathSound: 
   ParticleEffect: SwarmBaseExplosion
@@ -172,6 +172,7 @@ MonoBehaviour:
     multiplier: 1
   StopDistance: 8
   SpawnRateReductionMultiplier: 5
+  dashing: 0
   PostMoveTime: 1.5
   TimeBetweenShots: 0.65
   ShotSpread: 80

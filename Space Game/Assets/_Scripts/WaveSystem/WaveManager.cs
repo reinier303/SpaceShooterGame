@@ -27,6 +27,8 @@ public class WaveManager : MonoBehaviour
 
     public int EnemiesKilledThisWave;
 
+    public BossArrow BossArrowScript;
+
     private void Awake()
     {
         Object[] ScriptableWaves = Resources.LoadAll("Waves", typeof(ScriptableWave));
@@ -140,7 +142,9 @@ public class WaveManager : MonoBehaviour
     private void SpawnBoss()
     {
         Vector2 spawnPosition = GenerateSpawnPosition();
-        RObjectPooler.SpawnFromPool(Waves[currentWave].BossName, spawnPosition, Quaternion.identity);
+        GameObject Boss = RObjectPooler.SpawnFromPool(Waves[currentWave].BossName, spawnPosition, Quaternion.identity);
+        BossArrowScript.gameObject.SetActive(true);
+        BossArrowScript.Target = Boss.transform;
     }
 
     public ScriptableWave GetWave(int wave)

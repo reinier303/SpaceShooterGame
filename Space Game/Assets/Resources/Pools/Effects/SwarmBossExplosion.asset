@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81ef996067970074d8dd88ba76874a9d, type: 3}
-  m_Name: SwarmExplosionBase
+  m_Name: SwarmBossExplosion
   m_EditorClassIdentifier: 
-  Tag: SwarmExplosionBase
-  Prefab: {fileID: 69479998559693278, guid: 98fd1826280d2c14b94fc5ba23284896, type: 3}
-  Amount: 250
+  Tag: SwarmBossExplosion
+  Prefab: {fileID: 4646110159136946240, guid: a4a59aa393150414699fff76b79f5ecd, type: 3}
+  Amount: 100

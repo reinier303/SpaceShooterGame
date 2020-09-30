@@ -183,9 +183,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth:
     statName: 
-    baseValue: 5
+    baseValue: 3
     multiplier: 1
-  currentHealth: 5
+  currentHealth: 3
   ShakeMagnitude: 8
   ShakeDuration: 0.5
   HitSound: 
