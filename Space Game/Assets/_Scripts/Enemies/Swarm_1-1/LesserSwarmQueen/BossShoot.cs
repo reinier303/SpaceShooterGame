@@ -48,7 +48,7 @@ public class BossShoot : BaseState
                 GameObject projectileObject = objectPooler.SpawnFromPool("SwarmBullet", bossGameObject.transform.position + (bossGameObject.transform.up * 3),
                 Quaternion.Euler(bossGameObject.transform.eulerAngles.x, bossGameObject.transform.eulerAngles.y, newRotation));
             }
-            objectPooler.SpawnFromPool("SwarmBullet", bossGameObject.transform.position + bossGameObject.transform.up * 3, bossGameObject.transform.rotation);
+            //objectPooler.SpawnFromPool("SwarmBullet", bossGameObject.transform.position + bossGameObject.transform.up * 3, bossGameObject.transform.rotation);
             yield return new WaitForSeconds(timeBetweenShots);
         }
         yield return new WaitForSeconds(postMoveWaitTime);

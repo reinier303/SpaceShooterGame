@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5286f50686901e409d707c0eff733fd, type: 3}
+  m_Name: 1-1_SwarmOutskirts 1
+  m_EditorClassIdentifier: 
+  WaveName: The Swarm Outskirts
+  WaveTextColor: {r: 0.69411767, g: 0.8392157, b: 0.12156863, a: 1}
+  WaveTextMaterial: {fileID: 2100000, guid: 04c99ccc25490cf4692e4bb8d14f1867, type: 2}
+  EnemyPrefabs:
+  - Name: Swarmling
+    MaxAmount: 20
+    Priority: 6
+  - Name: LesserSwarmDrone
+    MaxAmount: 20
+    Priority: 4
+  - Name: Asteroid
+    MaxAmount: 100
+    Priority: 40
+  - Name: SwarmlingGroup3
+    MaxAmount: 10
+    Priority: 1
+  StartSpawnRate: 0.8
+  SpawnRateRampPerSecond: -0.0015
+  MaxSpawnRate: 0.02
+  BossName: LesserSwarmQueen
+  EnemiesForBossSpawn: 30

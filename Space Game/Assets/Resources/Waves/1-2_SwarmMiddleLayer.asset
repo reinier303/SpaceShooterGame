@@ -10,18 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e5286f50686901e409d707c0eff733fd, type: 3}
-  m_Name: 1-1_SwarmOutskirts
+  m_Name: 1-2_SwarmMiddleLayer
   m_EditorClassIdentifier: 
-  Name: 'The Swarm Outskirts '
+  WaveName: The Swarm Middle Layer
+  WaveTextColor: {r: 0.57610744, g: 0.9056604, b: 0.16660735, a: 1}
+  WaveTextMaterial: {fileID: 2100000, guid: 04c99ccc25490cf4692e4bb8d14f1867, type: 2}
   EnemyPrefabs:
-  - Name: Swarmling
+  - Name: SwarmlingGroup3
+    MaxAmount: 10
+    Priority: 2
+  - Name: LesserSwarmDrone
     MaxAmount: 20
     Priority: 3
-  - Name: LesserSwarmDrone
+  - Name: SwarmDrone
     MaxAmount: 20
     Priority: 2
   - Name: Asteroid
-    MaxAmount: 100
+    MaxAmount: 200
     Priority: 20
   StartSpawnRate: 0.8
   SpawnRateRampPerSecond: -0.0015

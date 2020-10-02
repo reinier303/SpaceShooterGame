@@ -13,7 +13,7 @@ public class WaveManager : MonoBehaviour
     private List<ScriptableWave> Waves = new List<ScriptableWave>();
 
     //Current Wave Data
-    public int currentWave;
+    public int currentWave = 0;
     [SerializeField] private float currentSpawnTime;
 
     //General Data
@@ -35,7 +35,7 @@ public class WaveManager : MonoBehaviour
         foreach (ScriptableWave wave in ScriptableWaves)
         {
             //Check if pool info is filled.
-            if (wave.StartSpawnRate > 0 && wave.EnemyPrefabs.Count > 0 && wave.Name != null)
+            if (wave.StartSpawnRate > 0 && wave.EnemyPrefabs.Count > 0 && wave.WaveName != null)
             {
                 Waves.Add(wave);
             }
@@ -44,6 +44,7 @@ public class WaveManager : MonoBehaviour
                 Debug.LogWarning("Wave: " + wave.name + " is missing some information. \n Please go back to Resources/Waves and fill in the information correctly");
             }
         }
+        //currentWave++;
         GenerateRandomEnemyList();
     }
 
@@ -51,9 +52,7 @@ public class WaveManager : MonoBehaviour
     {
         RObjectPooler = ObjectPooler.Instance;
         gameManager = GameManager.Instance;
-        currentWave = 0;
         currentSpawnTime = Waves[currentWave].StartSpawnRate;
-
         StartCoroutine(StartSpawning());
         StartCoroutine(RampSpawnRate());
     }
@@ -82,7 +81,7 @@ public class WaveManager : MonoBehaviour
         currentSpawnTime += Waves[currentWave].SpawnRateRampPerSecond;
         if(currentSpawnTime >= Waves[currentWave].MaxSpawnRate)
         {
-            StartCoroutine(RampSpawnRate());
+            StopCoroutine(RampSpawnRate());
         }
     }
 
@@ -117,11 +116,13 @@ public class WaveManager : MonoBehaviour
         }
     }
 
-    private void NextWave()
+    public void NextWave()
     {
+        BossArrowScript.gameObject.SetActive(false);
         currentWave++;
         currentSpawnTime = Waves[currentWave].StartSpawnRate;
         StartCoroutine(RampSpawnRate());
+        gameManager.RUIManager.InitializeWaveText();
     }
 
     public void EnemyKilled()

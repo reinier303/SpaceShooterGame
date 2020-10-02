@@ -43,22 +43,33 @@ public class UIManager : MonoBehaviour
     public PostGamePanel PostGamePanelScript;
 
     private GameManager gameManager;
+    private WaveManager RWaveManager;
     private PlayerEntity RPlayerEntity;
     private Player RPlayer;
 
     private void Awake()
     {
         gameManager = GameManager.Instance;
+        RWaveManager = gameManager.RWaveManager;
         RPlayer = gameManager.RPlayer;
         RPlayerEntity = RPlayer.RPlayerEntity;
+
+        WaveEnterCanvasGroup = WaveEnterText.GetComponent<CanvasGroup>();
     }
     private void Start()
     {
         LivesText.text = "Lives:" + RPlayerEntity.currentHealth;
         UnitsText.text = "Units:" + RPlayer.Data.Units;
-        WaveEnterCanvasGroup = WaveEnterText.GetComponent<CanvasGroup>();
-        StartCoroutine(ShowWaveText());
-        WaveProgressBar.maxValue = gameManager.RWaveManager.GetWave(gameManager.RWaveManager.currentWave).EnemiesForBossSpawn;
+
+        InitializeWaveText();
+
+        WaveProgressBar.maxValue = RWaveManager.GetWave(RWaveManager.currentWave).EnemiesForBossSpawn;
+    }
+
+    public void InitializeWaveText()
+    {
+        ScriptableWave currentWave = RWaveManager.GetWave(RWaveManager.currentWave);
+        StartCoroutine(ShowWaveText(currentWave.WaveName, currentWave.WaveTextColor, currentWave.WaveTextMaterial));
     }
 
     public void UpdateLives(float damage)
@@ -116,8 +127,11 @@ public class UIManager : MonoBehaviour
         PostGamePanelScript.UpdateSummary();
     }
 
-    public IEnumerator ShowWaveText()
+    public IEnumerator ShowWaveText(string waveName, Color textColor, Material textMaterial)
     {
+        WaveEnterText.text = "<size=50>Now entering</size>\n" + waveName;
+        WaveEnterText.color = textColor;
+        WaveEnterText.material = textMaterial;
         LeanTween.alphaCanvas(WaveEnterCanvasGroup, AlphaToWave, WaveTextDuration / 2).setEase(EaseTypeWave);
         yield return new WaitForSeconds(WaveTextDuration);
         LeanTween.alphaCanvas(WaveEnterCanvasGroup, 0, WaveTextDuration / 2).setEase(EaseTypeWave);

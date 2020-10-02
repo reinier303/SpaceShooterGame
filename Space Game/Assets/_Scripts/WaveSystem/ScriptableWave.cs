@@ -5,7 +5,10 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "WaveSystem/Wave", order = 998)]
 public class ScriptableWave : ScriptableObject
 {
-    public string Name;
+    public string WaveName;
+    public Color WaveTextColor;
+    public Material WaveTextMaterial;
+
     [Tooltip("Enemy Prefab and max amount alive")]
     public List<EnemyWaveData> EnemyPrefabs;
     public float StartSpawnRate = 1;
