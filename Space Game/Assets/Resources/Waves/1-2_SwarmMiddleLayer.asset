@@ -24,12 +24,15 @@ MonoBehaviour:
     Priority: 3
   - Name: SwarmDrone
     MaxAmount: 20
-    Priority: 2
+    Priority: 3
   - Name: Asteroid
     MaxAmount: 200
     Priority: 20
+  - Name: EggCarrier
+    MaxAmount: 50
+    Priority: 3
   StartSpawnRate: 0.8
   SpawnRateRampPerSecond: -0.0015
   MaxSpawnRate: 0.02
   BossName: LesserSwarmQueen
-  EnemiesForBossSpawn: 30
+  EnemiesForBossSpawn: 70

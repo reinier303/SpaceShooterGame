@@ -32,4 +32,4 @@ MonoBehaviour:
   SpawnRateRampPerSecond: -0.0015
   MaxSpawnRate: 0.02
   BossName: LesserSwarmQueen
-  EnemiesForBossSpawn: 30
+  EnemiesForBossSpawn: 40

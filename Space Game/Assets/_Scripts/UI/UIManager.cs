@@ -61,15 +61,16 @@ public class UIManager : MonoBehaviour
         LivesText.text = "Lives:" + RPlayerEntity.currentHealth;
         UnitsText.text = "Units:" + RPlayer.Data.Units;
 
-        InitializeWaveText();
+        InitializeWaveUI();
 
         WaveProgressBar.maxValue = RWaveManager.GetWave(RWaveManager.currentWave).EnemiesForBossSpawn;
     }
 
-    public void InitializeWaveText()
+    public void InitializeWaveUI()
     {
         ScriptableWave currentWave = RWaveManager.GetWave(RWaveManager.currentWave);
         StartCoroutine(ShowWaveText(currentWave.WaveName, currentWave.WaveTextColor, currentWave.WaveTextMaterial));
+        WaveProgressBar.maxValue = RWaveManager.GetWave(RWaveManager.currentWave).EnemiesForBossSpawn;
     }
 
     public void UpdateLives(float damage)

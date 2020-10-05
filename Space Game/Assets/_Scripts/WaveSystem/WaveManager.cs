@@ -107,6 +107,7 @@ public class WaveManager : MonoBehaviour
 
     private void GenerateRandomEnemyList()
     {
+        enemyNames.Clear();
         for(int i = 0; i < Waves[currentWave].EnemyPrefabs.Count; i++)
         {
             for(int j = 0; j < Waves[currentWave].EnemyPrefabs[i].Priority; j++)
@@ -119,10 +120,14 @@ public class WaveManager : MonoBehaviour
     public void NextWave()
     {
         BossArrowScript.gameObject.SetActive(false);
-        currentWave++;
+        if(currentWave < Waves.Count)
+        {
+            currentWave++;
+        }
         currentSpawnTime = Waves[currentWave].StartSpawnRate;
+        GenerateRandomEnemyList();
         StartCoroutine(RampSpawnRate());
-        gameManager.RUIManager.InitializeWaveText();
+        gameManager.RUIManager.InitializeWaveUI();
     }
 
     public void EnemyKilled()
