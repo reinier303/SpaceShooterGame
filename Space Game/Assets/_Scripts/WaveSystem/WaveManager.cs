@@ -120,10 +120,11 @@ public class WaveManager : MonoBehaviour
     public void NextWave()
     {
         BossArrowScript.gameObject.SetActive(false);
-        if(currentWave < Waves.Count)
+        if(currentWave < Waves.Count -1)
         {
             currentWave++;
         }
+        Debug.Log(currentWave);
         currentSpawnTime = Waves[currentWave].StartSpawnRate;
         GenerateRandomEnemyList();
         StartCoroutine(RampSpawnRate());
