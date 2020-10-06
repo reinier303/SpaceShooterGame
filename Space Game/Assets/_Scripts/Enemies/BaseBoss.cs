@@ -12,6 +12,8 @@ public class BaseBoss : BaseEnemy
 
     public bool dashing;
 
+    public Sprite BossIcon;
+
     protected override void Start()
     {
         base.Start();       
@@ -49,6 +51,35 @@ public class BaseBoss : BaseEnemy
     protected override void SpawnSegments()
     {
         //This method is meant to be overriden
+    }
+
+    protected virtual void ReduceSpawns()
+    {
+        gameManager.RWaveManager.AdjustToBoss(SpawnRateReductionMultiplier);
+    }
+
+    protected override void Move()
+    {
+        if (Vector2.Distance(transform.position, Player.transform.position) > StopDistance || dashing && gameManager.PlayerAlive)
+        {
+            //transform.position = Vector2.MoveTowards(transform.position, Player.position, Speed.GetValue() * Time.deltaTime);
+            transform.position += transform.up * Speed.GetValue() * Time.deltaTime;
+        }
+        else
+        {
+            transform.position = Vector2.MoveTowards(transform.position, Player.position, -Speed.GetValue() * Time.deltaTime);
+        }
+    }
+
+
+    protected virtual void OnBecameVisible()
+    {
+        gameManager.RWaveManager.BossArrowScript.gameObject.SetActive(false);
+    }
+
+    protected virtual void OnBecameInvisible()
+    {
+        gameManager.RWaveManager.BossArrowScript.gameObject.SetActive(true);
     }
 
     #region MoveToNextStateMethods
@@ -95,24 +126,5 @@ public class BaseBoss : BaseEnemy
 
         nextState.PerformMove();
     }
-
-    protected virtual void ReduceSpawns()
-    {
-        gameManager.RWaveManager.AdjustToBoss(SpawnRateReductionMultiplier);
-    }
-
-    protected override void Move()
-    {
-        if (Vector2.Distance(transform.position, Player.transform.position) > StopDistance || dashing && gameManager.PlayerAlive)
-        {
-            //transform.position = Vector2.MoveTowards(transform.position, Player.position, Speed.GetValue() * Time.deltaTime);
-            transform.position += transform.up * Speed.GetValue() * Time.deltaTime;
-        }
-        else
-        {
-            transform.position = Vector2.MoveTowards(transform.position, Player.position, -Speed.GetValue() * Time.deltaTime);
-        }
-    }
-
     #endregion
 }

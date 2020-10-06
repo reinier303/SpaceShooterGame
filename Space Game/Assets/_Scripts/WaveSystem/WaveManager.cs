@@ -148,10 +148,11 @@ public class WaveManager : MonoBehaviour
 
     private void SpawnBoss()
     {
+        BossArrowScript.gameObject.SetActive(true);
         Vector2 spawnPosition = GenerateSpawnPosition();
         GameObject Boss = RObjectPooler.SpawnFromPool(Waves[currentWave].BossName, spawnPosition, Quaternion.identity);
-        BossArrowScript.gameObject.SetActive(true);
         BossArrowScript.Target = Boss.transform;
+        BossArrowScript.bossIcon.sprite = Boss.GetComponent<BaseBoss>().BossIcon;
     }
 
     public ScriptableWave GetWave(int wave)
