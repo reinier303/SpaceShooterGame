@@ -22,6 +22,11 @@ namespace SpaceGame
         {
             ExtensionMethods.LoadSceneWithLoadingScreen(scene, loadingScreen, this);
         }
+
+        public void Quit()
+        {
+            Application.Quit();
+        }
     }
 }
 

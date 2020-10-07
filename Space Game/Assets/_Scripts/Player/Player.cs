@@ -84,6 +84,7 @@ public class Player : MonoBehaviour
 public class PlayerData
 {
     public List<WeaponData> Weapons;
+    public List<PlayerModule> PlayerModules;
     public float Units;
     public float TotalUnits;
 }

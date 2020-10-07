@@ -9,7 +9,7 @@ public class Weapon : ScriptableObject
     public int ID;
     public string WeaponName;
     public string ProjectileName;
-    public List<Module> BaseModules = new List<Module>();
+    public List<WeaponModule> BaseModules = new List<WeaponModule>();
     public Dictionary<string, ModuleData> Modules = new Dictionary<string, ModuleData>();
 
     public float CurrentExperience;
@@ -83,13 +83,13 @@ public class Weapon : ScriptableObject
 
     public void AddBaseModules()
     {
-        foreach(Module module in BaseModules)
+        foreach(WeaponModule module in BaseModules)
         {
             AddModule(module);
         }
     }
 
-    public void AddModule(Module module)
+    public void AddModule(WeaponModule module)
     {
         if(!Modules.ContainsKey(module.StatName))
         {
@@ -97,7 +97,7 @@ public class Weapon : ScriptableObject
         }
     }
 
-    public void AddModuleShop(Module module, int maxPoints)
+    public void AddModuleShop(WeaponModule module, int maxPoints)
     {
         ShopManager shopManager = ShopManager.Instance;
 

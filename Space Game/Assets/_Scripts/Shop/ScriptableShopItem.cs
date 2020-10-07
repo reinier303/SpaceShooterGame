@@ -14,7 +14,7 @@ public class ScriptableShopItem : ScriptableObject
     public string ShopItemName;
     [TextArea(3,20)][Header("Replaces -Name- with ShopItemName and -MaxLevel- with MaxLvl")]
     public string Description;
-    public Module ModuleToUnlock;
+    public WeaponModule ModuleToUnlock;
     public float Cost;
     public int MaxLvl;
 

@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -3749,6 +3749,7 @@ MonoBehaviour:
   RPlayerEntity: {fileID: 692017885}
   Data:
     Weapons: []
+    PlayerModules: []
     Units: 0
     TotalUnits: 0
   StartWeapon: {fileID: 11400000, guid: 0a51dc546c872474a98ef6a2b8035aea, type: 2}
@@ -4012,6 +4013,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ce1a2a7800bd75d4f913901f09899380, type: 3}
   - {fileID: 8300000, guid: 1e70d66d0afe25b4bb990093832bfce9, type: 3}
   - {fileID: 8300000, guid: 1f6791c741e1cb34595b772a70dfd8c2, type: 3}
+  - {fileID: 8300000, guid: 1526877c5e26fed4583ac93c4c3409ff, type: 3}
+  - {fileID: 8300000, guid: 32a1392cb4c0a2d4b923867f07fe2669, type: 3}
 --- !u!4 &727943447
 Transform:
   m_ObjectHideFlags: 0
