@@ -13,7 +13,7 @@ public class BossArrow : MonoBehaviour
     {
         gameManager = GameManager.Instance;
         player = gameManager.RPlayer.transform;
-        bossIcon = GetComponentInChildren<SpriteRenderer>();
+        bossIcon = transform.GetChild(0).GetComponent<SpriteRenderer>();
     }
     void FixedUpdate()
     {
