@@ -66,7 +66,13 @@ public class UIManager : MonoBehaviour
 
         WaveProgressBar.maxValue = RWaveManager.GetWave(RWaveManager.currentWave).EnemiesForBossSpawn;
 
+        InitializeLevelUI();
+    }
+
+    public void InitializeLevelUI()
+    {
         RPlayer.AddExperience(0);
+        UpdatePlayerLevel(RPlayer.Data.Level);
     }
 
     public void InitializeWaveUI()
