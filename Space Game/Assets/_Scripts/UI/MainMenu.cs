@@ -11,11 +11,6 @@ namespace SpaceGame
         private void Awake()
         {
             Time.timeScale = 1;
-
-            if (!SaveLoad.SaveExists("PlayerData.Sav"))
-            {
-                SaveLoad.NewSave();
-            }
         }
 
         public void LoadScene(int scene)

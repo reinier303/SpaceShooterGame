@@ -9,14 +9,15 @@ public class UIManager : MonoBehaviour
     [Header("UIComponents")]
     public TMP_Text LivesText;
     public TMP_Text UnitsText;
+    public TMP_Text PlayerLevelText;
     public TMP_Text WeaponLevelText;
     public TMP_Text WaveEnterText;
 
     private CanvasGroup WaveEnterCanvasGroup;
 
     public Slider WeaponExperience;
+    public Slider PlayerExperience;
     public Slider WaveProgressBar;
-
 
     public GameObject PostGamePanel;
     public GameObject PauseMenu;
@@ -64,6 +65,8 @@ public class UIManager : MonoBehaviour
         InitializeWaveUI();
 
         WaveProgressBar.maxValue = RWaveManager.GetWave(RWaveManager.currentWave).EnemiesForBossSpawn;
+
+        RPlayer.AddExperience(0);
     }
 
     public void InitializeWaveUI()
@@ -95,14 +98,24 @@ public class UIManager : MonoBehaviour
 
     }
 
-    public void UpdateCurrentWeapon(float currentValue)
+    public void UpdateCurrentWeaponExp(float currentValue)
     {
         WeaponExperience.value = currentValue;
     }
 
-    public void UpdateCurrentWeaponLevel(float level)
+    public void UpdateCurrentWeaponLevel(int level)
     {
         WeaponLevelText.text = "" + level;
+    }
+
+    public void UpdatePlayerExp(float currentValue)
+    {
+        PlayerExperience.value = currentValue;
+    }
+
+    public void UpdatePlayerLevel(int level)
+    {
+        PlayerLevelText.text = "" + level;
     }
 
     private IEnumerator BounceSizeTween(GameObject uIElement)

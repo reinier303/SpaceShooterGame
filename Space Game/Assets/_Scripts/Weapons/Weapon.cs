@@ -27,7 +27,7 @@ public class Weapon : ScriptableObject
     {
         uIManager = GameManager.Instance.RUIManager;
         float currentValue = CurrentExperience / experienceNeeded;
-        uIManager.UpdateCurrentWeapon(currentValue);
+        uIManager.UpdateCurrentWeaponExp(currentValue);
         uIManager.UpdateCurrentWeaponLevel(RWeaponData.Level);
     }
 
@@ -57,7 +57,7 @@ public class Weapon : ScriptableObject
             }
         }
         float currentValue = RWeaponData.CurrentExperience / RWeaponData.ExperienceNeeded;
-        GameManager.Instance.RUIManager.UpdateCurrentWeapon(currentValue);
+        GameManager.Instance.RUIManager.UpdateCurrentWeaponExp(currentValue);
     }
 
     public void LevelUp()

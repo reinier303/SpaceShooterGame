@@ -19,6 +19,10 @@ public class Player : MonoBehaviour
     private Weapon CurrentWeapon;
     public Weapon StartWeapon;
 
+    //Leveling variables
+    public float ExperienceNeeded;
+    public float PointsPerLevel;
+
     private void Awake()
     {
         GetSaveData();
@@ -52,6 +56,39 @@ public class Player : MonoBehaviour
     public void AddExperience(float expGain)
     {
         CurrentWeapon.GainExperience(expGain);
+        GainExperience(expGain);
+    }
+
+    public void GainExperience(float expGain)
+    {
+        //Calculate if any experience remains after leveling up.
+        float remainingExp = expGain + Data.CurrentExperience - Data.ExperienceNeeded;
+
+        Data.CurrentExperience += expGain;
+
+        //Check if level up.
+        if (Data.CurrentExperience >= Data.ExperienceNeeded)
+        {
+            LevelUp();
+            Data.CurrentExperience = 0;
+
+            //Repeat GainExperience untill expGain runs out.
+            if (remainingExp > 0)
+            {
+                GainExperience(remainingExp);
+            }
+        }
+        float currentValue = Data.CurrentExperience / Data.ExperienceNeeded;
+        RUIManager.UpdatePlayerExp(currentValue);
+    }
+
+    public void LevelUp()
+    {
+        Data.Level++;
+        Data.CurrentPoints += PointsPerLevel;
+        Data.ExperienceNeeded = Data.ExperienceNeeded * Mathf.Clamp((1.3f + 0.01f * Data.Level), 1.3f, 1.85f);
+        RUIManager.UpdatePlayerLevel(Data.Level);
+        GameManager.Instance.RPlayer.SavePlayerData();
     }
 
     public void AddUnits(float units)
@@ -84,7 +121,13 @@ public class Player : MonoBehaviour
 public class PlayerData
 {
     public List<WeaponData> Weapons;
+
     public List<PlayerModule> PlayerModules;
+    public float CurrentExperience;
+    public float ExperienceNeeded;
+    public float CurrentPoints;
+    public int Level;
+
     public float Units;
     public float TotalUnits;
 }

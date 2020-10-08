@@ -51,6 +51,10 @@ public class SaveLoad : MonoBehaviour
         data.TotalUnits = 0;
         data.Units = 0;
 
+        data.ExperienceNeeded = GameManager.Instance.RPlayer.ExperienceNeeded;
+        data.CurrentExperience = 0;
+        data.CurrentPoints = 0;
+
         data.Weapons = new List<WeaponData>();
         Weapon weapon = (Weapon)Resources.Load("Weapons/Bullet/Bullets", typeof(Weapon));
         weapon.AddBaseModules();
