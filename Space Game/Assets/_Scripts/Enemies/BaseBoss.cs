@@ -2,129 +2,132 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseBoss : BaseEnemy
+namespace SpaceGame
 {
-    protected List<BaseState> moves = new List<BaseState>();
-    protected List<BaseState> movesPerformed = new List<BaseState>();
-
-    protected int currentMove = 0;
-    public float SpawnRateReductionMultiplier;
-
-    public bool dashing;
-
-    public Sprite BossIcon;
-
-    protected override void Start()
+    public class BaseBoss : BaseEnemy
     {
-        base.Start();       
-    }
+        protected List<BaseState> moves = new List<BaseState>();
+        protected List<BaseState> movesPerformed = new List<BaseState>();
 
-    protected virtual void Update()
-    {
-        Move();
-        Rotate();
-    }
+        protected int currentMove = 0;
+        public float SpawnRateReductionMultiplier;
 
-    protected override void OnEnable()
-    {
-        base.OnEnable();
-        ReduceSpawns();
-    }
+        public bool dashing;
 
-    protected override void UpdateRunData()
-    {
-        gameManager.BossesKilled++;
-        gameManager.ExperienceEarned += ExpGiven.GetValue();
-    }
+        public Sprite BossIcon;
 
-    /// <summary>
-    /// Create cool boss specific particle effect in here.
-    /// </summary>
-    protected override void SpawnParticleEffect()
-    {
-        //This method is meant to be overriden
-    }
-
-    /// <summary>
-    /// Create cool boss specific segment spawn here.
-    /// </summary>
-    protected override void SpawnSegments()
-    {
-        //This method is meant to be overriden
-    }
-
-    protected virtual void ReduceSpawns()
-    {
-        gameManager.RWaveManager.AdjustToBoss(SpawnRateReductionMultiplier);
-    }
-
-    protected override void Move()
-    {
-        if (Vector2.Distance(transform.position, Player.transform.position) > StopDistance || dashing && gameManager.PlayerAlive)
+        protected override void Start()
         {
-            //transform.position = Vector2.MoveTowards(transform.position, Player.position, Speed.GetValue() * Time.deltaTime);
-            transform.position += transform.up * Speed.GetValue() * Time.deltaTime;
-        }
-        else
-        {
-            transform.position = Vector2.MoveTowards(transform.position, Player.position, -Speed.GetValue() * Time.deltaTime);
-        }
-    }
-
-
-    protected virtual void OnBecameVisible()
-    {
-        gameManager.RWaveManager.BossArrowScript.gameObject.SetActive(false);
-    }
-
-    protected virtual void OnBecameInvisible()
-    {
-        gameManager.RWaveManager.BossArrowScript.gameObject.SetActive(true);
-    }
-
-    #region MoveToNextStateMethods
-
-    public virtual void MoveToNextStateRandom()
-    {
-        BaseState nextState = moves[Random.Range(0, moves.Count)];
-        nextState.PerformMove();
-    }
-
-    public virtual void MoveToNextStateRoundRobin()
-    {
-        Debug.Log(moves.Count + ", p:" + movesPerformed.Count);
-
-        //If all moves have been performed refill the moves list
-        if (moves.Count == 0)
-        {
-            moves.AddRange(movesPerformed);
-            movesPerformed.Clear();
+            base.Start();
         }
 
-        //select random move from the move list
-        BaseState nextState = moves[Random.Range(0, moves.Count)];
-
-        //remove the next state from moves and add it to moves performed to make sure all moves will be performed in a random order.
-        moves.Remove(nextState);
-        movesPerformed.Add(nextState);
-
-        nextState.PerformMove();
-    }
-
-    public virtual void MoveToNextStateSequential()
-    {
-        BaseState nextState = moves[currentMove];
-
-        if(currentMove < moves.Count)
+        protected virtual void Update()
         {
-            currentMove++;
-        }
-        else
-        {
-            currentMove = 0;
+            Move();
+            Rotate();
         }
 
-        nextState.PerformMove();
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            ReduceSpawns();
+        }
+
+        protected override void UpdateRunData()
+        {
+            gameManager.BossesKilled++;
+            gameManager.ExperienceEarned += ExpGiven.GetValue();
+        }
+
+        /// <summary>
+        /// Create cool boss specific particle effect in here.
+        /// </summary>
+        protected override void SpawnParticleEffect()
+        {
+            //This method is meant to be overriden
+        }
+
+        /// <summary>
+        /// Create cool boss specific segment spawn here.
+        /// </summary>
+        protected override void SpawnSegments()
+        {
+            //This method is meant to be overriden
+        }
+
+        protected virtual void ReduceSpawns()
+        {
+            gameManager.RWaveManager.AdjustToBoss(SpawnRateReductionMultiplier);
+        }
+
+        protected override void Move()
+        {
+            if (Vector2.Distance(transform.position, Player.transform.position) > StopDistance || dashing && gameManager.PlayerAlive)
+            {
+                //transform.position = Vector2.MoveTowards(transform.position, Player.position, Speed.GetValue() * Time.deltaTime);
+                transform.position += transform.up * Speed.GetValue() * Time.deltaTime;
+            }
+            else
+            {
+                transform.position = Vector2.MoveTowards(transform.position, Player.position, -Speed.GetValue() * Time.deltaTime);
+            }
+        }
+
+
+        protected virtual void OnBecameVisible()
+        {
+            gameManager.RWaveManager.BossArrowScript.gameObject.SetActive(false);
+        }
+
+        protected virtual void OnBecameInvisible()
+        {
+            gameManager.RWaveManager.BossArrowScript.gameObject.SetActive(true);
+        }
+
+        #region MoveToNextStateMethods
+
+        public virtual void MoveToNextStateRandom()
+        {
+            BaseState nextState = moves[Random.Range(0, moves.Count)];
+            nextState.PerformMove();
+        }
+
+        public virtual void MoveToNextStateRoundRobin()
+        {
+            Debug.Log(moves.Count + ", p:" + movesPerformed.Count);
+
+            //If all moves have been performed refill the moves list
+            if (moves.Count == 0)
+            {
+                moves.AddRange(movesPerformed);
+                movesPerformed.Clear();
+            }
+
+            //select random move from the move list
+            BaseState nextState = moves[Random.Range(0, moves.Count)];
+
+            //remove the next state from moves and add it to moves performed to make sure all moves will be performed in a random order.
+            moves.Remove(nextState);
+            movesPerformed.Add(nextState);
+
+            nextState.PerformMove();
+        }
+
+        public virtual void MoveToNextStateSequential()
+        {
+            BaseState nextState = moves[currentMove];
+
+            if (currentMove < moves.Count)
+            {
+                currentMove++;
+            }
+            else
+            {
+                currentMove = 0;
+            }
+
+            nextState.PerformMove();
+        }
+        #endregion
     }
-    #endregion
 }

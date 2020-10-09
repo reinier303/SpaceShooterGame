@@ -1,23 +1,26 @@
 ﻿using UnityEngine;
 
-[System.Serializable]
-public class Stat
+namespace SpaceGame
 {
-    public string statName;
-
-    [SerializeField] private float baseValue = 1;
-
-    public float multiplier = 1;
-
-    public Stat(string name, float value, float newMultiplier)
+    [System.Serializable]
+    public class Stat
     {
-        statName = name;
-        baseValue = value;
-        multiplier = newMultiplier;
-    }
+        public string statName;
 
-    public float GetValue()
-    {
-        return baseValue * multiplier;
+        [SerializeField] private float baseValue = 1;
+
+        public float multiplier = 1;
+
+        public Stat(string name, float value, float newMultiplier)
+        {
+            statName = name;
+            baseValue = value;
+            multiplier = newMultiplier;
+        }
+
+        public float GetValue()
+        {
+            return baseValue * multiplier;
+        }
     }
 }

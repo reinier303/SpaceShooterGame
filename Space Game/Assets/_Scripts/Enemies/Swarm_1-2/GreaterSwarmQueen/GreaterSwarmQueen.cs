@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GreaterSwarmQueen : BaseBoss
+namespace SpaceGame
 {
+    public class GreaterSwarmQueen : BaseBoss
+    {
 
+    }
 }

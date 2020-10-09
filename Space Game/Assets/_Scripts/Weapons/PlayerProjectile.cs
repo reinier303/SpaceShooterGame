@@ -2,46 +2,49 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerProjectile : MonoBehaviour
+namespace SpaceGame
 {
-    public Dictionary<string, ModuleData> Modules = new Dictionary<string, ModuleData>();
-    public string OnHitEffectName;
-    protected ObjectPooler objectPooler;
-    protected GameManager gameManager;
-
-
-    protected virtual void Awake()
+    public class PlayerProjectile : MonoBehaviour
     {
-        objectPooler = ObjectPooler.Instance;
-        gameManager = GameManager.Instance;
-    }
+        public Dictionary<string, ModuleData> Modules = new Dictionary<string, ModuleData>();
+        public string OnHitEffectName;
+        protected ObjectPooler objectPooler;
+        protected GameManager gameManager;
 
-    protected virtual void Update()
-    {
-        Move();
-    }
 
-    protected virtual void Move()
-    {
-        transform.position += transform.up * Time.deltaTime * Modules["ProjectileSpeed"].GetStatValue();
-    }
-
-    protected virtual void OnTriggerEnter2D(Collider2D collider)
-    {
-        BaseEntity entity = collider.GetComponent<BaseEntity>();
-        if(entity != null)
+        protected virtual void Awake()
         {
-            gameManager.StartCoroutine(gameManager.Sleep(0.015f));
-            entity.OnTakeDamage?.Invoke(Modules["Damage"].GetStatValue());
+            objectPooler = ObjectPooler.Instance;
+            gameManager = GameManager.Instance;
+        }
+
+        protected virtual void Update()
+        {
+            Move();
+        }
+
+        protected virtual void Move()
+        {
+            transform.position += transform.up * Time.deltaTime * Modules["ProjectileSpeed"].GetStatValue();
+        }
+
+        protected virtual void OnTriggerEnter2D(Collider2D collider)
+        {
+            BaseEntity entity = collider.GetComponent<BaseEntity>();
+            if (entity != null)
+            {
+                gameManager.StartCoroutine(gameManager.Sleep(0.015f));
+                entity.OnTakeDamage?.Invoke(Modules["Damage"].GetStatValue());
+                objectPooler.SpawnFromPool(OnHitEffectName, transform.position, Quaternion.identity);
+                gameObject.SetActive(false);
+            }
+        }
+
+        public virtual IEnumerator DisableAfterTime()
+        {
+            yield return new WaitForSeconds(Modules["AliveTime"].GetStatValue());
             objectPooler.SpawnFromPool(OnHitEffectName, transform.position, Quaternion.identity);
             gameObject.SetActive(false);
         }
-    }
-
-    public virtual IEnumerator DisableAfterTime()
-    {
-        yield return new WaitForSeconds(Modules["AliveTime"].GetStatValue());
-        objectPooler.SpawnFromPool(OnHitEffectName, transform.position, Quaternion.identity);
-        gameObject.SetActive(false);
     }
 }

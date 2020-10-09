@@ -2,77 +2,80 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour
+namespace SpaceGame
 {
-    public static AudioManager Instance;
-
-    List<AudioData> AudioDatas = new List<AudioData>();
-    public List<AudioClip> MusicTracks;
-    private List<AudioClip> musicPlayed = new List<AudioClip>();
-
-    private AudioSource musicSource;
-
-    private void Awake()
+    public class AudioManager : MonoBehaviour
     {
-        Instance = this;
-        musicSource = GetComponent<AudioSource>();
-        MoveToNextSongRoundRobin();
-    }
+        public static AudioManager Instance;
 
-    public void AddAudio(string name, float duration)
-    {
-        AudioData data = new AudioData();
-        data.name = name;
-        data.duration = duration;
-        AudioDatas.Add(data);
-    }
+        List<AudioData> AudioDatas = new List<AudioData>();
+        public List<AudioClip> MusicTracks;
+        private List<AudioClip> musicPlayed = new List<AudioClip>();
 
-    public void PlaySound(string audioName)
-    {
-        //AkSoundEngine.PostEvent(audioName, gameObject);
-    }
+        private AudioSource musicSource;
 
-    public float GetAudioLength(string audioName)
-    {
-        float length = 0;
-        foreach(AudioData data in AudioDatas)
+        private void Awake()
         {
-            if(data.name == audioName)
+            Instance = this;
+            musicSource = GetComponent<AudioSource>();
+            MoveToNextSongRoundRobin();
+        }
+
+        public void AddAudio(string name, float duration)
+        {
+            AudioData data = new AudioData();
+            data.name = name;
+            data.duration = duration;
+            AudioDatas.Add(data);
+        }
+
+        public void PlaySound(string audioName)
+        {
+            //AkSoundEngine.PostEvent(audioName, gameObject);
+        }
+
+        public float GetAudioLength(string audioName)
+        {
+            float length = 0;
+            foreach (AudioData data in AudioDatas)
             {
-                length = data.duration;
+                if (data.name == audioName)
+                {
+                    length = data.duration;
+                }
             }
+            if (length == 0)
+            {
+                Debug.LogWarning("Audio not found");
+            }
+            return length;
         }
-        if(length == 0)
+        public virtual void MoveToNextSongRoundRobin()
         {
-            Debug.LogWarning("Audio not found");
+            //If all moves have been performed refill the moves list
+            if (MusicTracks.Count == 0)
+            {
+                MusicTracks.AddRange(musicPlayed);
+                musicPlayed.Clear();
+            }
+
+            //select random move from the move list
+            AudioClip nextSong = MusicTracks[Random.Range(0, MusicTracks.Count)];
+
+            //remove the next state from moves and add it to moves performed to make sure all moves will be performed in a random order.
+            MusicTracks.Remove(nextSong);
+            musicPlayed.Add(nextSong);
+
+            musicSource.clip = nextSong;
+            musicSource.Play();
         }
-        return length;
     }
-    public virtual void MoveToNextSongRoundRobin()
+
+    [System.Serializable]
+    public struct AudioData
     {
-        //If all moves have been performed refill the moves list
-        if (MusicTracks.Count == 0)
-        {
-            MusicTracks.AddRange(musicPlayed);
-            musicPlayed.Clear();
-        }
-
-        //select random move from the move list
-        AudioClip nextSong = MusicTracks[Random.Range(0, MusicTracks.Count)];
-
-        //remove the next state from moves and add it to moves performed to make sure all moves will be performed in a random order.
-        MusicTracks.Remove(nextSong);
-        musicPlayed.Add(nextSong);
-
-        musicSource.clip = nextSong;
-        musicSource.Play();
+        public AudioClip clip;
+        public string name;
+        public float duration;
     }
-}
-
-[System.Serializable]
-public struct AudioData
-{
-    public AudioClip clip;
-    public string name;
-    public float duration;
 }

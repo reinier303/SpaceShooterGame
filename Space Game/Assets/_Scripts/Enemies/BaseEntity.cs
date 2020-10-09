@@ -1,105 +1,107 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class BaseEntity : MonoBehaviour
+namespace SpaceGame
 {
-    [Header("Stats")]
-    public Stat MaxHealth;
-    public float currentHealth;
-
-    [Header("Screen Shake")]
-    public float ShakeMagnitude;
-    public float ShakeDuration;
-
-    [Header("Audio")]
-    public string HitSound;
-    public string DeathSound;
-
-    [Header("Particle Effect")]
-    public string ParticleEffect;
-    public float ParticleEffectScale;
-
-    [Header("Permanence Parts")]
-    public List<Sprite> PermanenceSprites;
-    public Vector2 PermanencePartMinMaxAmount;
-    public float PermanencePartOutwardsPower;
-    public float PermanenceScaleFactor;
-
-    public System.Action<float> OnTakeDamage;
-
-    protected GameManager gameManager;
-    protected ObjectPooler objectPooler;
-    protected CameraManager cameraManager;
-
-    protected Material onHitMaterial;
-    protected Material baseMaterial;
-
-    protected SpriteRenderer spriteRenderer;
-
-    protected virtual void Awake()
+    public class BaseEntity : MonoBehaviour
     {
-        OnTakeDamage += TakeDamage;
+        [Header("Stats")]
+        public Stat MaxHealth;
+        public float currentHealth;
 
-        onHitMaterial = (Material)Resources.Load("Materials/FlashWhite", typeof(Material));
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        baseMaterial = spriteRenderer.material;
-        gameManager = GameManager.Instance;
-        objectPooler = ObjectPooler.Instance;
-    }
+        [Header("Screen Shake")]
+        public float ShakeMagnitude;
+        public float ShakeDuration;
 
-    protected virtual void Start()
-    {
-        cameraManager = GameManager.Instance.RCameraManager;
-    }
+        [Header("Audio")]
+        public string HitSound;
+        public string DeathSound;
 
-    protected virtual void OnEnable()
-    {
-        currentHealth = MaxHealth.GetValue();
-    }
+        [Header("Particle Effect")]
+        public string ParticleEffect;
+        public float ParticleEffectScale;
 
-    public virtual void TakeDamage(float damage)
-    {
-        currentHealth -= damage;
-        if(currentHealth <= 0)
+        [Header("Permanence Parts")]
+        public List<Sprite> PermanenceSprites;
+        public Vector2 PermanencePartMinMaxAmount;
+        public float PermanencePartOutwardsPower;
+        public float PermanenceScaleFactor;
+
+        public System.Action<float> OnTakeDamage;
+
+        protected GameManager gameManager;
+        protected ObjectPooler objectPooler;
+        protected CameraManager cameraManager;
+
+        protected Material onHitMaterial;
+        protected Material baseMaterial;
+
+        protected SpriteRenderer spriteRenderer;
+
+        protected virtual void Awake()
         {
-            currentHealth = 0;
-            Die();
+            OnTakeDamage += TakeDamage;
+
+            onHitMaterial = (Material)Resources.Load("Materials/FlashWhite", typeof(Material));
+            spriteRenderer = GetComponent<SpriteRenderer>();
+            baseMaterial = spriteRenderer.material;
+            gameManager = GameManager.Instance;
+            objectPooler = ObjectPooler.Instance;
         }
-        else
+
+        protected virtual void Start()
         {
-            StartCoroutine(FlashWhite());
+            cameraManager = GameManager.Instance.RCameraManager;
         }
-    }
 
-    protected IEnumerator FlashWhite()
-    {
-        spriteRenderer.material = onHitMaterial;
-        yield return new WaitForSeconds(0.03f);
-        spriteRenderer.material = baseMaterial;
-    }
-
-    protected virtual void Die()
-    {
-        SpawnSegments();
-        SpawnParticleEffect();
-        cameraManager.StartCoroutine(cameraManager.Shake(ShakeDuration, ShakeMagnitude));
-        gameObject.SetActive(false);
-    }
-
-    protected virtual void SpawnParticleEffect()
-    {
-        GameObject effect = objectPooler.SpawnFromPool(ParticleEffect, transform.position, Quaternion.identity);
-        effect.transform.localScale *= ParticleEffectScale;
-    }
-
-    protected virtual void SpawnSegments()
-    {
-        for (int i = 0; i < Random.Range(PermanencePartMinMaxAmount.x, PermanencePartMinMaxAmount.y); i++)
+        protected virtual void OnEnable()
         {
-            GameObject permanencePart = objectPooler.SpawnFromPool("PermanencePart", transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
-            permanencePart.transform.localScale = transform.localScale;
-            permanencePart.GetComponent<PermanencePart>().InitializePart(PermanenceSprites, PermanencePartOutwardsPower, PermanenceScaleFactor);
+            currentHealth = MaxHealth.GetValue();
+        }
+
+        public virtual void TakeDamage(float damage)
+        {
+            currentHealth -= damage;
+            if (currentHealth <= 0)
+            {
+                currentHealth = 0;
+                Die();
+            }
+            else
+            {
+                StartCoroutine(FlashWhite());
+            }
+        }
+
+        protected IEnumerator FlashWhite()
+        {
+            spriteRenderer.material = onHitMaterial;
+            yield return new WaitForSeconds(0.03f);
+            spriteRenderer.material = baseMaterial;
+        }
+
+        protected virtual void Die()
+        {
+            SpawnSegments();
+            SpawnParticleEffect();
+            cameraManager.StartCoroutine(cameraManager.Shake(ShakeDuration, ShakeMagnitude));
+            gameObject.SetActive(false);
+        }
+
+        protected virtual void SpawnParticleEffect()
+        {
+            GameObject effect = objectPooler.SpawnFromPool(ParticleEffect, transform.position, Quaternion.identity);
+            effect.transform.localScale *= ParticleEffectScale;
+        }
+
+        protected virtual void SpawnSegments()
+        {
+            for (int i = 0; i < Random.Range(PermanencePartMinMaxAmount.x, PermanencePartMinMaxAmount.y); i++)
+            {
+                GameObject permanencePart = objectPooler.SpawnFromPool("PermanencePart", transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
+                permanencePart.transform.localScale = transform.localScale;
+                permanencePart.GetComponent<PermanencePart>().InitializePart(PermanenceSprites, PermanencePartOutwardsPower, PermanenceScaleFactor);
+            }
         }
     }
 }

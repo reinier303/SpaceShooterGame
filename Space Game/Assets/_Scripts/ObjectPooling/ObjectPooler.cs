@@ -2,91 +2,94 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPooler : MonoBehaviour
+namespace SpaceGame
 {
-    //CREATE POOL IN RESOURCES FOLDER TO FUNCTION.
-    //Assets/Resources/Pools/CreatePoolHere
-    public static ObjectPooler Instance;
-
-    private List<ScriptablePool> Pools = new List<ScriptablePool>();
-    public Dictionary<string, Queue<GameObject>> PoolDictionary;
-
-    private void Awake()
+    public class ObjectPooler : MonoBehaviour
     {
-        Instance = this;
+        //CREATE POOL IN RESOURCES FOLDER TO FUNCTION.
+        //Assets/Resources/Pools/CreatePoolHere
+        public static ObjectPooler Instance;
 
-        Object[] ScriptablePools = Resources.LoadAll("Pools", typeof(ScriptablePool));
-        foreach (ScriptablePool pool in ScriptablePools)
+        private List<ScriptablePool> Pools = new List<ScriptablePool>();
+        public Dictionary<string, Queue<GameObject>> PoolDictionary;
+
+        private void Awake()
         {
-            //Check if pool info is filled.
-            if(pool.Amount > 0 && pool.Prefab != null && pool.Tag != null)
-            {
-                Pools.Add(pool);
-            }
-            else 
-            {
-                Debug.LogWarning("Pool: " + pool.name + " is missing some information. \n Please go back to Resources/Pools and fill in the information correctly");
-            }
-        }
-    }
+            Instance = this;
 
-    // Create pools and put them in empty gameObjects to make sure the hierarchy window is clean.
-    private void Start()
-    {
-        PoolDictionary = new Dictionary<string, Queue<GameObject>>();
-
-        if(Pools.Count < 1)
-        {
-            return;
-        }
-        foreach (ScriptablePool pool in Pools)
-        {
-            if(!PoolDictionary.ContainsKey(pool.Tag))
+            Object[] ScriptablePools = Resources.LoadAll("Pools", typeof(ScriptablePool));
+            foreach (ScriptablePool pool in ScriptablePools)
             {
-                GameObject containerObject = new GameObject(pool.Tag + "Pool");
-                Queue<GameObject> objectPool = new Queue<GameObject>();
-
-                for (int i = 0; i < pool.Amount; i++)
+                //Check if pool info is filled.
+                if (pool.Amount > 0 && pool.Prefab != null && pool.Tag != null)
                 {
-                    GameObject obj = Instantiate(pool.Prefab, containerObject.transform);
-                    obj.SetActive(false);
-                    objectPool.Enqueue(obj);
+                    Pools.Add(pool);
                 }
-                PoolDictionary.Add(pool.Tag, objectPool);
+                else
+                {
+                    Debug.LogWarning("Pool: " + pool.name + " is missing some information. \n Please go back to Resources/Pools and fill in the information correctly");
+                }
             }
         }
-    }
 
-    //Spawn an object from the corresponding pool with the given variables
-    public GameObject SpawnFromPool(string tag, Vector2 position, Quaternion rotation)
-    {
-        if (!PoolDictionary.ContainsKey(tag))
+        // Create pools and put them in empty gameObjects to make sure the hierarchy window is clean.
+        private void Start()
         {
-            Debug.LogWarning("Pool with tag " + tag + " doesn't exist.");
-            return null;
+            PoolDictionary = new Dictionary<string, Queue<GameObject>>();
+
+            if (Pools.Count < 1)
+            {
+                return;
+            }
+            foreach (ScriptablePool pool in Pools)
+            {
+                if (!PoolDictionary.ContainsKey(pool.Tag))
+                {
+                    GameObject containerObject = new GameObject(pool.Tag + "Pool");
+                    Queue<GameObject> objectPool = new Queue<GameObject>();
+
+                    for (int i = 0; i < pool.Amount; i++)
+                    {
+                        GameObject obj = Instantiate(pool.Prefab, containerObject.transform);
+                        obj.SetActive(false);
+                        objectPool.Enqueue(obj);
+                    }
+                    PoolDictionary.Add(pool.Tag, objectPool);
+                }
+            }
         }
 
-        GameObject objectToSpawn = PoolDictionary[tag].Dequeue();
-
-        if(objectToSpawn == null)
+        //Spawn an object from the corresponding pool with the given variables
+        public GameObject SpawnFromPool(string tag, Vector2 position, Quaternion rotation)
         {
-            print("object is null");
+            if (!PoolDictionary.ContainsKey(tag))
+            {
+                Debug.LogWarning("Pool with tag " + tag + " doesn't exist.");
+                return null;
+            }
+
+            GameObject objectToSpawn = PoolDictionary[tag].Dequeue();
+
+            if (objectToSpawn == null)
+            {
+                print("object is null");
+            }
+
+            objectToSpawn.SetActive(false);
+            objectToSpawn.SetActive(true);
+
+            objectToSpawn.transform.position = position;
+            objectToSpawn.transform.rotation = rotation;
+
+            PoolDictionary[tag].Enqueue(objectToSpawn);
+
+            return objectToSpawn;
         }
 
-        objectToSpawn.SetActive(false);
-        objectToSpawn.SetActive(true);
+        private void ResetObject(GameObject objectToReset)
+        {
 
-        objectToSpawn.transform.position = position;
-        objectToSpawn.transform.rotation = rotation;
-
-        PoolDictionary[tag].Enqueue(objectToSpawn);
-
-        return objectToSpawn;
-    }
-
-    private void ResetObject(GameObject objectToReset)
-    {
+        }
 
     }
-
 }

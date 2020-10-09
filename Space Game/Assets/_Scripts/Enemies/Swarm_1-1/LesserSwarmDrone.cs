@@ -2,38 +2,41 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LesserSwarmDrone : BaseEnemy
+namespace SpaceGame
 {
-    public Stat FireRate;
-    public Stat ShootDistance;
-    private bool canFire;
-
-    protected override void Awake()
+    public class LesserSwarmDrone : BaseEnemy
     {
-        base.Awake();
-        canFire = true;
-    }
+        public Stat FireRate;
+        public Stat ShootDistance;
+        private bool canFire;
 
-    protected void Update()
-    {
-        Move();
-        Rotate();
-        Fire();
-    }
-
-    private void Fire()
-    {
-        if (canFire && gameManager.PlayerAlive && Vector2.Distance(Player.position, transform.position) <= ShootDistance.GetValue())
+        protected override void Awake()
         {
-            objectPooler.SpawnFromPool("SwarmBullet", transform.position, transform.rotation);
-            canFire = false;
-            StartCoroutine(FireCooldownTimer());
+            base.Awake();
+            canFire = true;
         }
-    }
 
-    private IEnumerator FireCooldownTimer()
-    {
-        yield return new WaitForSeconds(1 / FireRate.GetValue());
-        canFire = true;
+        protected void Update()
+        {
+            Move();
+            Rotate();
+            Fire();
+        }
+
+        private void Fire()
+        {
+            if (canFire && gameManager.PlayerAlive && Vector2.Distance(Player.position, transform.position) <= ShootDistance.GetValue())
+            {
+                objectPooler.SpawnFromPool("SwarmBullet", transform.position, transform.rotation);
+                canFire = false;
+                StartCoroutine(FireCooldownTimer());
+            }
+        }
+
+        private IEnumerator FireCooldownTimer()
+        {
+            yield return new WaitForSeconds(1 / FireRate.GetValue());
+            canFire = true;
+        }
     }
 }

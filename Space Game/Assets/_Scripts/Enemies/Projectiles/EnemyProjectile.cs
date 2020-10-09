@@ -2,42 +2,45 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyProjectile : MonoBehaviour
+namespace SpaceGame
 {
-    public float ProjectileSpeed;
-
-    //TODO:Get Damage from enemy that shoots as Stat
-    public float Damage;
-    public float AliveTime;
-
-    protected virtual void OnEnable()
+    public class EnemyProjectile : MonoBehaviour
     {
-        StartCoroutine(DisableAfterTime());
-    }
+        public float ProjectileSpeed;
 
-    protected virtual void Update()
-    {
-        Move();
-    }
+        //TODO:Get Damage from enemy that shoots as Stat
+        public float Damage;
+        public float AliveTime;
 
-    protected virtual void Move()
-    {
-        transform.position += transform.up * Time.deltaTime * ProjectileSpeed;
-    }
-
-    protected virtual void OnTriggerEnter2D(Collider2D collision)
-    {
-        PlayerEntity player = collision.GetComponent<PlayerEntity>();
-
-        if (player != null)
+        protected virtual void OnEnable()
         {
-            player.OnTakeDamage?.Invoke(Damage);
+            StartCoroutine(DisableAfterTime());
         }
-    }
 
-    public virtual IEnumerator DisableAfterTime()
-    {
-        yield return new WaitForSeconds(AliveTime);
-        gameObject.SetActive(false);
+        protected virtual void Update()
+        {
+            Move();
+        }
+
+        protected virtual void Move()
+        {
+            transform.position += transform.up * Time.deltaTime * ProjectileSpeed;
+        }
+
+        protected virtual void OnTriggerEnter2D(Collider2D collision)
+        {
+            PlayerEntity player = collision.GetComponent<PlayerEntity>();
+
+            if (player != null)
+            {
+                player.OnTakeDamage?.Invoke(Damage);
+            }
+        }
+
+        public virtual IEnumerator DisableAfterTime()
+        {
+            yield return new WaitForSeconds(AliveTime);
+            gameObject.SetActive(false);
+        }
     }
 }

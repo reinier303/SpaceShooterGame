@@ -2,66 +2,69 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerEntity : BaseEntity
+namespace SpaceGame
 {
-    [SerializeField] private GameObject PlayerHitEffect;
-    private bool canHit = true;
-    [SerializeField] private float hitCooldown; 
-
-    protected override void Die()
+    public class PlayerEntity : BaseEntity
     {
-        gameManager.PlayerAlive = false;
-        gameManager.SetSummaryData();
-        gameManager.RPlayer.AddUnitsToTotal();
-        gameManager.RCameraManager.DeathCamera();
-        gameManager.RUIManager.OnPlayerDeathUI();
-        SpawnParticleEffect();
-        cameraManager.StartCoroutine(cameraManager.Shake(ShakeDuration, ShakeMagnitude));
-        gameManager.RPlayer.SavePlayerData();
-        gameObject.SetActive(false);
-    }
+        [SerializeField] private GameObject PlayerHitEffect;
+        private bool canHit = true;
+        [SerializeField] private float hitCooldown;
 
-    public override void TakeDamage(float damage)
-    {
-        if(!canHit)
+        protected override void Die()
         {
-            return;
-        }
-        PlayerHitEffect.SetActive(true);
-        gameManager.RUIManager.StartCoroutine(gameManager.RUIManager.TweenAlpha(gameManager.RUIManager.HitVignette.rectTransform, 
-            gameManager.RUIManager.VignetteDuration, gameManager.RUIManager.AlphaTo, 0));
-        if (!gameManager.PlayerAlive)
-        {
-            return;
-        }
-        StartCoroutine(HitCooldown());
-        base.TakeDamage(damage);
-    }
-
-    protected override void SpawnParticleEffect()
-    {
-        gameManager.StartCoroutine(SpawnDeathEffect());
-    }
-
-    private IEnumerator SpawnDeathEffect()
-    {
-        for (int i = 0; i < 10; i++)
-        {
-            objectPooler.SpawnFromPool("PlayerExplosion", 
-            (Vector2)transform.position + new Vector2(Random.Range(-0.15f, 0.15f), Random.Range(-0.15f, 0.15f)), 
-            Quaternion.identity);
+            gameManager.PlayerAlive = false;
+            gameManager.SetSummaryData();
+            gameManager.RPlayer.AddUnitsToTotal();
+            gameManager.RCameraManager.DeathCamera();
+            gameManager.RUIManager.OnPlayerDeathUI();
+            SpawnParticleEffect();
             cameraManager.StartCoroutine(cameraManager.Shake(ShakeDuration, ShakeMagnitude));
-            yield return new WaitForSeconds(0.2f + Random.Range(-0.05f, 0.15f));
+            gameManager.RPlayer.SavePlayerData();
+            gameObject.SetActive(false);
         }
-        objectPooler.SpawnFromPool("PlayerEndExplosion", (Vector2)transform.position + new Vector2(Random.Range(-0.2f, 0.2f), Random.Range(-0.2f, 0.2f)), Quaternion.identity);
-        cameraManager.StartCoroutine(cameraManager.Shake(ShakeDuration, ShakeMagnitude * 1.5f));
-        SpawnSegments();
-    }
 
-    private IEnumerator HitCooldown()
-    {
-        canHit = false;
-        yield return new WaitForSeconds(hitCooldown);
-        canHit = true;
+        public override void TakeDamage(float damage)
+        {
+            if (!canHit)
+            {
+                return;
+            }
+            PlayerHitEffect.SetActive(true);
+            gameManager.RUIManager.StartCoroutine(gameManager.RUIManager.TweenAlpha(gameManager.RUIManager.HitVignette.rectTransform,
+                gameManager.RUIManager.VignetteDuration, gameManager.RUIManager.AlphaTo, 0));
+            if (!gameManager.PlayerAlive)
+            {
+                return;
+            }
+            StartCoroutine(HitCooldown());
+            base.TakeDamage(damage);
+        }
+
+        protected override void SpawnParticleEffect()
+        {
+            gameManager.StartCoroutine(SpawnDeathEffect());
+        }
+
+        private IEnumerator SpawnDeathEffect()
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                objectPooler.SpawnFromPool("PlayerExplosion",
+                (Vector2)transform.position + new Vector2(Random.Range(-0.15f, 0.15f), Random.Range(-0.15f, 0.15f)),
+                Quaternion.identity);
+                cameraManager.StartCoroutine(cameraManager.Shake(ShakeDuration, ShakeMagnitude));
+                yield return new WaitForSeconds(0.2f + Random.Range(-0.05f, 0.15f));
+            }
+            objectPooler.SpawnFromPool("PlayerEndExplosion", (Vector2)transform.position + new Vector2(Random.Range(-0.2f, 0.2f), Random.Range(-0.2f, 0.2f)), Quaternion.identity);
+            cameraManager.StartCoroutine(cameraManager.Shake(ShakeDuration, ShakeMagnitude * 1.5f));
+            SpawnSegments();
+        }
+
+        private IEnumerator HitCooldown()
+        {
+            canHit = false;
+            yield return new WaitForSeconds(hitCooldown);
+            canHit = true;
+        }
     }
 }

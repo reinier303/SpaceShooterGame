@@ -2,52 +2,55 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DashNode : Node
+namespace SpaceGame
 {
-    private float timer, cooldownTimer;
-
-    private bool onCooldown;
-
-
-    public DashNode(BlackBoard board)
+    public class DashNode : Node
     {
-        blackBoard = board;
-    }
+        private float timer, cooldownTimer;
 
-    public override NodeStates Evaluate()
-    {
-        if(onCooldown)
+        private bool onCooldown;
+
+
+        public DashNode(BlackBoard board)
         {
-            cooldownTimer++;
-            if(cooldownTimer > blackBoard.Cooldown)
+            blackBoard = board;
+        }
+
+        public override NodeStates Evaluate()
+        {
+            if (onCooldown)
+            {
+                cooldownTimer++;
+                if (cooldownTimer > blackBoard.Cooldown)
+                {
+                    return NodeStates.RUNNING;
+                }
+            }
+
+            if (blackBoard.PlayerHit)
+            {
+                blackBoard.PlayerHit = false;
+                return NodeStates.SUCCESS;
+            }
+
+            timer++;
+            DashForward();
+            if (timer >= blackBoard.DashSteps)
+            {
+                timer = 0;
+                onCooldown = true;
+                return NodeStates.FAILURE;
+            }
+            else
             {
                 return NodeStates.RUNNING;
             }
+
         }
 
-        if(blackBoard.PlayerHit)
+        public void DashForward()
         {
-            blackBoard.PlayerHit = false;
-            return NodeStates.SUCCESS;
+            blackBoard.BossEntity.transform.position += blackBoard.BossEntity.transform.up * blackBoard.DashSpeed / 60;
         }
-
-        timer++;
-        DashForward();
-        if (timer >= blackBoard.DashSteps)
-        {
-            timer = 0;
-            onCooldown = true;
-            return NodeStates.FAILURE;
-        }
-        else
-        {
-            return NodeStates.RUNNING;
-        }
-
-    }
-
-    public void DashForward()
-    {
-        blackBoard.BossEntity.transform.position += blackBoard.BossEntity.transform.up * blackBoard.DashSpeed / 60;
     }
 }

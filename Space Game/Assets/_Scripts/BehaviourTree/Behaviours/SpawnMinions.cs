@@ -2,41 +2,44 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnMinions : Node
+namespace SpaceGame
 {
-    private int timesSpawned;
-
-    private float timer;
-
-    public SpawnMinions(BlackBoard board)
+    public class SpawnMinions : Node
     {
-        blackBoard = board;
-    }
+        private int timesSpawned;
 
-    public override NodeStates Evaluate()
-    {
-        if(timesSpawned >= blackBoard.SpawnAmount)
+        private float timer;
+
+        public SpawnMinions(BlackBoard board)
         {
-            //Remove when in behaviour tree/testing only
-            blackBoard.SpawnAmount = 0;
-
-            return NodeStates.FAILURE;
+            blackBoard = board;
         }
-        else
+
+        public override NodeStates Evaluate()
         {
-            timer++;
-            if(timer >= blackBoard.TimeBetweenSpawns * 60)
+            if (timesSpawned >= blackBoard.SpawnAmount)
             {
-                Spawn();
-                timer = 0;
-                timesSpawned++;
-            }
-            return NodeStates.RUNNING;
-        }
-    }
+                //Remove when in behaviour tree/testing only
+                blackBoard.SpawnAmount = 0;
 
-    private void Spawn()
-    {
-        blackBoard.objectPooler.SpawnFromPool("SwarmQueenMinion", blackBoard.BossEntity.transform.position + blackBoard.BossEntity.transform.up * 2.5f, blackBoard.BossEntity.transform.rotation);
+                return NodeStates.FAILURE;
+            }
+            else
+            {
+                timer++;
+                if (timer >= blackBoard.TimeBetweenSpawns * 60)
+                {
+                    Spawn();
+                    timer = 0;
+                    timesSpawned++;
+                }
+                return NodeStates.RUNNING;
+            }
+        }
+
+        private void Spawn()
+        {
+            blackBoard.objectPooler.SpawnFromPool("SwarmQueenMinion", blackBoard.BossEntity.transform.position + blackBoard.BossEntity.transform.up * 2.5f, blackBoard.BossEntity.transform.rotation);
+        }
     }
 }

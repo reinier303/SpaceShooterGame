@@ -3582,6 +3582,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 692017883}
+  - component: {fileID: 692017891}
   - component: {fileID: 692017882}
   - component: {fileID: 692017888}
   - component: {fileID: 692017889}
@@ -3699,7 +3700,7 @@ MonoBehaviour:
   ShakeDuration: 0.5
   HitSound: 
   DeathSound: 
-  ParticleEffect: SwarmExplosionBase
+  ParticleEffect: 
   ParticleEffectScale: 1
   PermanenceSprites:
   - {fileID: -5977388703987902484, guid: a2a8f53f49c429549b3663ca21ddb49d, type: 3}
@@ -3845,6 +3846,24 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &692017891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 692017881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cac871632dc4195498d1576ffe9e3991, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BoostButton: 0
+  PauseButton: 0
+  UpButton: 263
+  DownButton: 0
+  LeftButton: 0
+  RightButton: 0
 --- !u!1 &705472984
 GameObject:
   m_ObjectHideFlags: 0
@@ -27115,7 +27134,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!50 &7602753367077112590
 Rigidbody2D:
   serializedVersion: 4

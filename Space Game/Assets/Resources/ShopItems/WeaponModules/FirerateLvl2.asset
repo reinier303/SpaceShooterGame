@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b11a3cb87c31fa140ada73f351b43f3f, type: 3}
-  m_Name: ProjectileCountLvl3
+  m_Name: FirerateLvl2
   m_EditorClassIdentifier: 
-  ID: 0
-  ShopIcon: {fileID: 21300000, guid: fde605a87f0f9b74ebd094a72f14a1c6, type: 3}
-  ShopItemName: Projectile Count Lvl 3
+  ID: 8
+  IDSet: 1
+  ShopIcon: {fileID: 21300000, guid: 51b07bd03fb03cc4c96c23ca6d84f695, type: 3}
+  ShopItemName: Firerate Lvl 2
   Description: -Name- increases the max amount of points you can put into this upgrade
     to -MaxLevel-.
-  ModuleToUnlock: {fileID: 11400000, guid: 99b71ea77922825409b64e70252f5e6f, type: 2}
-  Cost: 7500
-  MaxLvl: 9
+  ModuleToUnlock: {fileID: 11400000, guid: a6ea3741a541a2c4eb98a51244a69d0d, type: 2}
+  Cost: 500
+  MaxLvl: 8

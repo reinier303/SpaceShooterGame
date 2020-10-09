@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b11a3cb87c31fa140ada73f351b43f3f, type: 3}
   m_Name: DamageLvl1
   m_EditorClassIdentifier: 
-  ID: 0
+  ID: 4
+  IDSet: 1
   ShopIcon: {fileID: 21300000, guid: 20c122f1ed905f648ba310f12959e217, type: 3}
   ShopItemName: Damage Lvl 1
   Description: '-Name- unlocks the ability to upgrade your damage in the hangar.

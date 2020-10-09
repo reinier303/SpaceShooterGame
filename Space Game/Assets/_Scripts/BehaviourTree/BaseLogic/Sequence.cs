@@ -2,41 +2,44 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sequence : Node
+namespace SpaceGame
 {
-    //Children nodes that belong to this sequence
-    private Node[] m_nodes;
-
-    //Must provide an initial set of children nodes to work
-    public Sequence(params Node[] nodes)
+    public class Sequence : Node
     {
-        m_nodes = nodes;
-    }
+        //Children nodes that belong to this sequence
+        private Node[] m_nodes;
 
-    /* If any child node returns a failure, the entire node fails. Whence all  
-       nodes return a success, the node reports a success. */
-    public override NodeStates Evaluate()
-    {
-        bool anyChildRunning = false;
-
-        foreach (Node node in m_nodes)
+        //Must provide an initial set of children nodes to work
+        public Sequence(params Node[] nodes)
         {
-            switch (node.Evaluate())
-            {
-                case NodeStates.FAILURE:
-                    m_nodeState = NodeStates.FAILURE;
-                    return m_nodeState;
-                case NodeStates.SUCCESS:
-                    continue;
-                case NodeStates.RUNNING:
-                    anyChildRunning = true;
-                    continue;
-                default:
-                    m_nodeState = NodeStates.SUCCESS;
-                    return m_nodeState;
-            }
+            m_nodes = nodes;
         }
-        m_nodeState = anyChildRunning ? NodeStates.RUNNING : NodeStates.SUCCESS;
-        return m_nodeState;
+
+        /* If any child node returns a failure, the entire node fails. Whence all  
+           nodes return a success, the node reports a success. */
+        public override NodeStates Evaluate()
+        {
+            bool anyChildRunning = false;
+
+            foreach (Node node in m_nodes)
+            {
+                switch (node.Evaluate())
+                {
+                    case NodeStates.FAILURE:
+                        m_nodeState = NodeStates.FAILURE;
+                        return m_nodeState;
+                    case NodeStates.SUCCESS:
+                        continue;
+                    case NodeStates.RUNNING:
+                        anyChildRunning = true;
+                        continue;
+                    default:
+                        m_nodeState = NodeStates.SUCCESS;
+                        return m_nodeState;
+                }
+            }
+            m_nodeState = anyChildRunning ? NodeStates.RUNNING : NodeStates.SUCCESS;
+            return m_nodeState;
+        }
     }
 }
