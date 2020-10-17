@@ -53,7 +53,13 @@ namespace SpaceGame
             data.TotalUnits = 0;
             data.Units = 0;
 
-            data.ExperienceNeeded = GameManager.Instance.RPlayer.ExperienceNeeded;
+            Player player = GameManager.Instance.RPlayer;
+            data.PlayerModules = new Dictionary<string, ModuleData>();
+            foreach(PlayerModule module in player.playerBaseModules)
+            {
+                data.PlayerModules.Add(module.StatName, module.GetModuleData());
+            }
+            data.ExperienceNeeded = player.ExperienceNeeded;
             data.CurrentExperience = 0;
             data.CurrentPoints = 0;
 

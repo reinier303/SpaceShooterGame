@@ -14,8 +14,10 @@ namespace SpaceGame
         public TMP_Text PlayerLevelText;
         public TMP_Text WeaponLevelText;
         public TMP_Text WaveEnterText;
+        public TMP_Text BossEnterText;
 
-        private CanvasGroup WaveEnterCanvasGroup;
+        private CanvasGroup waveEnterCanvasGroup;
+        private CanvasGroup bossEnterCanvasGroup;
 
         public Slider WeaponExperience;
         public Slider PlayerExperience;
@@ -57,7 +59,7 @@ namespace SpaceGame
             RPlayer = gameManager.RPlayer;
             RPlayerEntity = RPlayer.RPlayerEntity;
 
-            WaveEnterCanvasGroup = WaveEnterText.GetComponent<CanvasGroup>();
+            waveEnterCanvasGroup = WaveEnterText.GetComponent<CanvasGroup>();
         }
         private void Start()
         {
@@ -154,9 +156,19 @@ namespace SpaceGame
             WaveEnterText.text = "<size=50>Now entering</size>\n" + waveName;
             WaveEnterText.color = textColor;
             WaveEnterText.material = textMaterial;
-            LeanTween.alphaCanvas(WaveEnterCanvasGroup, AlphaToWave, WaveTextDuration / 2).setEase(EaseTypeWave);
+            LeanTween.alphaCanvas(waveEnterCanvasGroup, AlphaToWave, WaveTextDuration / 2).setEase(EaseTypeWave);
             yield return new WaitForSeconds(WaveTextDuration);
-            LeanTween.alphaCanvas(WaveEnterCanvasGroup, 0, WaveTextDuration / 2).setEase(EaseTypeWave);
+            LeanTween.alphaCanvas(waveEnterCanvasGroup, 0, WaveTextDuration / 2).setEase(EaseTypeWave);
+        }
+
+        public IEnumerator ShowBossText(string bossText, Color textColor, Material textMaterial)
+        {
+            BossEnterText.text = bossText;
+            BossEnterText.color = textColor;
+            BossEnterText.material = textMaterial;
+            LeanTween.alphaCanvas(bossEnterCanvasGroup, AlphaToWave, WaveTextDuration / 2).setEase(EaseTypeWave);
+            yield return new WaitForSeconds(WaveTextDuration);
+            LeanTween.alphaCanvas(bossEnterCanvasGroup, 0, WaveTextDuration / 2).setEase(EaseTypeWave);
         }
 
         public IEnumerator TweenAlpha(RectTransform rectTransform, float duration, float alphaTo, float alphaFrom)

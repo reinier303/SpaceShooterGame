@@ -20,7 +20,10 @@ namespace SpaceGame
         public int SpawnAmount;
 
         [Header("DashVariables")]
-        public float DashHaltTime, DashDuration, ChargeUpTime, DashMovementMultiplier;
+        public float DashHaltTime;
+        public float DashDuration;
+        public float ChargeUpTime;
+        public float DashMovementMultiplier;
         public int DashAmount;
 
         [Header("SecondPhaseVariables")]

@@ -7,17 +7,32 @@ namespace SpaceGame
     public class InputManager : MonoBehaviour
     {
         private GameManager gameManager;
-
-        public KeyCode BoostButton;
+        [Header("General")]
         public KeyCode PauseButton;
+        public KeyCode PauseButton2;
+
+        [Header("Movement")]
+        public KeyCode BoostButton;
+        public KeyCode BoostButton2;
         public KeyCode UpButton;
+        public KeyCode UpButton2;
         public KeyCode DownButton;
+        public KeyCode DownButton2;
         public KeyCode LeftButton;
+        public KeyCode LeftButton2;
         public KeyCode RightButton;
+        public KeyCode RightButton2;
+
+        private float axisX;
+        private float axisY;
+
+        private bool boosting;
+        private float boost;
 
         private void Start()
         {
             gameManager = GameManager.Instance;
+            boost = 1;
         }
 
         private void Update()
@@ -27,7 +42,7 @@ namespace SpaceGame
 
         private void PauseInput()
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(PauseButton) || Input.GetKeyDown(PauseButton2))
             {
                 if (Time.timeScale == 1)
                 {
@@ -40,31 +55,98 @@ namespace SpaceGame
             }
         }
 
-        public float GetAxisSmoothHorizontal(float acceleration, float deceleration)
+
+        public float GetAxisSmoothHorizontal(float speed, float acceleration, float deceleration, float boostSpeed)
         {
-            float axis = 0;
+            boost = Boost(boostSpeed);
 
             //Right button input
-            if(Input.GetKey(RightButton))
+            if (Input.GetKey(RightButton) || Input.GetKey(RightButton2))
             {
-                axis = Mathf.Clamp01(axis + acceleration * Time.deltaTime);
+                axisX += acceleration * boost * Time.deltaTime;
+                if (axisX > speed * boost)
+                {
+                    axisX = speed * boost;
+                }
             }
-            else
+            else if(axisX > 0)
             {
-                axis = Mathf.Clamp01(axis - deceleration * Time.deltaTime);
+                axisX -= deceleration * boost * Time.deltaTime;
             }
 
             //Left button input
-            if (Input.GetKey(LeftButton))
+            if (Input.GetKey(LeftButton) || Input.GetKey(LeftButton2))
             {
-                axis = (Mathf.Clamp01(axis + acceleration * Time.deltaTime)) * -1;
+                axisX -= acceleration * boost * Time.deltaTime;
+                if (axisX < -speed * boost)
+                {
+                    axisX = -speed * boost;
+                }
+            }
+            else if (axisX < 0)
+            {
+                axisX += deceleration * boost * Time.deltaTime;
+            }
+            return axisX;
+        }
+
+
+        public float GetAxisSmoothVertical(float speed, float acceleration, float deceleration, float boostSpeed)
+        {
+            boost = Boost(boostSpeed);
+
+            //Right button input
+            if (Input.GetKey(UpButton) || Input.GetKey(UpButton2))
+            {
+                axisY += acceleration * boost * Time.deltaTime;
+                if (axisY > speed * boost)
+                {
+                    axisY = speed * boost;
+                }
+            }
+            else if (axisY > 0)
+            {
+                axisY -= deceleration * boost * Time.deltaTime;
+            }
+
+            //Left button input
+            if (Input.GetKey(DownButton) || Input.GetKey(DownButton2))
+            {
+                axisY -= acceleration * boost * Time.deltaTime;
+                if (axisY < -speed * boost)
+                {
+                    axisY = -speed * boost;
+                }
+            }
+            else if (axisY < 0)
+            {
+                axisY += deceleration * boost * Time.deltaTime;
+            }
+
+            return axisY;
+        }
+
+        public float Boost(float boostSpeed)
+        {
+            if(boost <= boostSpeed && Input.GetKey(BoostButton) || Input.GetKey(BoostButton2))
+            {
+                boosting = true;
             }
             else
             {
-                axis = (Mathf.Clamp01(axis - deceleration * Time.deltaTime)) * -1;
+                boosting = false;
             }
-            return axis;
+            if(boosting)
+            {
+                boost += boostSpeed * Time.deltaTime / 10;
+            }
+            else if (boost > 1)
+            {
+                boost -= boostSpeed * Time.deltaTime / 10;
+
+            }
+            return boost;
         }
-}
+    }
 }
 

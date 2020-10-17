@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: add544d89a3029d459b4ae76fc828bea, type: 3}
-  m_Name: BoostRegeneration
+  m_Name: BoostSpeed
   m_EditorClassIdentifier: 
   ID: 0
-  StatName: Boost Regeneration
+  StatName: Boost Speed
   stat:
-    statName: 
-    baseValue: 0
-    multiplier: 0
+    statName: Boost Speed
+    baseValue: 1
+    multiplier: 1
   PointsSpent: 0
   PointValue: 1
   PointCost: 2

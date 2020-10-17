@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: MagnetRadius
   m_EditorClassIdentifier: 
   ID: 0
-  StatName: Magnet Radius
+  StatName: MagnetRadius
   stat:
-    statName: 
-    baseValue: 0
-    multiplier: 0
+    statName: MagnetRadius
+    baseValue: 2
+    multiplier: 1
   PointsSpent: 0
-  PointValue: 1
-  PointCost: 2
+  PointValue: 0.4
+  PointCost: 1
   MaxPoints: 0

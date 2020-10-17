@@ -27,7 +27,7 @@ namespace SpaceGame
         {
             if (canFire && gameManager.PlayerAlive && Vector2.Distance(Player.position, transform.position) <= ShootDistance.GetValue())
             {
-                objectPooler.SpawnFromPool("SwarmBullet", transform.position, transform.rotation);
+                objectPooler.SpawnFromPool("SwarmBullet", transform.position + transform.up * 1.6f, transform.rotation);
                 canFire = false;
                 StartCoroutine(FireCooldownTimer());
             }

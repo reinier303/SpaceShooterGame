@@ -15,6 +15,8 @@ namespace SpaceGame
         public bool dashing;
 
         public Sprite BossIcon;
+        [TextArea(2,3)]
+        public string BossEnterText;
 
         protected override void Start()
         {

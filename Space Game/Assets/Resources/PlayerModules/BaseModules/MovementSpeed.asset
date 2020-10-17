@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: MovementSpeed
   m_EditorClassIdentifier: 
   ID: 0
-  StatName: Movement Speed
+  StatName: MovementSpeed
   stat:
-    statName: 
-    baseValue: 0
-    multiplier: 0
+    statName: MovementSpeed
+    baseValue: 4
+    multiplier: 1
   PointsSpent: 0
-  PointValue: 1
+  PointValue: 0.4
   PointCost: 2
   MaxPoints: 0

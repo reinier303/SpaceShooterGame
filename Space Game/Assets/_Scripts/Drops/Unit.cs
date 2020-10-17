@@ -17,11 +17,14 @@ namespace SpaceGame
         private Player playerScript;
         private ObjectPooler objectPooler;
 
+        private float magnetRadius;
+
         protected virtual void Awake()
         {
             playerScript = GameManager.Instance.RPlayer;
             player = playerScript.transform;
             objectPooler = ObjectPooler.Instance;
+            magnetRadius = playerScript.Data.PlayerModules["MagnetRadius"].GetStatValue();
         }
 
         protected virtual void OnEnable()
@@ -31,9 +34,9 @@ namespace SpaceGame
 
         protected virtual void Update()
         {
-            if (Vector2.Distance(transform.position, player.transform.position) < 2f)
+            if (Vector2.Distance(transform.position, player.transform.position) < magnetRadius)
             {
-                transform.position = Vector2.MoveTowards(transform.position, player.transform.position, Time.deltaTime * 1.5f);
+                transform.position = Vector2.MoveTowards(transform.position, player.transform.position, Time.deltaTime * (magnetRadius * 0.75f));
             }
         }
 

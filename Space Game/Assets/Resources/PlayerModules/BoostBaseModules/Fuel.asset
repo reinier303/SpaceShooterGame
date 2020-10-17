@@ -15,9 +15,9 @@ MonoBehaviour:
   ID: 0
   StatName: Fuel
   stat:
-    statName: 
-    baseValue: 0
-    multiplier: 0
+    statName: Fuel
+    baseValue: 10
+    multiplier: 1
   PointsSpent: 0
   PointValue: 1
   PointCost: 2

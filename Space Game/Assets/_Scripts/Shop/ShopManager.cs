@@ -110,6 +110,21 @@ namespace SpaceGame
             SaveUnlockedItems();
         }
 
+        public void UnlockPlayerModule(PlayerModule module, int maxPoints)
+        {
+            if (!Data.PlayerModules.ContainsKey(module.StatName))
+            {
+                Data.PlayerModules.Add(module.StatName, module.GetModuleData());
+            }
+            else if (maxPoints > Data.PlayerModules[module.StatName].MaxPoints)
+            {
+                Data.PlayerModules[module.StatName].MaxPoints = maxPoints;
+            }
+
+            RefreshWeapons();
+            SaveWeapons();
+        }
+
         public void SaveUnlockedItems()
         {
             SaveLoad.Save(ShopItemsUnlocked, "ShopItemsUnlocked.sav");

@@ -25,6 +25,8 @@ namespace SpaceGame
         public float ExperienceNeeded;
         public float PointsPerLevel;
 
+        public List<PlayerModule> playerBaseModules;
+
         private void Awake()
         {
             GetSaveData();
@@ -35,6 +37,8 @@ namespace SpaceGame
             RUIManager = GameManager.Instance.RUIManager;
 
             StartWeapon = (Weapon)Resources.Load("Weapons/Bullet/Bullets", typeof(Weapon));
+            Debug.Log(Data.PlayerModules);
+
         }
 
         private void GetSaveData()
@@ -47,6 +51,8 @@ namespace SpaceGame
             {
                 SaveLoad.NewSave();
                 Data = SaveLoad.Load<PlayerData>("PlayerData.sav");
+                Debug.Log(Data.PlayerModules);
+
             }
         }
 
@@ -124,7 +130,7 @@ namespace SpaceGame
     {
         public List<WeaponData> Weapons;
 
-        public List<PlayerModule> PlayerModules;
+        public Dictionary<string, ModuleData> PlayerModules;
         public float CurrentExperience;
         public float ExperienceNeeded;
         public float CurrentPoints;

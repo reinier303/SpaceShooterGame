@@ -18,12 +18,20 @@ namespace SpaceGame
         [Header("Replaces -Name- with ShopItemName and -MaxLevel- with MaxLvl")]
         public string Description;
         public WeaponModule ModuleToUnlock;
+        public PlayerModule PlayerModule;
         public float Cost;
         public int MaxLvl;
 
-        public void UnlockModule()
+        public virtual void UnlockModule()
         {
-            ModuleToUnlock.Weapon.AddModuleShop(ModuleToUnlock, MaxLvl);
+            if(ModuleToUnlock != null)
+            {
+                ModuleToUnlock.Weapon.AddModuleShop(ModuleToUnlock, MaxLvl);
+            }
+            else if(PlayerModule != null)
+            {
+                ShopManager.Instance.UnlockPlayerModule(PlayerModule, MaxLvl);
+            }
         }
     }
 }
