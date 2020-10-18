@@ -16,7 +16,7 @@ namespace SpaceGame
         {
             loadingScreen.SetActive(true);
 
-            yield return new WaitForSecondsRealtime(1.75f);
+            yield return new WaitForSecondsRealtime(3f);
 
             AsyncOperation operation = SceneManager.LoadSceneAsync(scene);
 
