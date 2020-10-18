@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using TMPro;
 using System.Linq;
 
@@ -26,6 +25,8 @@ namespace SpaceGame
         public Dictionary<string, WeaponData> Weapons = new Dictionary<string, WeaponData>();
 
         private List<int> ShopItemsUnlocked = new List<int>();
+
+        public GameObject LoadingScreen;
 
         private void Awake()
         {
@@ -99,9 +100,9 @@ namespace SpaceGame
         }
 
         //TODO:Loading screen and helper loadscene method instead of here
-        public void LoadSceneAsync(int scene)
+        public void LoadScene(int scene)
         {
-            SceneManager.LoadSceneAsync(scene);
+            ExtensionMethods.LoadSceneWithLoadingScreen(scene, LoadingScreen, this);
         }
 
         public void ItemBought(ScriptableShopItem item)

@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneLoader : MonoBehaviour
+namespace SpaceGame
 {
-    public int sceneToLoad;
-    private void OnEnable()
+    public class SceneLoader : MonoBehaviour
     {
-        //TODO:LoadingScreen
-        SceneManager.LoadSceneAsync(sceneToLoad);
+        public int SceneToLoad;
+        public GameObject LoadingScreen;
+
+        private void OnEnable()
+        {
+            ExtensionMethods.LoadSceneWithLoadingScreen(SceneToLoad, LoadingScreen, this);
+        }
     }
+
 }

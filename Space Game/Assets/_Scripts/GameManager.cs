@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace SpaceGame
 {
@@ -29,6 +28,8 @@ namespace SpaceGame
 
         public bool PlayerAlive;
         public bool BossAlive;
+
+        public GameObject LoadingScreen;
 
         //Curren Run Data
         private float runTime;
@@ -78,7 +79,7 @@ namespace SpaceGame
         //TODO:Loading screen and helper loadscene method instead of here
         public void LoadSceneAsync(int scene)
         {
-            SceneManager.LoadSceneAsync(scene);
+            ExtensionMethods.LoadSceneWithLoadingScreen(scene, LoadingScreen, this);
         }
 
         public void PauseGame()
