@@ -28,6 +28,7 @@ namespace SpaceGame
             {
                 MoveToNextSongRoundRobin();
             }
+            StartCoroutine(CheckIfPlaying());
         }
 
         public void AddAudio(string name, float duration)
@@ -78,12 +79,25 @@ namespace SpaceGame
             musicSource.clip = nextSong;
             musicSource.Play();
 
-            StartCoroutine(WaitForNextSong());
+            //StartCoroutine(WaitForNextSong());
+        }
+
+        private IEnumerator CheckIfPlaying()
+        {
+            Debug.Log(musicSource.clip.length);
+
+            if (!musicSource.isPlaying)
+            {
+                MoveToNextSongRoundRobin();
+            }
+            yield return new WaitForSecondsRealtime(1);
+            StartCoroutine(CheckIfPlaying());
         }
 
         private IEnumerator WaitForNextSong()
         {
-            yield return new WaitForSecondsRealtime(musicSource.clip.length);
+            Debug.Log(musicSource.clip.length);
+            yield return new WaitForSeconds(musicSource.clip.length);
             MoveToNextSongRoundRobin();
         }
 
