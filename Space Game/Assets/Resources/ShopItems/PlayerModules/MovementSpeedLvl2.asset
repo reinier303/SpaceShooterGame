@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b11a3cb87c31fa140ada73f351b43f3f, type: 3}
   m_Name: MovementSpeedLvl2
   m_EditorClassIdentifier: 
-  ID: 0
-  IDSet: 0
+  ID: 4
+  IDSet: 1
   ShopIcon: {fileID: 21300000, guid: 70808ab901a520a4ea015343105bfd01, type: 3}
   ShopItemName: Movement Speed Lvl 2
   Description: 
   ModuleToUnlock: {fileID: 0}
   PlayerModule: {fileID: 11400000, guid: c30562f1d8221fd418ab71aa2264484d, type: 2}
+  PlayerModulesToUnlock: []
   Cost: 500
   MaxLvl: 7

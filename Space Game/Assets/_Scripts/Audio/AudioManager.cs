@@ -14,11 +14,20 @@ namespace SpaceGame
 
         private AudioSource musicSource;
 
+        public bool RandomAudioEnabled;
+
+        public float regularMusicVolume;
+        public float pausedMusicVolume;
+
         private void Awake()
         {
             Instance = this;
             musicSource = GetComponent<AudioSource>();
-            MoveToNextSongRoundRobin();
+            musicSource.volume = regularMusicVolume;
+            if (RandomAudioEnabled)
+            {
+                MoveToNextSongRoundRobin();
+            }
         }
 
         public void AddAudio(string name, float duration)
@@ -59,7 +68,7 @@ namespace SpaceGame
                 musicPlayed.Clear();
             }
 
-            //select random move from the move list
+            //select random song from the move list
             AudioClip nextSong = MusicTracks[Random.Range(0, MusicTracks.Count)];
 
             //remove the next state from moves and add it to moves performed to make sure all moves will be performed in a random order.
@@ -68,6 +77,39 @@ namespace SpaceGame
 
             musicSource.clip = nextSong;
             musicSource.Play();
+
+            StartCoroutine(WaitForNextSong());
+        }
+
+        private IEnumerator WaitForNextSong()
+        {
+            yield return new WaitForSecondsRealtime(musicSource.clip.length);
+            MoveToNextSongRoundRobin();
+        }
+
+        public void AdjustMusicVolumePaused()
+        {
+            if(Time.timeScale == 0)
+            {
+                StartCoroutine(lerpVolume(musicSource.volume, pausedMusicVolume, 0.2f));
+            }
+            else
+            {
+                StartCoroutine(lerpVolume(musicSource.volume, regularMusicVolume, 0.2f));
+            }
+        }
+
+        private IEnumerator lerpVolume(float StartValue, float EndValue, float LerpTime)
+        {
+            float difference = StartValue - EndValue;
+            for (int i = 0; i < 20; i++)
+            {
+                musicSource.volume -= difference / 20;
+
+                yield return new WaitForSecondsRealtime(LerpTime/ 20);
+            }
+
+            musicSource.volume = EndValue;
         }
     }
 

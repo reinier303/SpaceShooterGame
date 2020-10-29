@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace SpaceGame
@@ -12,6 +13,8 @@ namespace SpaceGame
         public float BaseSpeed;
         public float Acceleration;
         public float Deceleration;
+        public float Fuel;
+        public float BoostRegen;
 
         private float currentSpeed;
 
@@ -27,10 +30,14 @@ namespace SpaceGame
 
         private Dictionary<string, ModuleData> playerModules;
 
+        public PolygonCollider2D BackgroundCollider;
+        private Vector2 backGroundSize;
+
         private void Awake()
         {
             cam = Camera.main;
             Stay = false;
+            backGroundSize = BackgroundCollider.transform.localScale * 14.5f;
         }
 
         private void Start()
@@ -39,13 +46,39 @@ namespace SpaceGame
             player = gameManager.RPlayer;
             inputManager = gameManager.RInputManager;
             playerModules = player.Data.PlayerModules;
-            BaseSpeed = playerModules["MovementSpeed"].GetStatValue();
+            GetMovementVariables();
             currentSpeed = BaseSpeed;
+            GetBoostVariables();
+        }
+
+        private void GetMovementVariables()
+        {
+            if (playerModules.ContainsKey("MovementSpeed"))
+            {
+                BoostSpeed = playerModules["MovementSpeed"].GetStatValue();
+                Acceleration = playerModules["Acceleration"].GetStatValue();
+                Deceleration = Acceleration * 0.8f;
+
+            }
+        }
+
+        private void GetBoostVariables()
+        {
+            if (playerModules.ContainsKey("BoostSpeed"))
+            {
+                BoostSpeed = playerModules["BoostSpeed"].GetStatValue();
+                BoostRegen = playerModules["BoostRegen"].GetStatValue();
+                Fuel = playerModules["Fuel"].GetStatValue();
+            }
         }
 
         // Update is called once per frame
         private void Update()
         {
+            if(Time.timeScale == 0)
+            {
+                return;
+            }
             Move();
             Rotate();
         }
@@ -58,6 +91,7 @@ namespace SpaceGame
             Vector3 input = new Vector3(axisX, axisY, 0) * currentSpeed * Time.deltaTime;
 
             transform.position += input;
+
         }
 
         #region MouseMovement

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b11a3cb87c31fa140ada73f351b43f3f, type: 3}
   m_Name: AliveTimeLvl2
   m_EditorClassIdentifier: 
-  ID: 2
+  ID: 8
   IDSet: 1
   ShopIcon: {fileID: 8536487650082518270, guid: e665cd6447b483045b247d4d2e18537c,
     type: 3}
@@ -20,5 +20,7 @@ MonoBehaviour:
   Description: -Name- increases the max amount of points you can put into this upgrade
     to -MaxLevel-.
   ModuleToUnlock: {fileID: 11400000, guid: fa2a45631c7771442b9831d83c6dc7ed, type: 2}
+  PlayerModule: {fileID: 0}
+  PlayerModulesToUnlock: []
   Cost: 350
   MaxLvl: 12

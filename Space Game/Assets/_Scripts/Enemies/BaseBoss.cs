@@ -15,8 +15,18 @@ namespace SpaceGame
         public bool dashing;
 
         public Sprite BossIcon;
+        [Header("BossSpawnTextVariables")]
         [TextArea(2,3)]
         public string BossEnterText;
+        public Color TextColor;
+        public Material TextMaterial;
+        private AudioSource audioSource;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            audioSource = GetComponent<AudioSource>();
+        }
 
         protected override void Start()
         {
@@ -29,10 +39,22 @@ namespace SpaceGame
             Rotate();
         }
 
+        protected override void Die()
+        {
+            base.Die();
+            gameManager.RUIManager.DisableBossBar();
+        }
+
         protected override void OnEnable()
         {
+            if(isInitialized)
+            {
+                audioSource.Play();
+                ReduceSpawns();
+                gameManager.StartCoroutine(gameManager.RUIManager.ShowBossText(BossEnterText, TextColor, TextMaterial));
+                gameManager.RUIManager.InitializeBossBar(MaxHealth.GetValue(), BossIcon);
+            }
             base.OnEnable();
-            ReduceSpawns();
         }
 
         protected override void UpdateRunData()
@@ -86,6 +108,12 @@ namespace SpaceGame
             gameManager.RWaveManager.BossArrowScript.gameObject.SetActive(true);
         }
 
+        public override void TakeDamage(float damage)
+        {
+            base.TakeDamage(damage);
+            gameManager.RUIManager.UpdateBossHealth(currentHealth);
+        }
+
         #region MoveToNextStateMethods
 
         public virtual void MoveToNextStateRandom()
@@ -96,8 +124,6 @@ namespace SpaceGame
 
         public virtual void MoveToNextStateRoundRobin()
         {
-            Debug.Log(moves.Count + ", p:" + movesPerformed.Count);
-
             //If all moves have been performed refill the moves list
             if (moves.Count == 0)
             {

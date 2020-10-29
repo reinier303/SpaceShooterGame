@@ -28,6 +28,7 @@ namespace SpaceGame
 
         public bool PlayerAlive;
         public bool BossAlive;
+        private bool sleeping;
 
         public GameObject LoadingScreen;
 
@@ -71,9 +72,19 @@ namespace SpaceGame
 
         public IEnumerator Sleep(float seconds)
         {
+            if (sleeping)
+            {
+                yield break;
+            }
+
             Time.timeScale = 0;
+            sleeping = true;
             yield return new WaitForSecondsRealtime(seconds);
             Time.timeScale = 1;
+
+            //Make sure multiple sleeps cant happen in sequence which caused the game to seem laggy
+            yield return new WaitForSeconds(0.2f);
+            sleeping = false;
         }
 
         //TODO:Loading screen and helper loadscene method instead of here
@@ -85,12 +96,14 @@ namespace SpaceGame
         public void PauseGame()
         {
             Time.timeScale = 0;
+            RAudioManager.AdjustMusicVolumePaused();
             RUIManager.OpenPauseMenu();
         }
 
         public void UnpauseGame()
         {
             Time.timeScale = 1;
+            RAudioManager.AdjustMusicVolumePaused();
             RUIManager.ClosePauseMenu();
         }
 

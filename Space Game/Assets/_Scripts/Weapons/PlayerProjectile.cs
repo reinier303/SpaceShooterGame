@@ -31,9 +31,9 @@ namespace SpaceGame
         protected virtual void OnTriggerEnter2D(Collider2D collider)
         {
             BaseEntity entity = collider.GetComponent<BaseEntity>();
-            if (entity != null)
+            if (entity != null && !entity.isDead)
             {
-                gameManager.StartCoroutine(gameManager.Sleep(0.015f));
+                //gameManager.StartCoroutine(gameManager.Sleep(0.001f));
                 entity.OnTakeDamage?.Invoke(Modules["Damage"].GetStatValue());
                 objectPooler.SpawnFromPool(OnHitEffectName, transform.position, Quaternion.identity);
                 gameObject.SetActive(false);

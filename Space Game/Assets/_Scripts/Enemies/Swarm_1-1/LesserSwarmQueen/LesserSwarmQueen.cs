@@ -78,13 +78,13 @@ namespace SpaceGame
                     explosion = "SwarmExplosionBase";
                 }
                 GameObject Explosion = objectPooler.SpawnFromPool(explosion,
-                (Vector2)transform.position + new Vector2(Random.Range(-1.5f, 1.5f), Random.Range(-1.5f, 1.5f)),
+                (Vector2)transform.position + new Vector2(Random.Range(-0.75f, 0.75f), Random.Range(-0.75f, 0.75f)),
                 Quaternion.identity);
                 cameraManager.StartCoroutine(cameraManager.Shake(ShakeDuration, ShakeMagnitude));
                 Explosion.transform.localScale *= Random.Range(0.65f, 1.15f);
                 yield return new WaitForSeconds(0.1f + Random.Range(-0.05f, 0.1f));
             }
-            objectPooler.SpawnFromPool("SwarmBossEndExplosion", (Vector2)transform.position + new Vector2(Random.Range(-0.2f, 0.2f), Random.Range(-0.2f, 0.2f)), Quaternion.identity);
+            objectPooler.SpawnFromPool("SwarmBossEndExplosion", (Vector2)transform.position + new Vector2(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f)), Quaternion.identity);
             cameraManager.StartCoroutine(cameraManager.Shake(ShakeDuration * 1.5f, ShakeMagnitude * 1.5f));
             SpawnSegments();
         }

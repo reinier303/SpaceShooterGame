@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b11a3cb87c31fa140ada73f351b43f3f, type: 3}
   m_Name: ProjectileSpeedLvl1
   m_EditorClassIdentifier: 
-  ID: 13
+  ID: 19
   IDSet: 1
   ShopIcon: {fileID: -2618548417645067749, guid: a2a8f53f49c429549b3663ca21ddb49d,
     type: 3}
@@ -22,5 +22,7 @@ MonoBehaviour:
 
     the max amount of points you can put in starts at -MaxLevel-.'
   ModuleToUnlock: {fileID: 11400000, guid: 6d0d3d33745f3cd49b3906147bf878b5, type: 2}
+  PlayerModule: {fileID: 0}
+  PlayerModulesToUnlock: []
   Cost: 20
   MaxLvl: 5

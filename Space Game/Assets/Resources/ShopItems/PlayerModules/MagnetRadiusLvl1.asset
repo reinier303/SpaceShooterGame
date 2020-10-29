@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: MagnetRadiusLvl1
   m_EditorClassIdentifier: 
   ID: 0
-  IDSet: 0
+  IDSet: 1
   ShopIcon: {fileID: 21300000, guid: 70808ab901a520a4ea015343105bfd01, type: 3}
   ShopItemName: Magnet Radius Lvl 1
   Description: 
   ModuleToUnlock: {fileID: 0}
   PlayerModule: {fileID: 11400000, guid: 524d864b4056bd043a5736aff0ab686c, type: 2}
+  PlayerModulesToUnlock: []
   Cost: 40
   MaxLvl: 4

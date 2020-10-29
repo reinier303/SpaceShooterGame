@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System.Security.Policy;
 
 namespace SpaceGame
 {
@@ -27,6 +28,7 @@ namespace SpaceGame
         public GameObject PauseMenu;
 
         public Image HitVignette;
+        public Image BossIcon;
 
         [Header("BounceTweenValues")]
         public float BounceTime;
@@ -60,6 +62,7 @@ namespace SpaceGame
             RPlayerEntity = RPlayer.RPlayerEntity;
 
             waveEnterCanvasGroup = WaveEnterText.GetComponent<CanvasGroup>();
+            bossEnterCanvasGroup = BossEnterText.GetComponent<CanvasGroup>();
         }
         private void Start()
         {
@@ -128,6 +131,11 @@ namespace SpaceGame
             PlayerLevelText.text = "" + level;
         }
 
+        public void UpdateBossHealth(float health)
+        {
+            WaveProgressBar.value = health;
+        }
+
         private IEnumerator BounceSizeTween(GameObject uIElement)
         {
             uIElement.transform.localScale = new Vector2(1, 1);
@@ -148,7 +156,7 @@ namespace SpaceGame
         public void OnPlayerDeathUI()
         {
             PostGamePanel.SetActive(true);
-            PostGamePanelScript.UpdateSummary();
+            StartCoroutine(PostGamePanelScript.UpdateSummary());
         }
 
         public IEnumerator ShowWaveText(string waveName, Color textColor, Material textMaterial)
@@ -176,6 +184,35 @@ namespace SpaceGame
             LeanTween.alpha(rectTransform, AlphaTo, duration / 2).setEase(EaseType);
             yield return new WaitForSeconds(duration / 2);
             LeanTween.alpha(rectTransform, alphaFrom, duration / 2).setEase(EaseType);
+        }
+
+        public void InitializeBossBar(float health, Sprite sprite)
+        {
+            Debug.Log(health);
+            WaveProgressBar.maxValue = health;
+            StartCoroutine(LerpBossBar(0, health, 1.5f));
+            BossIcon.transform.parent.gameObject.SetActive(true);
+            BossIcon.sprite = sprite;
+        }
+
+        private IEnumerator LerpBossBar(float StartValue, float EndValue, float LerpTime)
+        {
+            float StartTime = Time.time;
+            float EndTime = StartTime + LerpTime;
+
+            while (Time.time < EndTime)
+            {
+                float timeProgressed = (Time.time - StartTime) / LerpTime;  // this will be 0 at the beginning and 1 at the end.
+                WaveProgressBar.value = Mathf.Lerp(StartValue, EndValue, timeProgressed);
+
+                yield return new WaitForFixedUpdate();
+            }
+            WaveProgressBar.value = EndValue;
+        }
+
+        public void DisableBossBar()
+        {
+            BossIcon.transform.parent.gameObject.SetActive(false);
         }
     }
 }

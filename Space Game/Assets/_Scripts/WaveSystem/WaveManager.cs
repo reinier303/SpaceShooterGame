@@ -138,8 +138,8 @@ namespace SpaceGame
             {
                 return;
             }
-
             EnemiesKilledThisWave++;
+            gameManager.RUIManager.UpdateProgressBar();
             if (EnemiesKilledThisWave >= Waves[currentWave].EnemiesForBossSpawn)
             {
                 EnemiesKilledThisWave = 0;

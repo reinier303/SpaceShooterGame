@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: BoostRegeneration
   m_EditorClassIdentifier: 
   ID: 0
-  StatName: Boost Regeneration
+  StatName: BoostRegeneration
   stat:
-    statName: Boost Regeneration
+    statName: BoostRegeneration
     baseValue: 1
     multiplier: 1
   PointsSpent: 0

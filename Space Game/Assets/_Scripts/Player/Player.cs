@@ -37,8 +37,6 @@ namespace SpaceGame
             RUIManager = GameManager.Instance.RUIManager;
 
             StartWeapon = (Weapon)Resources.Load("Weapons/Bullet/Bullets", typeof(Weapon));
-            Debug.Log(Data.PlayerModules);
-
         }
 
         private void GetSaveData()
@@ -113,6 +111,7 @@ namespace SpaceGame
 
         public void SavePlayerData()
         {
+            AddUnitsToTotal();
             for (int i = 0; i < Data.Weapons.Count; i++)
             {
                 if (Data.Weapons[i].WeaponName == CurrentWeapon.WeaponName)
@@ -122,6 +121,16 @@ namespace SpaceGame
                 }
             }
             SaveLoad.Save<PlayerData>(Data, "PlayerData.sav");
+        }
+
+        protected virtual void OnBecameVisible()
+        {
+
+        }
+
+        protected virtual void OnBecameInvisible()
+        {
+
         }
     }
 

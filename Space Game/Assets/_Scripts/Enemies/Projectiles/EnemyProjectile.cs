@@ -12,6 +12,8 @@ namespace SpaceGame
         public float Damage;
         public float AliveTime;
 
+        public Sprite FiredBy;
+
         protected virtual void OnEnable()
         {
             StartCoroutine(DisableAfterTime());

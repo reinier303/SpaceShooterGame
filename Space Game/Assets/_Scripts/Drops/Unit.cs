@@ -57,7 +57,6 @@ namespace SpaceGame
 
                 yield return new WaitForFixedUpdate();
             }
-
         }
 
         private IEnumerator DisableAfterTime()

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b11a3cb87c31fa140ada73f351b43f3f, type: 3}
   m_Name: DamageLvl1
   m_EditorClassIdentifier: 
-  ID: 4
+  ID: 10
   IDSet: 1
   ShopIcon: {fileID: 21300000, guid: 20c122f1ed905f648ba310f12959e217, type: 3}
   ShopItemName: Damage Lvl 1
@@ -21,5 +21,7 @@ MonoBehaviour:
     the
     max amount of points you can put in starts at -MaxLevel-.'
   ModuleToUnlock: {fileID: 11400000, guid: 7a6a7ce1c0c168845838049848227433, type: 2}
+  PlayerModule: {fileID: 0}
+  PlayerModulesToUnlock: []
   Cost: 25
   MaxLvl: 3

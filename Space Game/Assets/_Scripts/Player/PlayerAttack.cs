@@ -46,6 +46,10 @@ namespace SpaceGame
         // Update is called once per frame
         private void Update()
         {
+            if(Time.timeScale == 0)
+            {
+                return;
+            }
             //TEMP: Get input from inputManager
             if (Input.GetMouseButton(0))
             {

@@ -11,14 +11,19 @@ namespace SpaceGame
         private CinemachineCameraOffset offset;
         public float OffsetIntensity = 0.1f;
         public float Damping = 0.1f;
-
+        public GameManager gameManager;
         private void Start()
         {
             offset = GetComponent<CinemachineCameraOffset>();
+            gameManager = GameManager.Instance;
         }
         // Update is called once per frame
         void Update()
         {
+            if(Time.timeScale == 0)
+            {
+                return;
+            }
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             Physics.Raycast(ray, out hit);

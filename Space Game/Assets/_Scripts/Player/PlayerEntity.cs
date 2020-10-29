@@ -9,6 +9,7 @@ namespace SpaceGame
         [SerializeField] private GameObject PlayerHitEffect;
         private bool canHit = true;
         [SerializeField] private float hitCooldown;
+        public Sprite lastEnemyDamagedBy;
 
         protected override void Die()
         {

@@ -38,6 +38,10 @@ namespace SpaceGame
 
         protected SpriteRenderer spriteRenderer;
 
+        [HideInInspector] public bool isDead;
+        [HideInInspector] public bool isInitialized;
+
+
         protected virtual void Awake()
         {
             OnTakeDamage += TakeDamage;
@@ -56,7 +60,9 @@ namespace SpaceGame
 
         protected virtual void OnEnable()
         {
+            isDead = false;
             currentHealth = MaxHealth.GetValue();
+            isInitialized = true;
         }
 
         public virtual void TakeDamage(float damage)
@@ -64,6 +70,7 @@ namespace SpaceGame
             currentHealth -= damage;
             if (currentHealth <= 0)
             {
+                isDead = true;
                 currentHealth = 0;
                 Die();
             }

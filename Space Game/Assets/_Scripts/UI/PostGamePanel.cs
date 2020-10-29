@@ -23,13 +23,47 @@ namespace SpaceGame
         public float RunTimeSeconds;
         public string KilledBy;
 
-        public void UpdateSummary()
+        private Dictionary<TMP_Text, float> textsAndValues = new Dictionary<TMP_Text, float>();
+
+        public IEnumerator UpdateSummary()
         {
-            UnitsEarnedText.text = "Units Earned:\n" + UnitsEarned;
-            ExperienceEarnedText.text = "Experience Gained:\n" + UnitsEarned;
+            yield return new WaitForSeconds(4.5f);
+            textsAndValues.Add(UnitsEarnedText, UnitsEarned);
+            textsAndValues.Add(ExperienceEarnedText, ExperienceEarned);
+            textsAndValues.Add(RareDropsFoundText, RareDropsFound);
+            textsAndValues.Add(EnemiesKilledText, EnemiesKilled);
+            textsAndValues.Add(BossesKilledText, BossesKilled);
+
+            foreach(TMP_Text textt in textsAndValues.Keys)
+            {
+
+                float LerpTime = 1.5f;
+                float StartTime = Time.time;
+                float EndTime = StartTime + LerpTime;
+
+                if (textsAndValues[textt] <= 1)
+                {
+                    LerpTime = 0.1f;
+                }
+
+                while (Time.time < EndTime)
+                {
+                    float timeProgressed = (Time.time - StartTime) / LerpTime;  // this will be 0 at the beginning and 1 at the end.
+                    textt.text = "\n" + Mathf.Round(Mathf.Lerp(0, textsAndValues[textt], timeProgressed));
+
+                    yield return new WaitForFixedUpdate();
+                }
+                textt.text = "\n" + Mathf.Round(textsAndValues[textt]);
+            }
+
+            /*
+            UnitsEarnedText.text += "\n" +  UnitsEarned;
+            ExperienceEarnedText.text = "Experience Gained:\n" + ExperienceEarned;
             RareDropsFoundText.text = "Rare Drops Found:\n" + RareDropsFound;
             EnemiesKilledText.text = "Enemies Killed:\n" + EnemiesKilled;
             BossesKilledText.text = "Bosses Killed:\n" + BossesKilled;
+            */
+            //Use 3 lerps for each value
             RunTimeSecondsText.text = "Run Time:\n" + ConvertToTime(RunTimeSeconds);
             KilledByText.text = "Killed By:\n" + KilledBy;
 

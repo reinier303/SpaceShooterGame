@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2488495253632554843}
   - component: {fileID: 2488495253632554844}
   - component: {fileID: 2488495253632554845}
+  - component: {fileID: -5839619459353262467}
   m_Layer: 8
   m_Name: LesserSwarmQueen
   m_TagString: Untagged
@@ -149,6 +150,8 @@ MonoBehaviour:
   PermanencePartMinMaxAmount: {x: 20, y: 30}
   PermanencePartOutwardsPower: 600
   PermanenceScaleFactor: 2
+  isDead: 0
+  isInitialized: 0
   Player: {fileID: 0}
   ContactDamage:
     statName: 
@@ -175,6 +178,8 @@ MonoBehaviour:
   dashing: 0
   BossIcon: {fileID: 21300000, guid: ad999d535f8eac748993d281ed78cf95, type: 3}
   BossEnterText: A Lesser Swarm Queen has arrived
+  TextColor: {r: 0.69411767, g: 0.8392157, b: 0.12156863, a: 1}
+  TextMaterial: {fileID: 2100000, guid: 04c99ccc25490cf4692e4bb8d14f1867, type: 2}
   PostMoveTime: 1.5
   TimeBetweenShots: 0.65
   ShotSpread: 80
@@ -192,6 +197,102 @@ MonoBehaviour:
   ShotSpreadMultiplier: 1.2
   SpawnTimeMultiplier: 0.8
   DashAmountSecondPhase: 3
+--- !u!82 &-5839619459353262467
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2488495253632554846}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 19862099389accd44adecde47c9554b1, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &2488495254376480293
 GameObject:
   m_ObjectHideFlags: 0

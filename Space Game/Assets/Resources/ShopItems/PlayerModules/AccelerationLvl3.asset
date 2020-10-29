@@ -10,17 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b11a3cb87c31fa140ada73f351b43f3f, type: 3}
-  m_Name: AliveTimeLvl3
+  m_Name: AccelerationLvl3
   m_EditorClassIdentifier: 
-  ID: 9
+  ID: 24
   IDSet: 1
-  ShopIcon: {fileID: 8536487650082518270, guid: e665cd6447b483045b247d4d2e18537c,
-    type: 3}
-  ShopItemName: Alive Time Lvl 3
-  Description: -Name- increases the max amount of points you can put into this upgrade
-    to -MaxLevel-.
-  ModuleToUnlock: {fileID: 11400000, guid: fa2a45631c7771442b9831d83c6dc7ed, type: 2}
-  PlayerModule: {fileID: 0}
+  ShopIcon: {fileID: 21300006, guid: cea2c9bf87b0c4dfdafb697a3ff00959, type: 3}
+  ShopItemName: Acceleration Lvl 3
+  Description: 
+  ModuleToUnlock: {fileID: 0}
+  PlayerModule: {fileID: 11400000, guid: 971c52755026bc54fbe5b1e326c2cc22, type: 2}
   PlayerModulesToUnlock: []
-  Cost: 2500
-  MaxLvl: 25
+  Cost: 8000
+  MaxLvl: 12

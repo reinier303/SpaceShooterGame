@@ -56,6 +56,7 @@ namespace SpaceGame
             if (player != null)
             {
                 player.OnTakeDamage?.Invoke(ContactDamage.GetValue());
+                player.lastEnemyDamagedBy = spriteRenderer.sprite;
             }
         }
 
@@ -89,7 +90,6 @@ namespace SpaceGame
             Player.GetComponent<Player>().AddExperience(ExpGiven.GetValue());
             UpdateRunData();
             DropUnits(DroppedUnits.GetValue());
-            gameManager.RUIManager.UpdateProgressBar();
             base.Die();
         }
         protected virtual void UpdateRunData()
