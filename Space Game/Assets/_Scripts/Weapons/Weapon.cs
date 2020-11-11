@@ -4,9 +4,8 @@ using UnityEngine;
 
 namespace SpaceGame
 {
-    [CreateAssetMenu(menuName = "WeaponSystem/Weapon", order = 997)]
     [System.Serializable]
-    public class Weapon : ScriptableObject
+    public class Weapon : ScriptableObject, IFire
     {
         public int ID;
         public string WeaponName;
@@ -115,7 +114,20 @@ namespace SpaceGame
             shopManager.RefreshWeapons();
             shopManager.SaveWeapons();
         }
+
+        public virtual void Fire(ObjectPooler objectPooler, Transform player)
+        {
+            Debug.Log("base");
+            //This method is meant to be overridden.
+        }
     }
+
+    public interface IFire
+    {
+        //Use Generic T for other optional parameters
+        void Fire(ObjectPooler objectPooler, Transform player);
+    }
+
 
     [System.Serializable]
     public class WeaponData

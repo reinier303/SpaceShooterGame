@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Reflection;
+using System;
 
 namespace SpaceGame
 {
@@ -63,37 +65,8 @@ namespace SpaceGame
             {
                 muzzleFlash.SetActive(false);
                 muzzleFlash.SetActive(true);
-
-                float spread = currentWeapon.RWeaponData.Modules["ProjectileSpread"].GetStatValue();
-                float count = (int)currentWeapon.RWeaponData.Modules["ProjectileCount"].GetStatValue();
-
-                float angleIncrease;
-
-                //Make sure there are no divisions by 0 in case of single projectile
-                if (count == 1)
-                {
-                    angleIncrease = 0;
-                    spread = 0;
-                }
-                else
-                {
-                    angleIncrease = spread / (count - 1);
-                }
-
-                for (int i = 0; i < count; i++)
-                {
-                    //Calculate new rotation
-                    float newRotation = (transform.eulerAngles.z - angleIncrease * i) + (spread / 2);
-
-                    //Spawn Projectile with extra rotation based on projectile count
-                    GameObject projectileObject = RObjectPooler.SpawnFromPool(currentWeapon.ProjectileName, transform.position + (transform.up / 3),
-                    Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, newRotation));
-
-                    //Initialize projectile
-                    PlayerProjectile projectile = projectileObject.GetComponent<PlayerProjectile>();
-                    projectile.Modules = currentWeapon.RWeaponData.Modules;
-                    projectile.StartCoroutine(projectile.DisableAfterTime());
-                }
+                Debug.Log(currentWeapon.GetType());
+                currentWeapon.Fire(RObjectPooler, transform);
 
                 canFire = false;
                 StartCoroutine(FireCooldownTimer());

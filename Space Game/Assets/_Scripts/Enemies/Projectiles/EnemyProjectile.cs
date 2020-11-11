@@ -36,6 +36,7 @@ namespace SpaceGame
             if (player != null)
             {
                 player.OnTakeDamage?.Invoke(Damage);
+                gameObject.SetActive(false);
             }
         }
 

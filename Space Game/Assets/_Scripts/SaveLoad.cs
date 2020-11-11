@@ -64,13 +64,13 @@ namespace SpaceGame
             data.CurrentPoints = 0;
 
             data.Weapons = new List<WeaponData>();
-            Weapon weapon = (Weapon)Resources.Load("Weapons/Bullet/Bullets", typeof(Weapon));
+            Weapon weapon = (Weapon)Resources.Load("Weapons/Bullet/BulletWeapon", typeof(Weapon));
             weapon.AddBaseModules();
             weapon.NewWeaponData();
             data.Weapons.Add(weapon.RWeaponData);
 
             Save(data, "PlayerData.sav");
-            Debug.Log("New Save Made" + "Weapon 0:" + data.Weapons[0].WeaponName);
+            Debug.Log("New Save Made" + "Weapon 0:" + data.Weapons[0].Level);
         }
     }
 }

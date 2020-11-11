@@ -84,8 +84,6 @@ namespace SpaceGame
 
         private IEnumerator CheckIfPlaying()
         {
-            Debug.Log(musicSource.clip.length);
-
             if (!musicSource.isPlaying)
             {
                 MoveToNextSongRoundRobin();
