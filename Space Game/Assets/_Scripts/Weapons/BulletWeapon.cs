@@ -11,8 +11,6 @@ namespace SpaceGame
 
         public override void Fire(ObjectPooler objectPooler, Transform player)
         {
-            Debug.Log("bullet");
-
             float spread = RWeaponData.Modules["ProjectileSpread"].GetStatValue();
             float count = (int)RWeaponData.Modules["ProjectileCount"].GetStatValue();
 

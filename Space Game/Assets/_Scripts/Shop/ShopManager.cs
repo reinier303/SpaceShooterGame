@@ -28,6 +28,8 @@ namespace SpaceGame
 
         public GameObject LoadingScreen;
 
+        public GameObject saveStatWarningText;
+
         private void Awake()
         {
             Time.timeScale = 1;

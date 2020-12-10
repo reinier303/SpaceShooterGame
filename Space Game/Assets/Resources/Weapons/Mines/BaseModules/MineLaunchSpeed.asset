@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ed2f2c1623539846bc6a5e920f20183, type: 3}
+  m_Name: MineLaunchSpeed
+  m_EditorClassIdentifier: 
+  ID: 0
+  StatName: LaunchSpeed
+  stat:
+    statName: LaunchSpeed
+    baseValue: 1
+    multiplier: 1
+  PointsSpent: 0
+  PointValue: 0.2
+  PointCost: 2
+  MaxPoints: 0
+  Weapon: {fileID: 11400000, guid: 423d2cebb604e2f4c892599a36eb8f64, type: 2}

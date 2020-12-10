@@ -13,7 +13,7 @@ namespace SpaceGame
 
         [SerializeField] private Transform weaponPanel, statPanel, playerModulePanel;
 
-        [SerializeField] private GameObject weaponButton, weaponStat, playerModuleStat, lockedButton;
+        [SerializeField] private GameObject weaponButton, weaponStat, playerModuleStat, lockedButton, statsSavedText;
 
         [SerializeField] private TMP_Text playerPoints;
 
@@ -82,7 +82,10 @@ namespace SpaceGame
 
         public void SaveWeaponData()
         {
+            statsSavedText.SetActive(false);
+            statsSavedText.SetActive(true);
             SaveLoad.Save<PlayerData>(data, "PlayerData.sav");
+            shopManager.saveStatWarningText.SetActive(false);
         }
     }
 }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using System.Security.Policy;
 
 namespace SpaceGame
 {
@@ -75,7 +74,6 @@ namespace SpaceGame
 
             InitializeLevelUI();
         }
-
         public void InitializeLevelUI()
         {
             RPlayer.AddExperience(0);

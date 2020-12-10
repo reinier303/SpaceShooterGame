@@ -64,7 +64,7 @@ namespace SpaceGame
             data.CurrentPoints = 0;
 
             data.Weapons = new List<WeaponData>();
-            Weapon weapon = (Weapon)Resources.Load("Weapons/Bullet/BulletWeapon", typeof(Weapon));
+            BulletWeapon weapon = (BulletWeapon)Resources.Load("Weapons/Bullet/BulletWeapon", typeof(BulletWeapon));
             weapon.AddBaseModules();
             weapon.NewWeaponData();
             data.Weapons.Add(weapon.RWeaponData);

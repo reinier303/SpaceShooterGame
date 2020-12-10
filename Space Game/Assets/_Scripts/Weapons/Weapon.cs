@@ -34,7 +34,6 @@ namespace SpaceGame
 
         public void GetWeaponData(PlayerData data, int weaponIndex)
         {
-
             RWeaponData = data.Weapons[weaponIndex];
         }
 
@@ -117,7 +116,6 @@ namespace SpaceGame
 
         public virtual void Fire(ObjectPooler objectPooler, Transform player)
         {
-            Debug.Log("base");
             //This method is meant to be overridden.
         }
     }

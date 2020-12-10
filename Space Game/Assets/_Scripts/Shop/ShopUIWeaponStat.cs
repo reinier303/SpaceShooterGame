@@ -13,23 +13,24 @@ namespace SpaceGame
 
         public ShopUIWeapon shopUIWeapon;
 
+        private GameObject saveWarningText;
+
         public void Initialize()
         {
             textComponent.text = ModuleName;
             PointsSpent.text = "" + shopUIWeapon.weaponData.Modules[ModuleName].PointsSpent;
-
+            saveWarningText = ShopManager.Instance.saveStatWarningText;
         }
 
         public void AddStat()
         {
             if (shopUIWeapon.weaponData.CurrentPoints >= shopUIWeapon.weaponData.Modules[ModuleName].PointCost)
             {
-                Debug.Log(shopUIWeapon.weaponData.Modules[ModuleName].PointsSpent + ", Max:" + shopUIWeapon.weaponData.Modules[ModuleName].MaxPoints);
-
                 if (shopUIWeapon.weaponData.Modules[ModuleName].PointsSpent >= shopUIWeapon.weaponData.Modules[ModuleName].MaxPoints)
                 {
                     return;
                 }
+                saveWarningText.SetActive(true);
                 shopUIWeapon.weaponData.Modules[ModuleName].PointsSpent++;
                 PointsSpent.text = "" + shopUIWeapon.weaponData.Modules[ModuleName].PointsSpent;
                 shopUIWeapon.weaponData.CurrentPoints -= shopUIWeapon.weaponData.Modules[ModuleName].PointCost;
@@ -42,6 +43,7 @@ namespace SpaceGame
         {
             if (shopUIWeapon.weaponData.Modules[ModuleName].PointsSpent > 0)
             {
+                saveWarningText.SetActive(true);
                 shopUIWeapon.weaponData.Modules[ModuleName].PointsSpent--;
                 PointsSpent.text = "" + shopUIWeapon.weaponData.Modules[ModuleName].PointsSpent;
                 shopUIWeapon.weaponData.CurrentPoints += shopUIWeapon.weaponData.Modules[ModuleName].PointCost;

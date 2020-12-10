@@ -17,7 +17,7 @@ namespace SpaceGame
 
         public List<Weapon> Weapons;
 
-        [SerializeField] private Weapon currentWeapon;
+        [SerializeField] private Weapon currentWeapon, secondaryWeapon;
 
         [SerializeField] private GameObject muzzleFlash;
 
@@ -35,7 +35,15 @@ namespace SpaceGame
         {
             canFire = true;
             currentWeapon = rPlayer.StartWeapon;
+
+            secondaryWeapon.NewWeaponData();
+            secondaryWeapon.AddBaseModules();
+            rPlayer.Data.Weapons.Add(secondaryWeapon.RWeaponData);
+
             currentWeapon.GetWeaponData(rPlayer.Data, 0);
+            secondaryWeapon.GetWeaponData(rPlayer.Data, 1);
+
+            Debug.Log(secondaryWeapon.Modules.Count);
             rPlayer.SetCurrentWeapon(currentWeapon);
             currentWeapon.InitializeUI();
         }
@@ -55,27 +63,46 @@ namespace SpaceGame
             //TEMP: Get input from inputManager
             if (Input.GetMouseButton(0))
             {
-                Fire();
+                Fire(0);
+            }
+            if(Input.GetMouseButton(1))
+            {
+                Fire(1);
             }
         }
 
-        private void Fire()
+        private void Fire(int mouseButton)
         {
             if (canFire)
             {
                 muzzleFlash.SetActive(false);
                 muzzleFlash.SetActive(true);
-                Debug.Log(currentWeapon.GetType());
-                currentWeapon.Fire(RObjectPooler, transform);
 
-                canFire = false;
-                StartCoroutine(FireCooldownTimer());
+                if(mouseButton == 0)
+                {
+                    currentWeapon.Fire(RObjectPooler, transform);
+                    canFire = false;
+                    StartCoroutine(FireCooldownTimer(mouseButton));
+                }
+                else
+                {
+                    secondaryWeapon.Fire(RObjectPooler, transform);
+                    canFire = false;
+                    StartCoroutine(FireCooldownTimer(mouseButton));
+                }
             }
         }
 
-        private IEnumerator FireCooldownTimer()
+        private IEnumerator FireCooldownTimer(int mouseButton)
         {
-            yield return new WaitForSeconds(1 / currentWeapon.RWeaponData.Modules["FireRate"].GetStatValue());
+            if(mouseButton == 0)
+            {
+                yield return new WaitForSeconds(1 / currentWeapon.RWeaponData.Modules["FireRate"].GetStatValue());
+            }
+            else
+            {
+                yield return new WaitForSeconds(1 / secondaryWeapon.RWeaponData.Modules["FireRate"].GetStatValue());
+            }
             canFire = true;
         }
     }

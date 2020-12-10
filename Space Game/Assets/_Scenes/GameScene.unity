@@ -4848,7 +4848,7 @@ MonoBehaviour:
     Level: 0
     Units: 0
     TotalUnits: 0
-  StartWeapon: {fileID: 11400000, guid: 0a51dc546c872474a98ef6a2b8035aea, type: 2}
+  StartWeapon: {fileID: 11400000, guid: 84fd4c5273b4f4d418e8f0c9fa3be5ca, type: 2}
   ExperienceNeeded: 100
   PointsPerLevel: 3
   playerBaseModules:
@@ -4870,7 +4870,8 @@ MonoBehaviour:
   RObjectPooler: {fileID: 505205243}
   fireCooldown: 1
   Weapons: []
-  currentWeapon: {fileID: 11400000, guid: 0a51dc546c872474a98ef6a2b8035aea, type: 2}
+  currentWeapon: {fileID: 11400000, guid: 84fd4c5273b4f4d418e8f0c9fa3be5ca, type: 2}
+  secondaryWeapon: {fileID: 11400000, guid: 423d2cebb604e2f4c892599a36eb8f64, type: 2}
   muzzleFlash: {fileID: 2202433110565546566}
 --- !u!114 &692017890
 MonoBehaviour:
@@ -5800,7 +5801,7 @@ MonoBehaviour:
   EnemiesAlive: 0
   Spawning: 1
   MapRenderer: {fileID: 866685844}
-  EnemiesKilledThisWave: 38
+  EnemiesKilledThisWave: 0
   BossArrowScript: {fileID: 1715656138}
 --- !u!4 &838335761
 Transform:
@@ -29369,6 +29370,75 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1001 &5808563023654273717
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5808563025143561890, guid: ccad0e372272b5f45b662a6641505bd0,
+        type: 3}
+      propertyPath: m_Name
+      value: Mine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5808563025143561900, guid: ccad0e372272b5f45b662a6641505bd0,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 5808563025143561900, guid: ccad0e372272b5f45b662a6641505bd0,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5808563025143561900, guid: ccad0e372272b5f45b662a6641505bd0,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5808563025143561900, guid: ccad0e372272b5f45b662a6641505bd0,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5808563025143561900, guid: ccad0e372272b5f45b662a6641505bd0,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5808563025143561900, guid: ccad0e372272b5f45b662a6641505bd0,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5808563025143561900, guid: ccad0e372272b5f45b662a6641505bd0,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5808563025143561900, guid: ccad0e372272b5f45b662a6641505bd0,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5808563025143561900, guid: ccad0e372272b5f45b662a6641505bd0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5808563025143561900, guid: ccad0e372272b5f45b662a6641505bd0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5808563025143561900, guid: ccad0e372272b5f45b662a6641505bd0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ccad0e372272b5f45b662a6641505bd0, type: 3}
 --- !u!82 &6169105658794764182
 AudioSource:
   m_ObjectHideFlags: 0
@@ -30167,7 +30237,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &9015315692274500982
 MonoBehaviour:
   m_ObjectHideFlags: 0

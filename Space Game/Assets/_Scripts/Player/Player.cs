@@ -36,7 +36,7 @@ namespace SpaceGame
             RPlayerEntity = GetComponent<PlayerEntity>();
             RUIManager = GameManager.Instance.RUIManager;
 
-            StartWeapon = (Weapon)Resources.Load("Weapons/Bullet/Bullets", typeof(Weapon));
+            StartWeapon = (BulletWeapon)Resources.Load("Weapons/Bullet/BulletWeapon", typeof(Weapon));
         }
 
         private void GetSaveData()
