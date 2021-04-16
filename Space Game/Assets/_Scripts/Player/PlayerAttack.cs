@@ -1,93 +1,116 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Reflection;
+using System;
 
-public class PlayerAttack : MonoBehaviour
+namespace SpaceGame
 {
-    //TEMP: Gamemanager delegates 
-    public ObjectPooler RObjectPooler;
-
-    private bool canFire;
-    public float fireCooldown;
-
-    public List<Weapon> Weapons;
-
-    private Weapon currentWeapon;
-
-    private void Awake()
+    public class PlayerAttack : MonoBehaviour
     {
-        Initialize();
-    }
+        //TEMP: Gamemanager delegates 
+        public ObjectPooler RObjectPooler;
+        private Player rPlayer;
 
-    private void Initialize()
-    {
-        canFire = true;
-        currentWeapon = Weapons[0];
-        InitializeWeapons();
-    }
+        private bool canFire;
+        public float fireCooldown;
 
-    //TEMP???: Other way to do this?
-    private void InitializeWeapons()
-    {
-        foreach(Weapon weapon in Weapons)
+        public List<Weapon> Weapons;
+
+        [SerializeField] private Weapon currentWeapon, secondaryWeapon;
+
+        [SerializeField] private GameObject muzzleFlash;
+
+        private void Awake()
         {
-            weapon.AddBaseModules();
+            rPlayer = GetComponent<Player>();
         }
-    }
 
-    // Update is called once per frame
-    private void Update()
-    {
-        //TEMP: Get input from inputManager
-        if(Input.GetMouseButton(0))
+        private void Start()
         {
-            Fire();
+            Initialize();
         }
-    }
 
-    private void Fire()
-    {
-        if(canFire)
+        private void Initialize()
         {
-            float spread = currentWeapon.Modules["ProjectileSpread"].GetStatValue();
-            float count = (int)currentWeapon.Modules["ProjectileCount"].GetStatValue();
+            canFire = true;
 
-            float angleIncrease;
+            //Initialize weapon datas
+            currentWeapon.GetWeaponData(rPlayer.Data, 0);
+            secondaryWeapon.GetWeaponData(rPlayer.Data, 1);
 
-            //Make sure there are no divisions by 0 in case of single projectile
-            if (count == 1)
+            foreach (WeaponData data in rPlayer.Data.Weapons)
             {
-                angleIncrease = 0;
-                spread = 0;
+                Debug.Log(data.WeaponName);
+            }
+            //Set weapon index
+            currentWeapon.WeaponIndex = 0;
+            secondaryWeapon.WeaponIndex = 1;
+
+            //Add weapons to list
+            Weapons.Add(currentWeapon);
+            Weapons.Add(secondaryWeapon);
+
+            rPlayer.SetWeapons(Weapons);
+            currentWeapon.InitializeUI();
+        }
+
+        public Weapon GetCurrentWeapon()
+        {
+            return currentWeapon;
+        }
+
+        // Update is called once per frame
+        private void Update()
+        {
+            if(Time.timeScale == 0)
+            {
+                return;
+            }
+            //TEMP: Get input from inputManager
+            if (Input.GetMouseButton(0))
+            {
+                Fire(0);
+            }
+            if(Input.GetMouseButton(1))
+            {
+                Fire(1);
+            }
+        }
+
+        private void Fire(int mouseButton)
+        {
+            if (canFire)
+            {
+                muzzleFlash.SetActive(false);
+                muzzleFlash.SetActive(true);
+
+                if(mouseButton == 0)
+                {
+                    currentWeapon.Fire(RObjectPooler, transform);
+                    canFire = false;
+                    StartCoroutine(FireCooldownTimer(mouseButton));
+                }
+                else
+                {
+                    secondaryWeapon.Fire(RObjectPooler, transform);
+                    canFire = false;
+                    StartCoroutine(FireCooldownTimer(mouseButton));
+                }
+            }
+        }
+
+        private IEnumerator FireCooldownTimer(int mouseButton)
+        {
+            if(mouseButton == 0)
+            {
+                yield return new WaitForSeconds(1 / currentWeapon.RWeaponData.Modules["FireRate"].GetStatValue());
             }
             else
             {
-                angleIncrease = spread / (count - 1);
+                yield return new WaitForSeconds(1 / secondaryWeapon.RWeaponData.Modules["FireRate"].GetStatValue());
             }
-
-            for (int i = 0; i < count; i++)
-            {
-                //Calculate new rotation
-                float newRotation = (transform.eulerAngles.z - angleIncrease * i) + (spread / 2);
-
-                //Spawn Projectile with extra rotation based on projectile count
-                GameObject projectileObject = RObjectPooler.SpawnFromPool(currentWeapon.ProjectileName, transform.position + (transform.up / 3), 
-                Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, newRotation));
-
-                //Initialize projectile
-                PlayerProjectile projectile = projectileObject.GetComponent<PlayerProjectile>();
-                projectile.Modules = currentWeapon.Modules;
-                projectile.StartCoroutine(projectile.DisableAfterTime());
-            }
-
-            canFire = false;
-            StartCoroutine(FireCooldownTimer());
+            canFire = true;
         }
-    }
-
-    private IEnumerator FireCooldownTimer()
-    {
-        yield return new WaitForSeconds(1 / currentWeapon.Modules["FireRate"].GetStatValue());
-        canFire = true;
     }
 }

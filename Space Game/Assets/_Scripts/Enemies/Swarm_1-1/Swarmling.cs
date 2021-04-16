@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Swarmling : BaseEnemy
+namespace SpaceGame
 {
-    protected void Update()
+    public class Swarmling : BaseEnemy
     {
-        Move();
-        Rotate();
+        protected void Update()
+        {
+            Move();
+            Rotate();
+        }
     }
 }

@@ -2,40 +2,43 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inverter : Node
+namespace SpaceGame
 {
-    // Child node to evaluate 
-    private Node m_node;
-
-    public Node node
+    public class Inverter : Node
     {
-        get { return m_node; }
-    }
+        // Child node to evaluate 
+        private Node m_node;
 
-    // The constructor requires the child node that this inverter decorator wraps
-    public Inverter(Node node)
-    {
-        m_node = node;
-    }
-
-    /* Reports a success if the child fails and 
-       a failure if the child succeeds. Running will report 
-       as running */
-    public override NodeStates Evaluate()
-    {
-        switch (m_node.Evaluate())
+        public Node node
         {
-            case NodeStates.FAILURE:
-                m_nodeState = NodeStates.SUCCESS;
-                return m_nodeState;
-            case NodeStates.SUCCESS:
-                m_nodeState = NodeStates.FAILURE;
-                return m_nodeState;
-            case NodeStates.RUNNING:
-                m_nodeState = NodeStates.RUNNING;
-                return m_nodeState;
+            get { return m_node; }
         }
-        m_nodeState = NodeStates.SUCCESS;
-        return m_nodeState;
+
+        // The constructor requires the child node that this inverter decorator wraps
+        public Inverter(Node node)
+        {
+            m_node = node;
+        }
+
+        /* Reports a success if the child fails and 
+           a failure if the child succeeds. Running will report 
+           as running */
+        public override NodeStates Evaluate()
+        {
+            switch (m_node.Evaluate())
+            {
+                case NodeStates.FAILURE:
+                    m_nodeState = NodeStates.SUCCESS;
+                    return m_nodeState;
+                case NodeStates.SUCCESS:
+                    m_nodeState = NodeStates.FAILURE;
+                    return m_nodeState;
+                case NodeStates.RUNNING:
+                    m_nodeState = NodeStates.RUNNING;
+                    return m_nodeState;
+            }
+            m_nodeState = NodeStates.SUCCESS;
+            return m_nodeState;
+        }
     }
 }

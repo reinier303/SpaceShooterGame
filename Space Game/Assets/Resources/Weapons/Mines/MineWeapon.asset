@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48bfabc80d4f70e47bc793d19bf34e1b, type: 3}
+  m_Name: MineWeapon
+  m_EditorClassIdentifier: 
+  ID: 0
+  WeaponName: Mines
+  ProjectileName: PlayerMine
+  BaseModules:
+  - {fileID: 11400000, guid: 29d7f851d434d2c4b9fc28588462c720, type: 2}
+  - {fileID: 11400000, guid: b6da835c4da207b4180e64bfa8fd2037, type: 2}
+  - {fileID: 11400000, guid: e218f29da73b60d4fb9c2585eb66ac84, type: 2}
+  - {fileID: 11400000, guid: 21a59ea07808b414697ed109ff2c6bfd, type: 2}
+  - {fileID: 11400000, guid: cdabc65ea22977d49b9241cc59a438fc, type: 2}
+  - {fileID: 11400000, guid: 2a2e8dafe17fa6142957f6b63fdc12ad, type: 2}
+  CurrentExperience: 0
+  experienceNeeded: 100
+  PointsPerLevel: 2
+  CurrentPoints: 0
+  Level: 1
+  WeaponIndex: 1
+  RWeaponData:
+    WeaponName: Mines
+    CurrentExperience: 0
+    ExperienceNeeded: 0
+    CurrentPoints: 0
+    Level: 1

@@ -10,15 +10,17 @@ namespace SpaceGame
 
         private void Awake()
         {
-            if(!SaveLoad.SaveExists("PlayerData"))
-            {
-                SaveLoad.NewSave();
-            }
+            Time.timeScale = 1;
         }
 
         public void LoadScene(int scene)
         {
             ExtensionMethods.LoadSceneWithLoadingScreen(scene, loadingScreen, this);
+        }
+
+        public void Quit()
+        {
+            Application.Quit();
         }
     }
 }

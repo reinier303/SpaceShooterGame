@@ -2,51 +2,54 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SprayShot : Node
+namespace SpaceGame
 {
-    private int timesShot;
-
-    private float timer, timeBetween;
-
-    public SprayShot(BlackBoard board)
+    public class SprayShot : Node
     {
-        blackBoard = board;
-    }
+        private int timesShot;
 
-    public override NodeStates Evaluate()
-    {
-        Debug.Log("SprayShot");
-        if (timesShot >= blackBoard.TimesToShootSpray)
+        private float timer, timeBetween;
+
+        public SprayShot(BlackBoard board)
         {
-            timesShot = 0;
-            return NodeStates.FAILURE;
+            blackBoard = board;
         }
-        else
+
+        public override NodeStates Evaluate()
         {
-            timer++;
-            if(timer >= blackBoard.TimeBetweenShotsSpray * 60)
+            Debug.Log("SprayShot");
+            if (timesShot >= blackBoard.TimesToShootSpray)
             {
-                Fire();
-                timer = 0;
+                timesShot = 0;
+                return NodeStates.FAILURE;
             }
-            return NodeStates.RUNNING;
+            else
+            {
+                timer++;
+                if (timer >= blackBoard.TimeBetweenShotsSpray * 60)
+                {
+                    Fire();
+                    timer = 0;
+                }
+                return NodeStates.RUNNING;
+            }
         }
-    }
 
-    public void Fire()
-    {
-        float spread = blackBoard.BulletSpreadSpray;
-        float angleIncrease = spread / (blackBoard.BulletAmountSpray - 1);
-
-        for (int i = 0; i < blackBoard.BulletAmountSpray; i++)
+        public void Fire()
         {
-            //Calculate new rotation
-            float newRotation = (blackBoard.BossEntity.transform.eulerAngles.z - angleIncrease * i) + (spread / 2);
+            float spread = blackBoard.BulletSpreadSpray;
+            float angleIncrease = spread / (blackBoard.BulletAmountSpray - 1);
 
-            //Spawn Projectile with extra rotation based on projectile count
-            GameObject projectileObject = blackBoard.objectPooler.SpawnFromPool("SwarmBullet", blackBoard.BossEntity.transform.position + (blackBoard.BossEntity.transform.up / 3),
-            Quaternion.Euler(blackBoard.BossEntity.transform.eulerAngles.x, blackBoard.BossEntity.transform.eulerAngles.y, newRotation));
+            for (int i = 0; i < blackBoard.BulletAmountSpray; i++)
+            {
+                //Calculate new rotation
+                float newRotation = (blackBoard.BossEntity.transform.eulerAngles.z - angleIncrease * i) + (spread / 2);
+
+                //Spawn Projectile with extra rotation based on projectile count
+                GameObject projectileObject = blackBoard.objectPooler.SpawnFromPool("SwarmBullet", blackBoard.BossEntity.transform.position + (blackBoard.BossEntity.transform.up / 3),
+                Quaternion.Euler(blackBoard.BossEntity.transform.eulerAngles.x, blackBoard.BossEntity.transform.eulerAngles.y, newRotation));
+            }
+            timesShot++;
         }
-        timesShot++;
     }
 }

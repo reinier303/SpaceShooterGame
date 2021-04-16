@@ -9,9 +9,12 @@ EditorBuildSettings:
     path: Assets/_Scenes/MainMenu.unity
     guid: 201baae740d3cd44fa655aed08051bcf
   - enabled: 1
-    path: Assets/_Scenes/GameScene.unity
+    path: Assets/_Scenes/FXShowOff.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/_Scenes/ShopScene.unity
     guid: 55458a3f7c1129544a4c41ee2cda3ccc
+  - enabled: 1
+    path: Assets/_Scenes/Intro.unity
+    guid: de1196791a05e8d4dbf6f5e78e1cfa93
   m_configObjects: {}

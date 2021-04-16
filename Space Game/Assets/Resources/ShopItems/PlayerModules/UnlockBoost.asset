@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b11a3cb87c31fa140ada73f351b43f3f, type: 3}
+  m_Name: UnlockBoost
+  m_EditorClassIdentifier: 
+  ID: 6
+  IDSet: 1
+  ShopIcon: {fileID: 0}
+  ShopItemName: UnlockBoost
+  Description: Unlock the option to boost
+  ModuleToUnlock: {fileID: 0}
+  PlayerModule: {fileID: 0}
+  PlayerModulesToUnlock:
+  - {fileID: 11400000, guid: a3fa9bb05a687ff40bbd6ef63078ab5d, type: 2}
+  - {fileID: 11400000, guid: b47b176b13ae5ab46a87a6b43c303f78, type: 2}
+  - {fileID: 11400000, guid: 714111909d2bad046a6895cd9a077204, type: 2}
+  Cost: 250
+  MaxLvl: 0
